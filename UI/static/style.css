@@ -1,0 +1,76 @@
+/* Universal */
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+html{
+    background: url(../static/layout.jpg) no-repeat center fixed;
+    height: 100vh;
+    background-size: cover;
+    overflow: hidden;
+}
+
+/* Header */
+.branding{
+    position: relative;
+    background:rgba(28, 88, 86, 0.5);
+    overflow: visible;
+    font-size: 4vw;
+    color: #0f3317;
+}
+
+form{
+    position: relative;
+    background: rgba(204, 243, 242, 0.3);
+    padding: 20px 0 20px 0;
+    text-align: center;
+}
+
+/* Login */
+form input{
+    font-family: "Roboto", "sans-serif";
+    outline: 1;
+    background: #f2f2f2;
+    width: 80%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+form button{
+    font-family: 'Roboto', 'sans-serif';
+    text-transform: uppercase;
+    outline: 0;
+    background: #597c55;
+    width: 80%;
+    border: none;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+form button:hover{
+    background: #486444;
+}
+
+/* The Grid */
+.site{
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 400px) 1fr;
+    grid-template-rows: auto 1fr 2fr 2fr;
+}
+
+.branding{
+    grid-column: 1/4;
+    grid-row: 1/2;
+}
+
+.login{
+    grid-column: 2/3;
+    grid-row: 3/4;
+}
