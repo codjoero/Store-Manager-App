@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="All store operations in one place">
+        <meta name="keywords" content="all in one app, store management">
+        <meta name="author" content="Ronnie N">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Store Manager | Dashboard</title>
+        <link rel="stylesheet" href="../static/dashstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <div class="site">
+            <header class="branding">
+                <h1 class="title">Store Manager</h1>
+            </header>
+            <aside class="sidebar">
+                <ul>
+                    <li onclick="Dashboard()"><i class="fa fa-users"></i> Dashboard</li>
+                    <li><i class="fa fa-calendar-check-o"></i> Inventory</li>
+                    <li><i class="fa fa-bar-chart"></i> Reports</li>
+                    <li><i class="fa fa-address-book-o"></i> Accounts</li>
+                    <li><i class="fa fa-tags"></i> Categories</li>
+                    <li><i class="fa fa-cog"></i> Settings</li>
+                </ul>
+            </aside>
+            <main class="dash">
+                <p class="db">Dashboard</p>
+                <p class="user"><i class="fa fa-user-circle-o"></i> Jonnie</p>
+                <div class="cart"><i class="fa fa-cart-arrow-down"></i> Cart</div>
+                <div class="cust"><i class="fa fa-smile-o"></i> Customer</div>
+                <div class="mysales"><i class="fa fa-money"></i> mySales</div>
+                <div class="logout"onclick="logout()"><i class="fa fa-sign-out"></i> logout</div>
+                <div class="acc"><i class="fa fa-user-plus"></i> Accounts</div>
+                <div class="inv"><i class="fa fa-calendar-check-o"></i> Inventory</div>
+                <div class="log"><i class="fa fa-pencil-square-o"></i> logs</div>
+                <div class="cat"><i class="fa fa-tags"></i> Categories</div>
+                <div class="rep"><i class="fa fa-bar-chart"></i> Reports</div>
+                <div class="set"><i class="fa fa-gears"></i> Settings</div>
+            </main>
+            <footer class="foot">
+                <p>Store Manager, Copyright &copy; 2018</p>
+            </footer>
+        </div>
+    <!-- js -->
+    <script src="/UI/static/mystyles.js"></script>
+    </body>
+</html>
