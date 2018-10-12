@@ -16,12 +16,4 @@ function checkLogin() {
     if ( _CONFIG[login] !== undefined && _CONFIG[login]["Password"] == pass) {
         window.location.replace(_CONFIG[login]["Redirect"]);
     }
-}
-
-function logout(){
-    window.location.replace("../templates/index.html");
-}
-
-function dashboard(){
-    window.location.replace("../templates/dashboard.html");
 };
