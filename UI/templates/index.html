@@ -8,7 +8,7 @@
         <meta name="author" content="Ronnie N">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Store Manager | Login</title>
-        <link rel="stylesheet" href="../static/style.css">
+        <link rel="stylesheet" href="/UI/static/style.css">
     </head>
 
     <body>
@@ -16,11 +16,13 @@
             <header class="branding">
                 <h1 class="title">Store Manager</h1>
             </header>
-            <form class="login">
-                <input type="text" placeholder="user name"/>
-                <input type="text" placeholder="password"/>
-                <button>login</button>
+            <form class="form">
+                <input type="text" class="entry" placeholder="user name" id="login" required/>
+                <input type="text" class="entry" placeholder="password" id="password" required/>
+                <button type="button" id="submit"  onclick="checkLogin()">login</button>
             </form>
         </div>
+    <!-- js -->
+    <script src="/UI/static/mystyles.js"></script>
     </body>
 </html>
