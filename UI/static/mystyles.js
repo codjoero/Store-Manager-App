@@ -19,9 +19,9 @@ function checkLogin() {
 }
 
 function logout(){
-    window.location.replace("/UI/templates/index.html");
+    window.location.replace("../templates/index.html");
 }
 
 function dashboard(){
-    window.location.replace("/UI/templates/dashboard.html");
+    window.location.replace("../templates/dashboard.html");
 };
