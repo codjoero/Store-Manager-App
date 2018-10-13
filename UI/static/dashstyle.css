@@ -3,13 +3,28 @@
     margin: 0px;
     padding: 0px;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 html{
     background: url(../static/layout.jpg) no-repeat center fixed;
+    position: relative;
     height: 100vh;
     background-size: cover;
     overflow: visible;
+}
+
+.site{
+    min-height: 100vh;
+    overflow: hidden;
+    display:block;
+    position: relative;
+    
 }
 
 /* Header */
@@ -19,6 +34,7 @@ html{
     overflow: visible;
     font-size: 3.2vw;
     color: #0f3317;
+    width: 100vw;
 }
 
 /* Sidebar */
@@ -43,6 +59,7 @@ html{
     background: rgba(50, 53, 54, 0.8);
 }
 
+/* dashborad */
 .dash div{
     text-align: center;
     padding: 1em;
@@ -65,10 +82,14 @@ html{
     margin: 0 1em;
 }
 
+/* footer */
 footer{
+    position: relative;
     background:rgba(28, 88, 86, 0.5);
     font-size: 15px;
     text-align: center;
+    bottom: 0;
+    width: 100vw;
 }
 
 /* site Grid areas */
@@ -99,7 +120,7 @@ aside{
         "ft        ft";     
 }
 
-/* The Dash Grid */
+/* The Dashboard NestGrid-1 */
 .site .dash{
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
@@ -159,7 +180,141 @@ aside{
     background-color: rgb(237, 6, 245);
 }
 
+/* CART.HTML */
+.shopper div{
+    text-align: center;
+    padding: 1em;
+    color: #fff;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+/* Cart items table */
+.shoplist{
+    margin: 0 1.5vw;
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid rgb(194, 193, 193);
+}
+
+th, td {
+    text-align: left;
+    padding: 6px;
+    color: rgb(42, 20, 78);
+    font-size: 20px;
+}
+
+tr:nth-child(odd){
+    background-color: rgba(194, 193, 193, 0.5);
+}
+tr:nth-child(even){
+    background-color: rgba(236, 233, 233, 0.6);
+}
+
+/* Grid */
+.site .shopper{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    grid-template-rows: auto 2fr 2fr 2fr 2fr 2fr 2fr auto;
+    grid-gap: 6px;
+}
+
+.kids{
+    grid-column: 1;
+    grid-row: 2;
+    background-color: rgb(4, 50, 253);
+}
+
+.shirts{
+    grid-column: 2;
+    grid-row: 2;
+    background-color: rgb(219, 18, 45);
+}
+
+.tops{
+    grid-column: 3;
+    grid-row: 2;
+    background-color: rgb(9, 122, 94);
+}
+
+.bottoms{
+    grid-column: 1;
+    grid-row: 3;
+    background-color: rgb(4, 61, 78);
+}
+
+.denims{
+    grid-column: 2;
+    grid-row: 3;
+    background-color: rgb(62, 253, 4);
+}
+
+.jackets{
+    grid-column: 3;
+    grid-row: 3;
+    background-color: rgb(94, 10, 87);
+}
+
+.pants{
+    grid-column: 1;
+    grid-row: 4;
+    background-color: rgb(107, 53, 2);
+}
+
+.suits{
+    grid-column: 2;
+    grid-row: 4;
+    background-color: rgb(253, 4, 87);
+}
+
+.access{
+    grid-column: 3;
+    grid-row: 4;
+    background-color: rgb(8, 197, 211);
+}
+
+.beach{
+    grid-column: 1;
+    grid-row: 5;
+    background-color: rgb(253, 4, 129);
+}
+
+.bags{
+    grid-column: 2;
+    grid-row: 5;
+    background-color: rgb(253, 124, 4);
+}
+
+.ling{
+    grid-column: 3;
+    grid-row: 5;
+    background-color: rgb(128, 26, 60);
+}
+
+.back{
+    grid-column: 3;
+    grid-row: 6;
+    background-color: rgb(61, 71, 58);
+    text-transform: uppercase;
+}
+
+.shoplist{
+    grid-column: 4/6;
+    grid-row: 2/7;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+/* Queries */
 @media (max-width: 640px){
+    /* Main site */
     .site{
         display: grid;
         grid-gap: 10px;
@@ -224,5 +379,18 @@ aside{
     .set{
         grid-column: 1;
         grid-row: 5;
+    }
+
+        /* Grid */
+    .site .shopper{
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-template-rows: auto 2fr 2fr 2fr 2fr 2fr 2fr auto;
+        grid-gap: 6px;
+    }
+
+    .shoplist{
+        grid-column: 1/4;
+        grid-row: -1;
     }
 }
