@@ -1,4 +1,4 @@
-/* Array for username/password */
+// Array for username/password 
 var _CONFIG = {
     "user": {
         "Password": "andela",
@@ -26,3 +26,9 @@ function checkLogin() {
 // else {
 //     document.getElementById("admin").style.display = "block";
 // };
+
+// inventory2 table row delete
+function deleteRow(call) {
+    var i = call.parentNode.parentNode.rowIndex;
+    document.getElementById("mytable").deleteRow(i);
+}
