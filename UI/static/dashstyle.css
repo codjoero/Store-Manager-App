@@ -120,10 +120,10 @@ th, td {
 }
 
 tr:nth-child(odd){
-    background-color: rgba(194, 193, 193, 0.6);
+    background-color: rgba(194, 193, 193, 0.9);
 }
 tr:nth-child(even){
-    background-color: rgba(236, 233, 233, 0.8);
+    background-color: rgba(236, 233, 233, 0.9);
 }
 
 /******* THE GRID *******/
