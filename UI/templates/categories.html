@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="All store operations in one place">
+        <meta name="keywords" content="all in one app, store management">
+        <meta name="author" content="Ronnie N">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Store Manager | Categories</title>
+        <link rel="stylesheet" href="../static/dashstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <div class="site">
+            <header class="branding">
+                <h1 class="title">Store Manager</h1>
+            </header>
+            <aside class="sidebar">
+                <ul>
+                    <a href="../templates/dashboard.html"><li><i class="fa fa-users"></i> Dashboard</li></a>
+                    <a href="../templates/inventory.html"><li><i class="fa fa-calendar-check-o"></i> Inventory</li></a>
+                    <a href="../templates/reports.html"><li><i class="fa fa-bar-chart"></i> Reports</li></a>
+                    <a href="../templates/accounts.html"><li><i class="fa fa-address-book-o"></i> Accounts</li></a>
+                    <a href="../templates/categories.html"><li><i class="fa fa-tags"></i> Categories</li></a>
+                    <a href="../templates/settings.html"><li><i class="fa fa-cog"></i> Settings</li></a>
+                </ul>
+            </aside>
+            <main class="shopper">
+                <h2 class="categ">Categories</h2>
+                <h3 class="user"><i class="fa fa-user-circle-o"></i> Jonnie</h3>
+                <div class="kids">Kids</div>
+                <div class="shirts">Shirts</div>
+                <div class="tops">Tops</div>
+                <div class="bottoms">Bottoms</div>
+                <div class="denims">Denims</div>
+                <div class="jackets">Jackets</div>
+                <div class="pants">Pants</div>
+                <div class="suits">Suits</div>
+                <div class="access">Accessories</div>
+                <div class="beach">Beach</div>
+                <div class="bags">Bags</div>
+                <div class="ling">Lingerie</div>
+                <div class="new"><a href="../templates/dashboard.html"><i class="fa fa-plus-square"></i> New</a></div>
+                <div class="back"><a href="../templates/dashboard.html"><i class="fa fa-reply-all"></i> Back</a></div>
+                <aside class="shoplist">
+                    <h2 id="thelist">Kids Items</h2>
+                    <button type="button" id="insert"  onclick="#">Delete Category</button>
+                    <table>
+                        <tr>
+                            <th>Items</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                            <td>Kitty-pants</td>
+                            <td>80</td>
+                        </tr>
+                        <tr>
+                            <td>flame-shirt</td>
+                            <td>50</td>
+                        </tr>
+                        <tr>
+                            <td>batman-pj</td>
+                            <td>65</td>
+                        </tr>
+                        <tr>
+                            <td>Cindarella-shoes</td>
+                            <td>100</td>
+                        </tr>
+                        <tr>
+                            <td>Jamaican-boys</td>
+                            <td>85</td>
+                        </tr>
+                        <tr>
+                            <td>Add new item ...</td>
+                            <td></td> 
+                        </tr>
+                    </table>
+                </aside>
+            </main>
+            <footer class="foot">
+                <p>Store Manager, Copyright &copy; 2018</p>
+            </footer>
+        </div>
+    <!-- js -->
+    <script src="/UI/static/mystyles.js"></script>
+    </body>
+</html>
