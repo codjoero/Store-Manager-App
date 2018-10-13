@@ -92,7 +92,43 @@ footer{
     width: 100vw;
 }
 
-/* site Grid areas */
+/* CART.HTML */
+.shopper div{
+    text-align: center;
+    padding: 1em;
+    color: #fff;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+/* Cart items table */
+.shoplist{
+    margin: 0 1.5vw;
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid rgb(194, 193, 193);
+}
+
+th, td {
+    text-align: left;
+    padding: 6px;
+    color: rgb(3, 0, 7);
+    font-size: 20px;
+}
+
+tr:nth-child(odd){
+    background-color: rgba(194, 193, 193, 0.9);
+}
+tr:nth-child(even){
+    background-color: rgba(236, 233, 233, 0.9);
+}
+
+/******* THE GRID *******/
+
+/* SITE Grid areas */
 header{
     grid-area: hd;
 }
@@ -120,7 +156,7 @@ aside{
         "ft        ft";     
 }
 
-/* The Dashboard NestGrid-1 */
+/* The Dashboard NestedGrid */
 .site .dash{
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
@@ -180,41 +216,8 @@ aside{
     background-color: rgb(237, 6, 245);
 }
 
-/* CART.HTML */
-.shopper div{
-    text-align: center;
-    padding: 1em;
-    color: #fff;
-    font-size: 1.4em;
-    cursor: pointer;
-}
-/* Cart items table */
-.shoplist{
-    margin: 0 1.5vw;
-}
 
-table{
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 1px solid rgb(194, 193, 193);
-}
-
-th, td {
-    text-align: left;
-    padding: 6px;
-    color: rgb(42, 20, 78);
-    font-size: 20px;
-}
-
-tr:nth-child(odd){
-    background-color: rgba(194, 193, 193, 0.5);
-}
-tr:nth-child(even){
-    background-color: rgba(236, 233, 233, 0.6);
-}
-
-/* Grid */
+/* The Cart NestedGrid */
 .site .shopper{
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
@@ -297,13 +300,33 @@ tr:nth-child(even){
 .back{
     grid-column: 3;
     grid-row: 6;
-    background-color: rgb(61, 71, 58);
+    background-color: rgb(26, 53, 18);
     text-transform: uppercase;
 }
 
 .shoplist{
     grid-column: 4/6;
     grid-row: 2/7;
+}
+
+/* The Inventory NestedGrid */
+.site .stock{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    grid-template-rows: auto 1fr 1fr;
+    margin: 0 1em;
+}
+
+.stock .user{
+    grid-column: 2;
+}
+
+.stock table{
+    grid-column: 1/-1;
+}
+
+.stock i{
+    font-size: 160%;
 }
 
 a {
@@ -381,7 +404,7 @@ a {
         grid-row: 5;
     }
 
-        /* Grid */
+    /* he Cart Grid */
     .site .shopper{
         display: grid;
         grid-template-columns: 30% 30% 30%;
