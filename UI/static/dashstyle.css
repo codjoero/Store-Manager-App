@@ -74,10 +74,6 @@ html{
     color: rgb(37, 44, 44)
 }
 
-#user, #admin{
-    display: none;
-}
-
 .dash i{
     font-size: 160%;
 }
@@ -166,6 +162,23 @@ tr:nth-child(even){
     font-size: 15px;
     padding-top: 10px;
     cursor: pointer;
+}
+
+/* ACCOUNTS */
+.tbupdate{    
+    width: 20vw;
+    float: left;
+}
+
+form .entry{
+    font-family: "Roboto", "sans-serif";
+    outline: 1;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 5px;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 12px;
 }
 
 /******* THE GRID *******/
@@ -362,7 +375,7 @@ aside{
 .site .stock{
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
-    grid-template-rows: auto 1fr 1fr;
+    grid-template-rows: auto auto auto 1fr 1fr;
     margin: 0 1em;
 }
 
@@ -389,6 +402,10 @@ aside{
     grid-column: 4;
     width: 9vw;
     float: left;
+}
+
+.tbupdate{
+    grid-column: 1/-1;
 }
 
 a {
@@ -483,7 +500,7 @@ a {
     .site .stock{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
         margin: 0 1em;
     }
 
@@ -503,20 +520,27 @@ a {
     /*inventory2 */
     #addbutton{
         grid-column: 1/-1;
-        grid-row: 2;
+        grid-row: 6;
         width: 100%;
         /* float: left; */
     }
 
     #freezebutton{
         grid-column: 1/-1;
-        grid-row: 3;
+        grid-row: 5;
         width: 100%;
         /* float: left; */
     }
+
+    .tbupdate{
+        width: 100%;
+    }
+
+    .entry{
+        width: 100%;
+    }
 }
 
-}
 
 @media (max-width: 320px){
     /* Main site */
@@ -603,7 +627,7 @@ a {
     .site .stock{
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: auto auto auto 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
         margin: 0 1em;
     }
 
@@ -623,16 +647,14 @@ a {
     /*inventory2 */
     #addbutton{
         grid-column: 1/-1;
-        grid-row: 2;
+        grid-row: 6;
         width: 100%;
-        /* float: left; */
     }
 
     #freezebutton{
         grid-column: 1/-1;
-        grid-row: 3;
+        grid-row: 5;
         width: 100%;
-        /* float: left; */
     }
 }
 

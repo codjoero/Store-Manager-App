@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="All store operations in one place">
+        <meta name="keywords" content="all in one app, store management">
+        <meta name="author" content="Ronnie N">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Store Manager | Inventory</title>
+        <link rel="stylesheet" href="../../static/dashstyle.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <div class="site">
+            <header class="branding">
+                <h1 class="title">Store Manager</h1>
+            </header>
+            <aside class="sidebar">
+                <ul>
+                    <a href="dashboard.html"><li><i class="fa fa-users"></i> Dashboard</li></a>
+                    <a href="inventory.html"><li><i class="fa fa-calendar-check-o"></i> Inventory</li></a>
+                    <a href="reports.html"><li><i class="fa fa-bar-chart"></i> Reports</li></a>
+                    <a href="accounts.html"><li><i class="fa fa-address-book-o"></i> Accounts</li></a>
+                    <a href="categories.html"><li><i class="fa fa-tags"></i> Categories</li></a>
+                    <a href="settings.html"><li><i class="fa fa-gears"></i> Settings</li></a>
+                </ul>
+            </aside>
+            <main class="stock">
+                <h2 class="db">User Accounts</h2>
+                <p class="user"><i class="fa fa-user-circle-o"></i> Admin</p>
+                <table id="mytable">
+                    <tr>
+                        <th>Select</th>
+                        <th>Id#</th>
+                        <th>Name</th>
+                        <th>username</th>
+                        <th>Grade</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>02</td>
+                        <td>Jonnie</td>
+                        <td>user</td>
+                        <td>C</td>
+                        <td class="txtright"><i class="fa fa-edit"></i></td>
+                        <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>01</td>
+                        <td>Ronald</td>
+                        <td>admin</td>
+                        <td>A</td>
+                        <td class="txtright"><i class="fa fa-edit"></i></td>
+                        <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
+                    </tr>                   
+                </table>
+                <form class="tbupdate">
+                    <button type="button" id="addbutton" class="insert"  onclick="">Delete</button>
+                    <input type="text" class="entry" placeholder="employee id">
+                    <input type="text" class="entry" placeholder="name">
+                    <input type="text" class="entry" placeholder="suername">
+                    <select class="entry">
+                        <option value="a">A</option>
+                        <option value="a">B</option>
+                        <option value="a">C</option>
+                    </select>
+                    <button type="button" id="addbutton" class="insert"  onclick="">Add user</button>
+                </form>
+            </main>
+            <footer class="foot">
+                <p>Store Manager, Copyright &copy; 2018</p>
+            </footer>
+        </div>
+    <!-- js -->
+    <script src="../../static/mystyles.js"></script>
+    </body>
+</html>

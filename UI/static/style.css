@@ -58,6 +58,10 @@ form #submit:hover{
     background: #486444;
 }
 
+#checker{
+    color: rgb(100, 13, 13);
+}
+
 /* The Grid */
 .site{
     display: grid;

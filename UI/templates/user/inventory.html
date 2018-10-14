@@ -7,8 +7,8 @@
         <meta name="keywords" content="all in one app, store management">
         <meta name="author" content="Ronnie N">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Store Manager | Dashboard</title>
-        <link rel="stylesheet" href="../static/dashstyle.css">
+        <title>Store Manager | Inventory</title>
+        <link rel="stylesheet" href="../../static/dashstyle.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
@@ -19,20 +19,18 @@
             </header>
             <aside class="sidebar">
                 <ul>
-                    <a href="../templates/dashboard.html"><li><i class="fa fa-users"></i> Dashboard</li></a>
-                    <a href="../templates/inventory.html"><li><i class="fa fa-calendar-check-o"></i> Inventory</li></a>
-                    <a href="../templates/reports.html"><li><i class="fa fa-bar-chart"></i> Reports</li></a>
-                    <a href="../templates/accounts.html"><li><i class="fa fa-address-book-o"></i> Accounts</li></a>
-                    <a href="../templates/categories.html"><li><i class="fa fa-tags"></i> Categories</li></a>
-                    <a href="../templates/settings.html"><li><i class="fa fa-cog"></i> Settings</li></a>
+                    <a href="dashboard.html"><li><i class="fa fa-users"></i> Dashboard</li></a>
+                    <a href="inventory.html"><li><i class="fa fa-calendar-check-o"></i> Inventory</li></a>
+                    <a href="#"><li><i class="fa fa-bar-chart"></i> Reports</li></a>
+                    <a href="#"><li><i class="fa fa-address-book-o"></i> Accounts</li></a>
+                    <a href="#"><li><i class="fa fa-tags"></i> Categories</li></a>
+                    <a href="#"><li><i class="fa fa-cog"></i> Settings</li></a>
                 </ul>
             </aside>
             <main class="stock">
                 <h2 class="db">Inventory</h2>
                 <p class="user"><i class="fa fa-user-circle-o"></i> Jonnie</p>
-                <button type="button" id="freezebutton" class="insert"  onclick="#">Freeze product</button>
-                <button type="button" id="addbutton" class="insert"  onclick="#">Add product</button>
-                <table id="mytable">
+                <table>
                         <tr>
                             <th>product name</th>
                             <th>Id#</th>
@@ -41,8 +39,6 @@
                             <th>min_stock</th>
                             <th>price</th>
                             <th>stocked on</th>
-                            <th></th>
-                            <th></th>
                         </tr>
                         <tr>
                             <td>Bell-bottoms</td>
@@ -52,8 +48,6 @@
                             <td>20</td>
                             <td>200</td>
                             <td>01-02-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
                         <tr>
                             <td>NY-pants</td>
@@ -63,8 +57,6 @@
                             <td>20</td>
                             <td>150</td>
                             <td>22-05-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
                         <tr>
                             <td>Eiffel-top</td>
@@ -74,8 +66,6 @@
                             <td>20</td>
                             <td>120</td>
                             <td>18-06-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
                         <tr>
                             <td>Cindarella-shoes</td>
@@ -85,8 +75,6 @@
                             <td>40</td>
                             <td>100</td>
                             <td>23-08-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
                         <tr>
                             <td>Jamaican-boys</td>
@@ -96,8 +84,6 @@
                             <td>35</td>
                             <td>85</td>
                             <td>11-04-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
                         <tr>
                             <td>Neckless-G</td>
@@ -107,8 +93,6 @@
                             <td>25</td>
                             <td>75</td>
                             <td>17-05-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
                     </table>
             </main>
@@ -117,6 +101,6 @@
             </footer>
         </div>
     <!-- js -->
-    <script src="/UI/static/mystyles.js"></script>
+    <script src="../../static/mystyles.js"></script>
     </body>
 </html>
