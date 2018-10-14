@@ -2,32 +2,28 @@
 var _CONFIG = {
     "user": {
         "Password": "andela",
-        "Redirect": "../templates/dashboard.html"
+        "Redirect": "../templates/user/dashboard.html"
     },
     "admin": {
-        "Password": "bootcamp",
-        "Redirect": "../templates/dashboard.html"
+        "Password": "andela",
+        "Redirect": "../templates/admin/dashboard.html"
     }
 }
-var loggedin = "";
+
 function checkLogin() {
     var login = document.getElementById("login").value;
     var pass = document.getElementById("password").value;
+    var text;
     if ( _CONFIG[login] !== undefined && _CONFIG[login]["Password"] == pass) {
         window.location.replace(_CONFIG[login]["Redirect"]);
-        
-        document.getElementById(login).style.display = "block";
     }
+    else {
+        text = "wrong input";
+        document.getElementById("checker").innerHTML = text;
+    }
+    
 };
 
-// if (loggedin == "user"){
-//     document.getElementById("user").style.display = "block";
-// }
-// else {
-//     document.getElementById("admin").style.display = "block";
-// };
-
-// inventory2 table row delete
 function deleteRow(call) {
     var i = call.parentNode.parentNode.rowIndex;
     document.getElementById("mytable").deleteRow(i);
