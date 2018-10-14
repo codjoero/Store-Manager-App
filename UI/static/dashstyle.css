@@ -131,7 +131,7 @@ tr:nth-child(even){
 }
 
 /* CATEGORIES */
-#insert{
+.insert{
     float: right;
     font-family: 'Roboto', 'sans-serif';
     outline: 0;
@@ -144,12 +144,28 @@ tr:nth-child(even){
     cursor: pointer;
 }
 
-#insert:hover{
+.insert:hover{
     background: #486444;
 }
 
 #thelist{
     float: left;
+}
+
+/* INVENTORY2 */
+.txtright{
+    float: right;
+    color: #3a25f1;
+    font-size: 12px;
+    padding-top: 13px;
+    cursor: pointer;
+}
+
+.txtdel{
+    color: rgb(204, 80, 80);
+    font-size: 15px;
+    padding-top: 10px;
+    cursor: pointer;
 }
 
 /******* THE GRID *******/
@@ -362,6 +378,19 @@ aside{
     font-size: 160%;
 }
 
+/*inventory2 */
+#addbutton{
+    grid-column: 5;
+    width: 8vw;
+    float: left;
+}
+
+#freezebutton{
+    grid-column: 4;
+    width: 9vw;
+    float: left;
+}
+
 a {
     color: inherit;
     text-decoration: inherit;
@@ -437,7 +466,7 @@ a {
         grid-row: 5;
     }
 
-    /* he Cart Grid */
+    /* The Cart Grid */
     .site .shopper{
         display: grid;
         grid-template-columns: 30% 30% 30%;
@@ -449,4 +478,161 @@ a {
         grid-column: 1/4;
         grid-row: -1;
     }
+
+    /* The Inventory NestedGrid */
+    .site .stock{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto 1fr 1fr;
+        margin: 0 1em;
+    }
+
+    .stock .user{
+        grid-column: 2;
+    }
+
+    .stock table{
+        grid-column: 1/-1;
+        grid-row: 4;
+    }
+
+    .stock i{
+        font-size: 160%;
+    }
+
+    /*inventory2 */
+    #addbutton{
+        grid-column: 1/-1;
+        grid-row: 2;
+        width: 100%;
+        /* float: left; */
+    }
+
+    #freezebutton{
+        grid-column: 1/-1;
+        grid-row: 3;
+        width: 100%;
+        /* float: left; */
+    }
 }
+
+}
+
+@media (max-width: 320px){
+    /* Main site */
+    .site{
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas:
+            "hd"
+            "main"
+            "sidebar"
+            "ft";
+    }
+
+    .sidebar{
+        display: none;
+    }
+
+    .dash{
+        margin: 0 0.5em;
+    }
+
+    /* The Dash Grid */
+    .site .dash{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 8px;
+    }
+    .cart{
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .cust{
+        grid-column: 1;
+        grid-row: 3;
+    }
+    .logout{
+        grid-column: 2;
+        grid-row: 2;
+    }
+    
+    .mysales{
+        grid-column: 1;
+        grid-row: 4;
+    }
+    .acc{
+        grid-column: 2;
+        grid-row: 3;
+    }
+    .inv{
+        grid-column: 1;
+        grid-row: 6;
+    }
+    .log{
+        grid-column: 2;
+        grid-row: 5;
+    }
+    .rep{
+        grid-column: 2;
+        grid-row: 4;
+    }
+    .cat{
+        grid-column: 2;
+        grid-row: 6;   
+    }
+    .set{
+        grid-column: 1;
+        grid-row: 5;
+    }
+
+    /* The Cart Grid */
+    .site .shopper{
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-template-rows: auto 2fr 2fr 2fr 2fr 2fr 2fr auto;
+        grid-gap: 6px;
+    }
+
+    .shoplist{
+        grid-column: 1/4;
+        grid-row: -1;
+    }
+
+    /* The Inventory NestedGrid */
+    .site .stock{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto 1fr 1fr;
+        margin: 0 1em;
+    }
+
+    .stock .user{
+        grid-column: 2;
+    }
+
+    .stock table{
+        grid-column: 1/-1;
+        grid-row: 4;
+    }
+
+    .stock i{
+        font-size: 160%;
+    }
+
+    /*inventory2 */
+    #addbutton{
+        grid-column: 1/-1;
+        grid-row: 2;
+        width: 100%;
+        /* float: left; */
+    }
+
+    #freezebutton{
+        grid-column: 1/-1;
+        grid-row: 3;
+        width: 100%;
+        /* float: left; */
+    }
+}
+
