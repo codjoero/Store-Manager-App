@@ -1,6 +1,8 @@
 # Store-Manager-App
-#### About...
+
 [![Build Status](https://travis-ci.org/codjoero/Userprofile.svg?branch=user-register-160784779)](https://travis-ci.org/codjoero/Userprofile)
+#### About...
+
 Store Manager is a web application that helps Store-owners manage sales, product inventory records and staff.
 It also allows staff allocated authority by the Store-owner, to login and start Shopping Carts for customers, interract with the product inventory and make sale records that can be viewed by the owner wherever they are.
 ### Dev Setup
