@@ -6,3 +6,5 @@ app.pyc
 __init__.pyc
 config.pyc
 users.pyc
+test_app.pyc
+util.pyc

@@ -146,6 +146,3 @@ class ManagerTestCase(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
         self.assertIn('sale_id', str(resp.data))    
-
-if __name__ == '__main__':
-    unittest.main()
