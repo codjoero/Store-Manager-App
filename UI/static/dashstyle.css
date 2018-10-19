@@ -1,0 +1,660 @@
+/* Universal */
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    box-sizing: border-box;
+}
+
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html{
+    background: url(../static/layout.jpg) no-repeat center fixed;
+    position: relative;
+    height: 100vh;
+    background-size: cover;
+    overflow: visible;
+}
+
+.site{
+    min-height: 100vh;
+    overflow: hidden;
+    display:block;
+    position: relative;
+    
+}
+
+/* Header */
+.branding{
+    position: relative;
+    background:rgba(28, 88, 86, 0.5);
+    overflow: visible;
+    font-size: 3.2vw;
+    color: #0f3317;
+    width: 100vw;
+}
+
+/* Sidebar */
+.sidebar{
+    position: relative;
+    height: 80vh;
+    background: rgba(68, 71, 73, 0.8);
+}
+
+.sidebar ul li{
+    text-decoration: none;
+    position: inherit;
+    font-size: 1.5vw;
+    color: rgba(230, 230, 230, 0.9);
+    list-style: none;
+    padding: 15px 5vw 15px 1vw;
+    border-bottom: 2px solid rgba(68, 71, 73, 0.8);
+    cursor: pointer;
+}
+
+.sidebar ul li:hover{
+    background: rgba(50, 53, 54, 0.8);
+}
+
+/* dashborad */
+.dash div{
+    text-align: center;
+    padding: 1em;
+    color: #fff;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.db{
+    font-size: 180%;
+    font-weight: bold;
+    color: rgb(37, 44, 44)
+}
+
+.dash i{
+    font-size: 160%;
+}
+
+.dash{
+    margin: 0 1em;
+}
+
+/* footer */
+footer{
+    position: relative;
+    background:rgba(28, 88, 86, 0.5);
+    font-size: 15px;
+    text-align: center;
+    bottom: 0;
+    width: 100vw;
+}
+
+/* CART.HTML */
+.shopper div{
+    text-align: center;
+    padding: 1em;
+    color: #fff;
+    font-size: 1.4em;
+    cursor: pointer;
+}
+/* Cart items table */
+.shoplist{
+    margin: 0 1.5vw;
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid rgb(194, 193, 193);
+}
+
+th, td {
+    text-align: left;
+    padding: 6px;
+    color: rgb(3, 0, 7);
+    font-size: 20px;
+}
+
+tr:nth-child(odd){
+    background-color: rgba(194, 193, 193, 0.9);
+}
+tr:nth-child(even){
+    background-color: rgba(236, 233, 233, 0.9);
+}
+
+/* CATEGORIES */
+.insert{
+    float: right;
+    font-family: 'Roboto', 'sans-serif';
+    outline: 0;
+    background: #597c55;
+    width: 30%;
+    border: none;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.insert:hover{
+    background: #486444;
+}
+
+#thelist{
+    float: left;
+}
+
+/* INVENTORY2 */
+.txtright{
+    float: right;
+    color: #3a25f1;
+    font-size: 12px;
+    padding-top: 13px;
+    cursor: pointer;
+}
+
+.txtdel{
+    color: rgb(204, 80, 80);
+    font-size: 15px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+
+/* ACCOUNTS */
+.tbupdate{    
+    width: 20vw;
+    float: left;
+}
+
+form .entry{
+    font-family: "Roboto", "sans-serif";
+    outline: 1;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 5px;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+/******* THE GRID *******/
+
+/* SITE Grid areas */
+header{
+    grid-area: hd;
+}
+
+footer{
+    grid-area: ft;
+}
+
+main{
+    grid-area: main;
+}
+
+aside{
+    grid-area: sidebar;
+}
+
+.site{
+    display: grid;
+    grid-template-columns: auto 8fr;
+    /* grid-template-rows: auto 2fr 1fr; */
+    grid-gap: 7px;
+    grid-template-areas:
+        "hd        hd"
+        "sidebar main"
+        "ft        ft";     
+}
+
+/* The Dashboard NestedGrid */
+.site .dash{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    grid-template-rows: auto 2fr 2fr 2fr 2fr 2fr;
+    grid-gap: 9px;
+}
+
+.cart{
+    grid-column: 1;
+    grid-row: 2;
+    background-color: rgb(4, 253, 212);
+}
+.cust{
+    grid-column: 2;
+    grid-row: 2;
+    background-color: rgb(99, 247, 8);;
+}
+.mysales{
+    grid-column: 3;
+    grid-row: 2;
+    background-color: rgb(48, 22, 252);
+
+}
+.logout{
+    grid-column: 4;
+    grid-row: 2;
+    background-color: rgb(250, 64, 2);
+}
+.acc{
+    grid-column: 1;
+    grid-row: 3;
+    background-color: #f4f802;
+}
+.inv{
+    grid-column: 2;
+    grid-row: 3;
+    background-color: rgb(2, 136, 245);
+}
+.log{
+    grid-column: 3;
+    grid-row: 3;
+    background-color: #FFB400;
+}
+.rep{
+    grid-column: 4;
+    grid-row: 3;
+    background-color: rgb(253, 2, 69);
+}
+.cat{
+    grid-column: 1;
+    grid-row: 4;
+    background-color: rgb(245, 113, 6);
+}
+.set{
+    grid-column: 2;
+    grid-row: 4;
+    background-color: rgb(237, 6, 245);
+}
+
+
+/* The Cart NestedGrid */
+.site .shopper{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    grid-template-rows: auto 2fr 2fr 2fr 2fr 2fr 2fr auto;
+    grid-gap: 6px;
+}
+
+.kids{
+    grid-column: 1;
+    grid-row: 2;
+    background-color: rgb(4, 50, 253);
+}
+
+.shirts{
+    grid-column: 2;
+    grid-row: 2;
+    background-color: rgb(219, 18, 45);
+}
+
+.tops{
+    grid-column: 3;
+    grid-row: 2;
+    background-color: rgb(9, 122, 94);
+}
+
+.bottoms{
+    grid-column: 1;
+    grid-row: 3;
+    background-color: rgb(4, 61, 78);
+}
+
+.denims{
+    grid-column: 2;
+    grid-row: 3;
+    background-color: rgb(62, 253, 4);
+}
+
+.jackets{
+    grid-column: 3;
+    grid-row: 3;
+    background-color: rgb(94, 10, 87);
+}
+
+.pants{
+    grid-column: 1;
+    grid-row: 4;
+    background-color: rgb(107, 53, 2);
+}
+
+.suits{
+    grid-column: 2;
+    grid-row: 4;
+    background-color: rgb(253, 4, 87);
+}
+
+.access{
+    grid-column: 3;
+    grid-row: 4;
+    background-color: rgb(8, 197, 211);
+}
+
+.beach{
+    grid-column: 1;
+    grid-row: 5;
+    background-color: rgb(253, 4, 129);
+}
+
+.bags{
+    grid-column: 2;
+    grid-row: 5;
+    background-color: rgb(253, 124, 4);
+}
+
+.ling{
+    grid-column: 3;
+    grid-row: 5;
+    background-color: rgb(128, 26, 60);
+}
+
+.new{
+    grid-column: 1;
+    grid-row: 6;
+    background-color: rgb(67, 109, 158);
+    text-transform: uppercase;
+}
+
+.back{
+    grid-column: 3;
+    grid-row: 6;
+    background-color: rgb(26, 53, 18);
+    text-transform: uppercase;
+}
+
+.shoplist{
+    grid-column: 4/6;
+    grid-row: 2/7;
+}
+
+/* The Inventory NestedGrid */
+.site .stock{
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
+    grid-template-rows: auto auto auto 1fr 1fr;
+    margin: 0 1em;
+}
+
+.stock .user{
+    grid-column: 2;
+}
+
+.stock table{
+    grid-column: 1/-1;
+}
+
+.stock i{
+    font-size: 160%;
+}
+
+/*inventory2 */
+#addbutton{
+    grid-column: 5;
+    width: 8vw;
+    float: left;
+}
+
+#freezebutton{
+    grid-column: 4;
+    width: 9vw;
+    float: left;
+}
+
+.tbupdate{
+    grid-column: 1/-1;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+
+/* Queries */
+@media (max-width: 640px){
+    /* Main site */
+    .site{
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas:
+            "hd"
+            "main"
+            "sidebar"
+            "ft";
+    }
+
+    .sidebar{
+        display: none;
+    }
+
+    .dash{
+        margin: 0 0.5em;
+    }
+
+    /* The Dash Grid */
+    .site .dash{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 8px;
+    }
+    .cart{
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .cust{
+        grid-column: 2;
+        grid-row: 2;
+    }
+    .logout{
+        grid-column: 3;
+        grid-row: 2;
+    }
+    
+    .mysales{
+        grid-column: 1;
+        grid-row: 3;
+    }
+    .acc{
+        grid-column: 2;
+        grid-row: 3;
+    }
+    .inv{
+        grid-column: 3;
+        grid-row: 3;
+    }
+    .log{
+        grid-column: 1;
+        grid-row: 4;
+    }
+    .rep{
+        grid-column: 2;
+        grid-row: 4;
+    }
+    .cat{
+        grid-column: 3;
+        grid-row: 4;   
+    }
+    .set{
+        grid-column: 1;
+        grid-row: 5;
+    }
+
+    /* The Cart Grid */
+    .site .shopper{
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-template-rows: auto 2fr 2fr 2fr 2fr 2fr 2fr auto;
+        grid-gap: 6px;
+    }
+
+    .shoplist{
+        grid-column: 1/4;
+        grid-row: -1;
+    }
+
+    /* The Inventory NestedGrid */
+    .site .stock{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        margin: 0 1em;
+    }
+
+    .stock .user{
+        grid-column: 2;
+    }
+
+    .stock table{
+        grid-column: 1/-1;
+        grid-row: 4;
+    }
+
+    .stock i{
+        font-size: 160%;
+    }
+
+    /*inventory2 */
+    #addbutton{
+        grid-column: 1/-1;
+        grid-row: 6;
+        width: 100%;
+        /* float: left; */
+    }
+
+    #freezebutton{
+        grid-column: 1/-1;
+        grid-row: 5;
+        width: 100%;
+        /* float: left; */
+    }
+
+    .tbupdate{
+        width: 100%;
+    }
+
+    .entry{
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 320px){
+    /* Main site */
+    .site{
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas:
+            "hd"
+            "main"
+            "sidebar"
+            "ft";
+    }
+
+    .sidebar{
+        display: none;
+    }
+
+    .dash{
+        margin: 0 0.5em;
+    }
+
+    /* The Dash Grid */
+    .site .dash{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 8px;
+    }
+    .cart{
+        grid-column: 1;
+        grid-row: 2;
+    }
+    .cust{
+        grid-column: 1;
+        grid-row: 3;
+    }
+    .logout{
+        grid-column: 2;
+        grid-row: 2;
+    }
+    
+    .mysales{
+        grid-column: 1;
+        grid-row: 4;
+    }
+    .acc{
+        grid-column: 2;
+        grid-row: 3;
+    }
+    .inv{
+        grid-column: 1;
+        grid-row: 6;
+    }
+    .log{
+        grid-column: 2;
+        grid-row: 5;
+    }
+    .rep{
+        grid-column: 2;
+        grid-row: 4;
+    }
+    .cat{
+        grid-column: 2;
+        grid-row: 6;   
+    }
+    .set{
+        grid-column: 1;
+        grid-row: 5;
+    }
+
+    /* The Cart Grid */
+    .site .shopper{
+        display: grid;
+        grid-template-columns: 30% 30% 30%;
+        grid-template-rows: auto 2fr 2fr 2fr 2fr 2fr 2fr auto;
+        grid-gap: 6px;
+    }
+
+    .shoplist{
+        grid-column: 1/4;
+        grid-row: -1;
+    }
+
+    /* The Inventory NestedGrid */
+    .site .stock{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        margin: 0 1em;
+    }
+
+    .stock .user{
+        grid-column: 2;
+    }
+
+    .stock table{
+        grid-column: 1/-1;
+        grid-row: 4;
+    }
+
+    .stock i{
+        font-size: 160%;
+    }
+
+    /*inventory2 */
+    #addbutton{
+        grid-column: 1/-1;
+        grid-row: 6;
+        width: 100%;
+    }
+
+    #freezebutton{
+        grid-column: 1/-1;
+        grid-row: 5;
+        width: 100%;
+    }
+}
+
