@@ -1,0 +1,24 @@
+language: python
+python:
+  - "3.6"
+
+cache: pip
+
+env:
+  global:
+
+
+install:
+  - "pip install -r requirements.txt"
+
+branches:
+  only:
+  - gh-pages
+  - /.*/
+
+script:
+  - python3 -m pytest -v --cov APIs/tests --cov-report term-missing
+
+after_success:
+  - coveralls
+  - codecov
