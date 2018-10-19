@@ -17,8 +17,8 @@ branches:
   - /.*/
 
 script:
-  - python3 -m pytest -v --cov APIs/tests --cov-report 
-
+  - "nosetests --with-coverage --cover-package=api"
+  - "coverage report"
 after_success:
   - coveralls
   - codecov
