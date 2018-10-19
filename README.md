@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/codjoero/Userprofile.svg?branch=user-register-160784779)](https://travis-ci.org/codjoero/Userprofile)
 [![Coverage Status](https://coveralls.io/repos/github/codjoero/Store-Manager-App/badge.svg?branch=ch-project-adjustments-161335874)](https://coveralls.io/github/codjoero/Store-Manager-App?branch=ch-project-adjustments-161335874)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1cc0ea9fdebf640c8169/maintainability)](https://codeclimate.com/github/codjoero/Store-Manager-App/maintainability)
 #### About
 
 Store Manager is a web application that helps Store-owners manage sales, product inventory records and staff.

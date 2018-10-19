@@ -27,5 +27,5 @@ class Users:
 
     def delete_user(self, id):
         user = util.get_list_enum(self.users, id)
-        self.users.remove(user[0])
-        return True
+        # self.users.remove(user[0])
+        return util.delete_item(self.users, user)

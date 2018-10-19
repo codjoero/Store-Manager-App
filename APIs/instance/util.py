@@ -19,10 +19,15 @@ class Utilities():
             abort(404)
         return list_name
 
-
+    # Requests user input in json and updates the list
     def request_json_get(self, store_list):
         store_dict = store_list[0]
         dict_keys = store_dict.keys()   # a list
         for x in dict_keys:
             store_dict[x] = request.json.get(x, store_dict[x])
         return store_dict
+
+
+    def delete_item(self, store_list, list_dict):
+        store_list.remove(list_dict[0])
+        return True
