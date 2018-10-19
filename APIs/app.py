@@ -79,7 +79,7 @@ def get_sale_record(id):
 
 @app.route('/storemanager/api/v1/sales', methods=['GET'])
 def get_all_sale_records():
-    return jsonify({'New sale': sales.get_all_sale_records()}), 200
+    return jsonify({'Sale Record': sales.get_all_sale_records()}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

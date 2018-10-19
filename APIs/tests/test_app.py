@@ -104,14 +104,14 @@ class ManagerTestCase(unittest.TestCase):
         resp = self.client.get('/storemanager/api/v1/products/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
-        self.assertIn('prod_id', str(resp.data))
+        self.assertIn('id', str(resp.data))
 
 
     def test_view_all_products(self):
         resp = self.client.get('/storemanager/api/v1/products')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
-        self.assertIn('prod_id', str(resp.data))      
+        self.assertIn('id', str(resp.data))      
 
 
     def test_delete_product(self):
@@ -131,18 +131,18 @@ class ManagerTestCase(unittest.TestCase):
             )
         self.assertEqual(resp.status_code, 201)
         self.assertIn('pants', str(resp.data))
-        self.assertIn('sale_id', str(resp.data))
+        self.assertIn('id', str(resp.data))
 
 
     def test_get_sale_record(self):
         resp = self.client.get('/storemanager/api/v1/sales/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
-        self.assertIn('sale_id', str(resp.data))    
+        self.assertIn('id', str(resp.data))    
 
 
     def test_get_all_sale_records(self):
         resp = self.client.get('/storemanager/api/v1/sales')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
-        self.assertIn('sale_id', str(resp.data))    
+        self.assertIn('id', str(resp.data))    
