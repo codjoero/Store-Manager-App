@@ -17,8 +17,7 @@ branches:
   - /.*/
 
 script:
-  - python3 -m pytest -v --cov APIs/tests --cov-report term-missing
-
+  - python3 -m pytest -v --cov APIs/tests
 after_success:
   - coveralls
   - codecov
