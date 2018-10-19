@@ -32,6 +32,11 @@ def unauthorized(error):
 """ 
 Users endpoints 
 """
+
+@app.route('/')
+def welcome():
+    return "Welcome!"
+
 @app.route('/storemanager/api/v1/users', methods=['POST'])
 def create_user():
     return jsonify(ref_calls('New user', users.create_user())), 201
