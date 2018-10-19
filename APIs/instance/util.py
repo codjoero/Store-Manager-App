@@ -31,3 +31,8 @@ class Utilities():
     def delete_item(self, store_list, list_dict):
         store_list.remove(list_dict[0])
         return True
+
+
+    def general_delete(self, store_list, id):
+        list_name = self.get_list_enum(store_list, id)
+        return self.delete_item(store_list, list_name)

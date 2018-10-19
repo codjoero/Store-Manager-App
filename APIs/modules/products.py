@@ -36,9 +36,7 @@ class Products:
         return util.request_json_get(prod)
 
     def delete_product(self, id):
-        prod = util.get_list_enum(self.products, id)
-        # self.products.remove(prod[0])
-        return util.delete_item(self.products, prod)
+        return util.general_delete(self.products, id)
 
     def view_a_product(self, id):
         return util.get_list_enum(self.products, id)

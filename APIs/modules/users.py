@@ -26,6 +26,4 @@ class Users:
         return util.request_json_get(user)
 
     def delete_user(self, id):
-        user = util.get_list_enum(self.users, id)
-        # self.users.remove(user[0])
-        return util.delete_item(self.users, user)
+        return util.general_delete(self.users, id)
