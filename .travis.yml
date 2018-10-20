@@ -6,7 +6,7 @@ cache: pip
 
 env:
   global:
-
+ - CODECOV_TOKEN="06154fdb-53ed-44a5-880b-64be61c02af8"
 
 install:
   - "pip install -r requirements.txt"
@@ -18,7 +18,13 @@ branches:
 
 script:
   - "nosetests --with-coverage --cover-package=api"
-  
+   - CODECOV_TOKEN="   - CODECOV_TOKE   - CODECOV_TOKEN="
+   - CODECOV_TOKEN="
+   - CODECOV_TOKEN="
+   - CODECOV_TOKEN="
+   - CODECOV_TOKEN="
+N="
+
 after_success:
   - coveralls
   - codecov
