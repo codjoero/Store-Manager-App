@@ -8,3 +8,5 @@ config.pyc
 users.pyc
 test_app.pyc
 util.pyc
+products.pyc
+sales.pyc

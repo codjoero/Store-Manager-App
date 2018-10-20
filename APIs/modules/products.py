@@ -1,4 +1,4 @@
-from flask import Flask, request, abort
+from flask import Flask, request, abort, jsonify
 import datetime
 from APIs.instance.util import Utilities
 
@@ -7,13 +7,6 @@ util = Utilities()
 class Products:
     def __init__(self):
         self.products = []
-
-    # # products list enumaration
-    # def get_prod_list(self, id):
-    #     prod = [prod for prod in self.products if prod['prod_id'] == id]
-    #     if len(prod) == 0:
-    #         abort(404)
-    #     return prod
 
     def create_product(self):
         util.json_check('prod_name')
@@ -27,19 +20,19 @@ class Products:
             "stock_date": datetime.date.today()
         }
         self.products.append(product)
-        return product
+        return jsonify({'New product': product}), 201
 
     def update_product(self, id):
         prod = util.get_list_enum(self.products, id)
         if not request.json:
             abort(400)
-        return util.request_json_get(prod)
+        return jsonify({'Updated product': util.request_json_get(prod)}), 200
 
     def delete_product(self, id):
-        return util.general_delete(self.products, id)
+        return jsonify({'Product deleted': util.general_delete(self.products, id)}), 200
 
     def view_a_product(self, id):
-        return util.get_list_enum(self.products, id)
+        return jsonify({'Product': util.get_list_enum(self.products, id)}), 200
 
     def view_all_product(self):
-        return self.products
+        return jsonify({'Products': self.products}), 200

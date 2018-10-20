@@ -1,5 +1,5 @@
 
-from flask import Flask, request, abort
+from flask import Flask, request, abort, jsonify
 from APIs.instance.util import Utilities
 
 util = Utilities()
@@ -19,11 +19,11 @@ class Users:
             "grade": request.json["grade"]
         }
         self.users.append(user)
-        return user
+        return jsonify({'New user': user}), 201
 
     def update_user(self, id):
         user = util.get_list_enum(self.users, id)
-        return util.request_json_get(user)
+        return jsonify({'New user': util.request_json_get(user)}), 200
 
     def delete_user(self, id):
-        return util.general_delete(self.users, id)
+        return jsonify({'User Deleted': util.general_delete(self.users, id)}), 200

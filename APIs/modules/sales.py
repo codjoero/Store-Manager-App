@@ -1,4 +1,4 @@
-from flask import Flask, request, abort
+from flask import Flask, request, abort, jsonify
 import datetime
 from APIs.instance.util import Utilities
 
@@ -19,10 +19,10 @@ class Sales:
             "sale_date": datetime.date.today()
         }
         self.sales.append(sale)
-        return sale
+        return jsonify({'Sale Record': sale}), 201
 
     def get_sale_record(self, id):
-        return util.get_list_enum(self.sales, id)
+        return jsonify({'Sale record': util.get_list_enum(self.sales, id)}), 200
 
     def get_all_sale_records(self):
-        return self.sales
+        return jsonify({'Sale records': self.sales}), 200
