@@ -18,13 +18,7 @@ branches:
 
 script:
   - "nosetests --with-coverage --cover-package=api"
-   - CODECOV_TOKEN="   - CODECOV_TOKE   - CODECOV_TOKEN="
-   - CODECOV_TOKEN="
-   - CODECOV_TOKEN="
-   - CODECOV_TOKEN="
-   - CODECOV_TOKEN="
-N="
-
+   
 after_success:
   - coveralls
   - codecov

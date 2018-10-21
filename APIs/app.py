@@ -1,6 +1,4 @@
-
-from flask import Flask, request, jsonify, abort, make_response
-import json
+from flask import Flask, request, jsonify, make_response
 from APIs.modules.users import Users
 from APIs.modules.products import Products
 from APIs.modules.sales import Sales
@@ -13,8 +11,9 @@ sales = Sales()
 app = Flask(__name__)
 
 app.secret = 'andela'
-""" 
-Error Handlers 
+ 
+
+"""Error Handlers 
 """
 @app.errorhandler(400)
 def bad_request(error):
@@ -29,10 +28,9 @@ def unauthorized(error):
     return make_response(jsonify({'error': 'Unauthorized'}), 401)
 
 
-""" 
-Users endpoints 
+ 
+"""Users endpoints 
 """
-
 @app.route('/')
 def welcome():
     return "Welcome!"
@@ -41,49 +39,49 @@ def welcome():
 def create_user():
     return users.create_user()
 
-@app.route('/storemanager/api/v1/users/<int:id>', methods=['PUT'])
-def update_user(id):
-    return users.update_user(id)
+@app.route('/storemanager/api/v1/users/<int:_id>', methods=['PUT'])
+def update_user(_id):
+    return users.update_user(_id)
 
-@app.route('/storemanager/api/v1/users/<int:id>', methods=['DELETE'])
-def delete_user(id):
-    return users.delete_user(id)
+@app.route('/storemanager/api/v1/users/<int:_id>', methods=['DELETE'])
+def delete_user(_id):
+    return users.delete_user(_id)
 
 
-""" 
-Products endpoints 
+
+"""Products endpoints 
 """
 @app.route('/storemanager/api/v1/products', methods=['POST'])
 def create_product():
     return products.create_product()
 
-@app.route('/storemanager/api/v1/products/<int:id>', methods=['PUT'])
-def update_product(id):
-    return products.update_product(id)
+@app.route('/storemanager/api/v1/products/<int:_id>', methods=['PUT'])
+def update_product(_id):
+    return products.update_product(_id)
 
-@app.route('/storemanager/api/v1/products/<int:id>', methods=['DELETE'])
-def delete_product(id):
-    return products.delete_product(id)
+@app.route('/storemanager/api/v1/products/<int:_id>', methods=['DELETE'])
+def delete_product(_id):
+    return products.delete_product(_id)
 
-@app.route('/storemanager/api/v1/products/<int:id>', methods=['GET'])
-def view_a_product(id):
-    return products.view_a_product(id)
+@app.route('/storemanager/api/v1/products/<int:_id>', methods=['GET'])
+def view_a_product(_id):
+    return products.view_a_product(_id)
 
 @app.route('/storemanager/api/v1/products', methods=['GET'])
 def view_all_product():
     return products.view_all_product()
 
 
-""" 
-Sales endpoints 
+ 
+"""Sales endpoints 
 """
 @app.route('/storemanager/api/v1/sales', methods=['POST'])
 def create_sale_order():
     return sales.create_sale_order()
 
-@app.route('/storemanager/api/v1/sales/<int:id>', methods=['GET'])
-def get_sale_record(id):
-    return sales.get_sale_record(id)
+@app.route('/storemanager/api/v1/sales/<int:_id>', methods=['GET'])
+def get_sale_record(_id):
+    return sales.get_sale_record(_id)
 
 @app.route('/storemanager/api/v1/sales', methods=['GET'])
 def get_all_sale_records():

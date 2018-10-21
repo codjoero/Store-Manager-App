@@ -3,9 +3,9 @@ import unittest
 import json
 from APIs.app import app
  
-
 class ManagerTestCase(unittest.TestCase):
-    def setUp(self): 
+
+    def setUp(self):
         self.app_user = {
             "name": "Jonnie Pemba",
             "username":"jonnie",
@@ -16,12 +16,12 @@ class ManagerTestCase(unittest.TestCase):
             "prod_name": "bell_bottoms",
             "category": "pants",
             "stock": 20,
-            "min_stock": 10,    
+            "min_stock": 10,
             "price": 200
         }
         self.sale = {
             "prod_name": "bell_bottoms",
-            "category": "pants", 
+            "category": "pants",
             "price": 200
         }
 
@@ -62,14 +62,13 @@ class ManagerTestCase(unittest.TestCase):
         self.assertIn('A', str(resp.data))
 
 
-    def test_delete_user(self):     
+    def test_delete_user(self):
         resp = self.client.delete('/storemanager/api/v1/users/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('true', str(resp.data))
 
 
-    """
-    Products
+    """Products
     """
     def test_create_product(self):
         resp = self.client.post(
@@ -88,7 +87,7 @@ class ManagerTestCase(unittest.TestCase):
             "category": "pants",
             "stock": 20,
             "min_stock": 10,    
-            "price": 200}), 
+            "price": 200}),
             content_type='application/json'
             )
         self.assertEqual(rp.status_code, 201)
@@ -112,7 +111,6 @@ class ManagerTestCase(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
         self.assertIn('id', str(resp.data))      
-
 
     def test_delete_product(self):
         resp = self.client.delete('/storemanager/api/v1/products/1')

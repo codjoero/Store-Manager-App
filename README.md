@@ -3,9 +3,7 @@
 [![Build Status](https://travis-ci.org/codjoero/Userprofile.svg?branch=user-register-160784779)](https://travis-ci.org/codjoero/Userprofile)
 [![Coverage Status](https://coveralls.io/repos/github/codjoero/Store-Manager-App/badge.svg?branch=ch-project-adjustments-161335874)](https://coveralls.io/github/codjoero/Store-Manager-App?branch=ch-project-adjustments-161335874)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1cc0ea9fdebf640c8169/maintainability)](https://codeclimate.com/github/codjoero/Store-Manager-App/maintainability)
-[![codecov](https://codecov.io/gh/codjoero/Store-Manager-App/branch/master/graph/badge.svg)](https://codecov.io/gh/codjoero/Store-Manager-App)
-
-
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6cc05ba8faff4376bcbf48bd0645c1c2)](https://www.codacy.com/app/codjoero/Store-Manager-App?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=codjoero/Store-Manager-App&amp;utm_campaign=Badge_Grade)
 
 ## About
 
@@ -16,7 +14,7 @@ It also allows staff allocated authority by the Store-owner, to login and start 
 
 To get the project, clone it using [Github Repo](https://github.com/codjoero/Store-Manager-App). Also the current work in progress App is on [github pages](https://codjoero.github.io/Store-Manager-App/)
 
-This is app is hosted on [heroku](https://dashboard.heroku.com/apps/thecodestoremanager-api-heroku).
+This is app is hosted on [heroku](https://thecodestoremanager-api-heroku.herokuapp.com/).
 
 # Features
 
