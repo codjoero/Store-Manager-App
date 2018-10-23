@@ -222,53 +222,53 @@ aside{
 .cart{
     grid-column: 1;
     grid-row: 2;
-    background-color: rgb(4, 253, 212);
+    background-color: rgb(120, 150, 144);
 }
 .cust{
     grid-column: 2;
     grid-row: 2;
-    background-color: rgb(99, 247, 8);;
+    background-color: rgb(120, 150, 144);;
 }
 .mysales{
     grid-column: 3;
     grid-row: 2;
-    background-color: rgb(48, 22, 252);
+    background-color: rgb(120, 150, 144);
 
 }
 .logout{
     grid-column: 4;
     grid-row: 2;
-    background-color: rgb(250, 64, 2);
+    background-color: rgb(120, 150, 144);
 }
 .acc{
     grid-column: 1;
     grid-row: 3;
-    background-color: #f4f802;
+    background-color: rgb(120, 150, 144);
 }
 .inv{
     grid-column: 2;
     grid-row: 3;
-    background-color: rgb(2, 136, 245);
+    background-color: rgb(120, 150, 144);
 }
 .log{
     grid-column: 3;
     grid-row: 3;
-    background-color: #FFB400;
+    background-color: rgb(120, 150, 144);
 }
 .rep{
     grid-column: 4;
     grid-row: 3;
-    background-color: rgb(253, 2, 69);
+    background-color: rgb(120, 150, 144);
 }
 .cat{
     grid-column: 1;
     grid-row: 4;
-    background-color: rgb(245, 113, 6);
+    background-color: rgb(120, 150, 144);
 }
 .set{
     grid-column: 2;
     grid-row: 4;
-    background-color: rgb(237, 6, 245);
+    background-color: rgb(120, 150, 144);
 }
 
 
@@ -283,86 +283,86 @@ aside{
 .kids{
     grid-column: 1;
     grid-row: 2;
-    background-color: rgb(4, 50, 253);
+    background-color: rgb(120, 150, 144);
 }
 
 .shirts{
     grid-column: 2;
     grid-row: 2;
-    background-color: rgb(219, 18, 45);
+    background-color: rgb(120, 150, 144);
 }
 
 .tops{
     grid-column: 3;
     grid-row: 2;
-    background-color: rgb(9, 122, 94);
+    background-color: rgb(120, 150, 144);
 }
 
 .bottoms{
     grid-column: 1;
     grid-row: 3;
-    background-color: rgb(4, 61, 78);
+    background-color: rgb(120, 150, 144);
 }
 
 .denims{
     grid-column: 2;
     grid-row: 3;
-    background-color: rgb(62, 253, 4);
+    background-color: rgb(120, 150, 144);
 }
 
 .jackets{
     grid-column: 3;
     grid-row: 3;
-    background-color: rgb(94, 10, 87);
+    background-color: rgb(120, 150, 144);
 }
 
 .pants{
     grid-column: 1;
     grid-row: 4;
-    background-color: rgb(107, 53, 2);
+    background-color: rgb(120, 150, 144);
 }
 
 .suits{
     grid-column: 2;
     grid-row: 4;
-    background-color: rgb(253, 4, 87);
+    background-color: rgb(120, 150, 144);
 }
 
 .access{
     grid-column: 3;
     grid-row: 4;
-    background-color: rgb(8, 197, 211);
+    background-color: rgb(120, 150, 144);
 }
 
 .beach{
     grid-column: 1;
     grid-row: 5;
-    background-color: rgb(253, 4, 129);
+    background-color: rgb(120, 150, 144);
 }
 
 .bags{
     grid-column: 2;
     grid-row: 5;
-    background-color: rgb(253, 124, 4);
+    background-color: rgb(120, 150, 144);
 }
 
 .ling{
     grid-column: 3;
     grid-row: 5;
-    background-color: rgb(128, 26, 60);
+    background-color: rgb(120, 150, 144);
 }
 
 .new{
     grid-column: 1;
     grid-row: 6;
-    background-color: rgb(67, 109, 158);
+    background-color: rgb(120, 150, 144);
     text-transform: uppercase;
 }
 
 .back{
     grid-column: 3;
     grid-row: 6;
-    background-color: rgb(26, 53, 18);
+    background-color: rgb(120, 150, 144);
     text-transform: uppercase;
 }
 
