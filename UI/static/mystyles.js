@@ -2,11 +2,11 @@
 var _CONFIG = {
     "user": {
         "Password": "andela",
-        "Redirect": "../templates/user/dashboard.html"
+        "Redirect": "/UI/templates/user/dashboard.html"
     },
     "admin": {
         "Password": "andela",
-        "Redirect": "../templates/admin/dashboard.html"
+        "Redirect": "/UI/templates/admin/dashboard.html"
     }
 }
 
