@@ -13,8 +13,7 @@ install:
 
 branches:
   only:
-  - gh-pages
-  - /.*/
+  - develop
 
 script:
   - "nosetests --with-coverage --cover-package=api"
