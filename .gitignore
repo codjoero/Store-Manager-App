@@ -1,0 +1,12 @@
+__pycache__
+.vscode
+env
+.env
+app.pyc
+__init__.pyc
+config.pyc
+users.pyc
+test_app.pyc
+util.pyc
+products.pyc
+sales.pyc
