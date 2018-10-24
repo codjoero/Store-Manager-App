@@ -1,24 +1,18 @@
 language: python
 python:
-  - "3.6"
-
-cache: pip
+ - "3.6"
 
 env:
-  global:
- - CODECOV_TOKEN="06154fdb-53ed-44a5-880b-64be61c02af8"
+ global:
+   - CODECOV_TOKEN="06154fdb-53ed-44a5-880b-64be61c02af8"
 
 install:
-  - "pip install -r requirements.txt"
-
-branches:
-  only:
-  - gh-pages
-  - /.*/
+ - "pip install -r requirements.txt"
+ - "pip install coveralls"
 
 script:
-  - "nosetests --with-coverage --cover-package=api"
+ - "nosetests --with-coverage --cover-package=APIs"
    
 after_success:
-  - coveralls
-  - codecov
+ - coveralls
+ - codecov
