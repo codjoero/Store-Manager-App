@@ -3,30 +3,41 @@
 Store Manager is a web application that helps Store-owners manage sales, product inventory records and staff.
 It also allows staff allocated authority by the Store-owner, to login and start Shopping Carts for customers, interract with the product inventory and make sale records that can be viewed by the owner wherever they are.
 
+## Features
+
+> **admin**
+    add, edit, view and delete attendant accounts
+    add, edit, view and delete categories and products
+    view a single sale and all sales 
+
+> **store attendant**
+    add products to cart
+    view categories and products
+    view personal sales made
+
 ## Dev Setup
 
 To get the project, clone it using [Github Repo](https://github.com/codjoero/Store-Manager-App). Also the current work in progress App is on [github pages](https://codjoero.github.io/Store-Manager-App/)
 On github pages please login as below:-
 
-* Admin
+Admin
+* username - admin
+* password - andela
 
-username - admin
-password - andela
-
-* Store attendant
-
-username - user
-password - andela
+Store attendant
+* username - user
+* password - andela
 
 ## Prerequisites
 
 All thats needed is:-
-    Web browser
-    Internet
+    a web browser
+    internet connection
 
 ## Installation
 
 * Clone [Project](https://github.com/codjoero/Store-Manager-App.git) to your local machine
+
 
 * Current updated branch - [develop](https://github.com/codjoero/Store-Manager-App/tree/develop).
 
@@ -41,8 +52,6 @@ App built with the following tech:-
    * HTML5 
    * CSS3
    * Javascript
-   * Python/Flask
-   * Virtualenv
 
 ### To contribute to this App
 
