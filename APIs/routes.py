@@ -1,17 +1,14 @@
 from flask import Flask, request, jsonify, make_response
-from APIs.modules.users import Users
-from APIs.modules.products import Products
-from APIs.modules.sales import Sales
+from APIs import app
+from APIs.models.users import Users
+from APIs.models.products import Products
+from APIs.models.sales import Sales
 
 
 users = Users()
 products = Products()
 sales = Sales()
 
-app = Flask(__name__)
-
-app.secret = 'andela'
- 
 
 """Error Handlers 
 """
@@ -27,17 +24,27 @@ def not_found(error):
 def unauthorized(error):
     return make_response(jsonify({'error': 'Unauthorized'}), 401)
 
+@app.errorhandler(500)
+def server_error(error):
+    return make_response(jsonify({'error': 'Server error'}), 500)
 
- 
-"""Users endpoints 
+
+"""Root endpoint
 """
 @app.route('/')
 def welcome():
     return "Welcome!"
 
+
+"""Users endpoints 
+"""
 @app.route('/storemanager/api/v1/users', methods=['POST'])
 def create_user():
     return users.create_user()
+
+@app.route('/storemanager/api/v1/users', methods=['GET'])
+def view_all_users():
+    return users.view_all_users()
 
 @app.route('/storemanager/api/v1/users/<int:_id>', methods=['PUT'])
 def update_user(_id):
@@ -86,7 +93,3 @@ def get_sale_record(_id):
 @app.route('/storemanager/api/v1/sales', methods=['GET'])
 def get_all_sale_records():
     return sales.get_all_sale_records()
-
-
-if __name__ == '__main__':
-    app.run(debug=True)

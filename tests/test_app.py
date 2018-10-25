@@ -1,7 +1,7 @@
 
 import unittest
 import json
-from APIs.app import app
+from APIs import app
  
 class ManagerTestCase(unittest.TestCase):
 
@@ -22,6 +22,7 @@ class ManagerTestCase(unittest.TestCase):
         self.sale = {
             "prod_name": "bell_bottoms",
             "category": "pants",
+            "quantity": 2,
             "price": 200
         }
 
@@ -40,6 +41,11 @@ class ManagerTestCase(unittest.TestCase):
         self.assertEqual(resp.status_code, 201)
         self.assertIn('Jonnie Pemba', str(resp.data))
 
+    def test_view_all_users(self):
+        resp = self.client.get('/storemanager/api/v1/users')
+        self.assertEqual(resp.status_code, 200)
+        self.assertIn('name', str(resp.data))
+        self.assertIn('grade', str(resp.data))
 
     def test_update_user(self):
 
