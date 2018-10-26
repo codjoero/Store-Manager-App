@@ -16,19 +16,24 @@ To get the project, clone it using [Github Repo](https://github.com/codjoero/Sto
 
 This is app is hosted on [heroku](https://thecodestoremanager-api-heroku.herokuapp.com/).
 
-# Features
+# Heroku Endpoints
 
-* Admin create new store attendant account: 'storemanager/api/v1/user'
-* Admin update a store attendant account: 'storemanager/api/v1/user/id'
-* Admin delete a store attendant account: 'storemanager/api/v1/user/id'
-* Admin add a new product: 'storemanager/api/v1/products'
-* Admin modify a product: 'storemanager/api/v1/products/id'
-* Admin delete a product: 'storemanager/api/v1/products/id'
-* Admin/store attendant view a product: 'storemanager/api/v1/products/id'
-* Admin/store attendant view all products: 'storemanager/api/v1/products'
-* Store attendant add a sale order: 'storemanager/api/v1/sales'
-* Admin/store attendant view a sale order: 'storemanager/api/v1/sales/id'
-* Admin view all sale records: 'storemanager/api/v1/sales'
+| Functionality | HTTP Method | Endpoint    | 
+|---------------|:-----------:|------------:|
+| index / welcome |     | / |
+| new account | ==POST== | /storemanager/api/v1/user |
+| update account | ==PUT== | /storemanager/api/v1/user/id |
+| delete account | ==DELETE== | /storemanager/api/v1/user/id |
+| add new product | ==POST== | /storemanager/api/v1/products |
+| modify product | ==PUT== | /storemanager/api/v1/products/id |
+| delete product | ==DELETE== | /storemanager/api/v1/products/id |
+| add a sale order | ==POST== | /storemanager/api/v1/sales |
+| view a sale order | ==GET== | /storemanager/api/v1/sales/id |
+| view all sale records | ==GET== 'storemanager/api/v1/sales |
+
+### Documentation
+
+The documentation can be found [here](https://documenter.getpostman.com/view/5459960/RWgxvFDm)
 
 ### Prerequisites
 
