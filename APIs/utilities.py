@@ -11,6 +11,15 @@ class Utilities():
         if not request.json or not item in request.json:
             abort(400)
 
+    @classmethod
+    def duplicate_item(self, storage_list, item, _name):
+        duplicate = [dict_item for dict_item in storage_list\
+                    if dict_item[_name] == item[_name]]
+        
+        if len(duplicate) != 0:
+            return True
+        else:
+            return False
 
     # List enumeration for all methods
     @classmethod

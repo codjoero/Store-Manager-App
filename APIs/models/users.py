@@ -20,6 +20,9 @@ class Users:
             "grade": request.json["grade"]
         }
 
+        if util.duplicate_item(self.users, user, "username"):
+            return jsonify({"message":"user already exists!"}), 400
+
         if not user['name'] or not user['username'] or\
             not user['password'] or not user['grade']:
             abort(400)
