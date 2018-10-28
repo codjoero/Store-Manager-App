@@ -8,18 +8,18 @@ users = Users()
 
 """Users endpoints 
 """
-@app.route('/storemanager/api/v1/users', methods=['POST'])
+@app.route('/api/v1/users', methods=['POST'])
 def create_user():
     return users.create_user()
 
-@app.route('/storemanager/api/v1/users', methods=['GET'])
+@app.route('/api/v1/users', methods=['GET'])
 def view_all_users():
     return users.view_all_users()
 
-@app.route('/storemanager/api/v1/users/<int:_id>', methods=['PUT'])
+@app.route('/api/v1/users/<int:_id>', methods=['PUT'])
 def update_user(_id):
     return users.update_user(_id)
 
-@app.route('/storemanager/api/v1/users/<int:_id>', methods=['DELETE'])
+@app.route('/api/v1/users/<int:_id>', methods=['DELETE'])
 def delete_user(_id):
     return users.delete_user(_id)
