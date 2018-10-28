@@ -103,7 +103,7 @@ class ManagerTestCase(unittest.TestCase):
         rp = self.client.post(
             '/api/v1/products',
             data=json.dumps({
-            "prod_name": "bell_bottoms",
+            "prod_name": "NY-style",
             "category": "pants",
             "stock": '20A',
             "min_stock": '10P',    
@@ -137,7 +137,13 @@ class ManagerTestCase(unittest.TestCase):
     def test_update_product_fields_input(self):
         rp = self.client.post(
             '/api/v1/products',
-            data=json.dumps(self.product),
+            data=json.dumps({
+                "prod_name": 'Jasmin_blue',
+                "category": 'pants',
+                "stock": 20,
+                "min_stock": 10,
+                "price": 200
+                }),
             content_type='application/json'
             )
         self.assertEqual(rp.status_code, 201)
