@@ -21,6 +21,9 @@ class Products:
             "stock_date": datetime.date.today()
         }
 
+        if util.duplicate_item(self.products, product, "prod_name"):
+            return jsonify({"message":"product already exists!"}), 400
+
         if ' ' in product['prod_name'] or not product['category'] or\
             not product['stock'] or not product['min_stock'] or\
             not product['price']:
@@ -29,7 +32,7 @@ class Products:
         if not isinstance(product['stock'], int) or\
             not isinstance(product['min_stock'], int) or\
             not isinstance(product['price'], int):
-            return jsonify({'message': 'Numbers expected for units'}), 400
+            return jsonify({'message': 'Numbers expected for units!'}), 400
 
         self.products.append(product)
         return jsonify({'New product': product}), 201

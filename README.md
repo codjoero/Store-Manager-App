@@ -21,15 +21,15 @@ This is app is hosted on [heroku](https://thecodestoremanager-api-heroku.herokua
 | Functionality | HTTP Method | Endpoint    | 
 |---------------|:-----------:|------------:|
 | index / welcome |     | / |
-| new account | POST | /storemanager/api/v1/user |
-| update account | PUT | /storemanager/api/v1/user/id |
-| delete account | DELETE | /storemanager/api/v1/user/id |
-| add new product | POST | /storemanager/api/v1/products |
-| modify product | PUT | /storemanager/api/v1/products/id |
-| delete product | DELETE | /storemanager/api/v1/products/id |
-| add a sale order | POST | /storemanager/api/v1/sales |
-| view a sale order | GET | /storemanager/api/v1/sales/id |
-| view all sale records | GET | /storemanager/api/v1/sales |
+| new account | POST | /api/v1/user |
+| update account | PUT | /api/v1/user/id |
+| delete account | DELETE | /api/v1/user/id |
+| add new product | POST | /api/v1/products |
+| modify product | PUT | /api/v1/products/id |
+| delete product | DELETE | /api/v1/products/id |
+| add a sale order | POST | /api/v1/sales |
+| view a sale order | GET | /api/v1/sales/id |
+| view all sale records | GET | /api/v1/sales |
 
 ### Documentation
 
