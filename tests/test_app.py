@@ -35,7 +35,7 @@ class ManagerTestCase(unittest.TestCase):
 
     def test_create_user(self):
         resp = self.client.post(
-            '/storemanager/api/v1/users',
+            '/api/v1/users',
             data=json.dumps(self.app_user),
             content_type='application/json'
             )
@@ -43,7 +43,7 @@ class ManagerTestCase(unittest.TestCase):
         self.assertIn('Jonnie Pemba', str(resp.data))
 
     def test_view_all_users(self):
-        resp = self.client.get('/storemanager/api/v1/users')
+        resp = self.client.get('/api/v1/users')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('name', str(resp.data))
         self.assertIn('grade', str(resp.data))
@@ -51,7 +51,7 @@ class ManagerTestCase(unittest.TestCase):
     def test_update_user(self):
 
         rp = self.client.post(
-            '/storemanager/api/v1/users',
+            '/api/v1/users',
             data=json.dumps({
             "name": "brenda Good",
             "username":"brenda",
@@ -61,7 +61,7 @@ class ManagerTestCase(unittest.TestCase):
             )
         self.assertEqual(rp.status_code, 201)
         resp = self.client.put(
-            '/storemanager/api/v1/users/1',
+            '/api/v1/users/1',
             data=json.dumps({"grade": "A"}),
             content_type='application/json'
             )
@@ -70,7 +70,7 @@ class ManagerTestCase(unittest.TestCase):
 
 
     def test_delete_user(self):
-        resp = self.client.delete('/storemanager/api/v1/users/1')
+        resp = self.client.delete('/api/v1/users/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('true', str(resp.data))
 
@@ -79,7 +79,7 @@ class ManagerTestCase(unittest.TestCase):
     """
     def test_create_product(self):
         resp = self.client.post(
-            '/storemanager/api/v1/products',
+            '/api/v1/products',
             data=json.dumps(self.product),
             content_type='application/json'
             )
@@ -88,7 +88,7 @@ class ManagerTestCase(unittest.TestCase):
 
     def test_create_product_empty_fields(self):
         rp = self.client.post(
-            '/storemanager/api/v1/products',
+            '/api/v1/products',
             data=json.dumps({
             "prod_name": '',
             "category": '',
@@ -101,7 +101,7 @@ class ManagerTestCase(unittest.TestCase):
 
     def test_create_product_number_input(self):
         rp = self.client.post(
-            '/storemanager/api/v1/products',
+            '/api/v1/products',
             data=json.dumps({
             "prod_name": "bell_bottoms",
             "category": "pants",
@@ -116,7 +116,7 @@ class ManagerTestCase(unittest.TestCase):
 
     def test_update_product(self):
         rp = self.client.post(
-            '/storemanager/api/v1/products',
+            '/api/v1/products',
             data=json.dumps({
             "prod_name": "bell_bottoms",
             "category": "pants",
@@ -127,7 +127,7 @@ class ManagerTestCase(unittest.TestCase):
             )
         self.assertEqual(rp.status_code, 201)
         resp = self.client.put(
-            '/storemanager/api/v1/products/1',
+            '/api/v1/products/1',
             data=json.dumps({"price": 300}),
             content_type='application/json'
             )
@@ -136,13 +136,13 @@ class ManagerTestCase(unittest.TestCase):
 
     def test_update_product_fields_input(self):
         rp = self.client.post(
-            '/storemanager/api/v1/products',
+            '/api/v1/products',
             data=json.dumps(self.product),
             content_type='application/json'
             )
         self.assertEqual(rp.status_code, 201)
         resp = self.client.put(
-            '/storemanager/api/v1/products/1',
+            '/api/v1/products/1',
             data=json.dumps({
                 "prod_name": 20,
                 "category": 50,
@@ -156,30 +156,30 @@ class ManagerTestCase(unittest.TestCase):
 
 
     def test_view_a_product(self):
-        resp = self.client.get('/storemanager/api/v1/products/1')
+        resp = self.client.get('/api/v1/products/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
         self.assertIn('id', str(resp.data))
 
     def test_delete_product(self):
-        resp = self.client.delete('/storemanager/api/v1/products/1')
+        resp = self.client.delete('/api/v1/products/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('true', str(resp.data))
 
     def test_view_all_products(self):
-        resp = self.client.get('/storemanager/api/v1/products')
+        resp = self.client.get('/api/v1/products')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
         self.assertIn('id', str(resp.data))      
 
     def test_view_all_products_empty_list(self):
         self.client.delete(
-            '/storemanager/api/v1/products/1')
+            '/api/v1/products/1')
         self.client.delete(
-            '/storemanager/api/v1/products/2')
-        rp = self.client.get('/storemanager/api/v1/products')
+            '/api/v1/products/2')
+        rp = self.client.get('/api/v1/products')
         rp_decode = json.loads(rp.data.decode())
-        self.assertEqual(rp.status_code, 400)
+        self.assertEqual(rp.status_code, 404)
         self.assertIn('Inventory is empty!', rp_decode['message'])
 
 
@@ -188,7 +188,7 @@ class ManagerTestCase(unittest.TestCase):
     """
     def test_create_sale_order(self):
         resp = self.client.post(
-            '/storemanager/api/v1/sales',
+            '/api/v1/sales',
             data=json.dumps(self.sale),
             content_type='application/json'
             )
@@ -198,14 +198,14 @@ class ManagerTestCase(unittest.TestCase):
 
 
     def test_get_sale_record(self):
-        resp = self.client.get('/storemanager/api/v1/sales/1')
+        resp = self.client.get('/api/v1/sales/1')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
         self.assertIn('id', str(resp.data))    
 
 
     def test_get_all_sale_records(self):
-        resp = self.client.get('/storemanager/api/v1/sales')
+        resp = self.client.get('/api/v1/sales')
         self.assertEqual(resp.status_code, 200)
         self.assertIn('pants', str(resp.data))
         self.assertIn('id', str(resp.data))    

@@ -7,14 +7,14 @@ sales = Sales()
 
 """Sales endpoints 
 """
-@app.route('/storemanager/api/v1/sales', methods=['POST'])
+@app.route('/api/v1/sales', methods=['POST'])
 def create_sale_order():
     return sales.create_sale_order()
 
-@app.route('/storemanager/api/v1/sales/<int:_id>', methods=['GET'])
+@app.route('/api/v1/sales/<int:_id>', methods=['GET'])
 def get_sale_record(_id):
     return sales.get_sale_record(_id)
 
-@app.route('/storemanager/api/v1/sales', methods=['GET'])
+@app.route('/api/v1/sales', methods=['GET'])
 def get_all_sale_records():
     return sales.get_all_sale_records()

@@ -58,7 +58,7 @@ class Products:
 
     def view_all_product(self):
         if len(self.products) == 0:
-            return jsonify({'message': 'Inventory is empty!'}), 400
+            return jsonify({'message': 'Inventory is empty!'}), 404
         return jsonify({'Products': self.products}), 200
         
     def delete_product(self, _id):
