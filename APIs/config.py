@@ -1,11 +1,12 @@
-# /instance/config.py
-
+# /config.py
+import os
 
 class Config(object):
     """Parent configuration class."""
     DEBUG = False
     CSRF_ENABLED = True
-
+    JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY')
+    DATABASE_URI = os.getenv('DATABASE_URL')
 
 class DevelopmentConfig(Config):
     """Configurations for Development."""
