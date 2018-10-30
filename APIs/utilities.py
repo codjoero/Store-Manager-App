@@ -71,8 +71,8 @@ class UserValidation():
         """Method validates user's name,
         Returns True for valid, False otherwise
         """
-        if not self.name or not isinstance(
-            self.name, str) or self.name.isspace():
+        if not self.name or\
+            not isinstance(self.name, str):
             return False
         else:
             return True
@@ -81,9 +81,8 @@ class UserValidation():
         """Method validates username,
         Returns True for valid, False otherwise
         """
-        if ' ' in self.username or not self.username\
-            or not isinstance(self.username, str)\
-            or self.username.isspace():
+        if self.username or self.username.isspace()\
+            or not isinstance(self.username, str):
             return False
         else:
             return True

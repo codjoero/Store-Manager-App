@@ -23,8 +23,8 @@ class DataBaseConnection:
                     name TEXT NOT NULL,
                     username TEXT NOT NULL,
                     password TEXT NOT NULL,
-                    admin BOOLEAN DEFAULT FALSE,
-                    time_stamp DATE NOT NULL DEFAULT CURRENT_DATE
+                    role TEXT NOT NULL,
+                    time_stamp TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
             )
@@ -39,7 +39,7 @@ class DataBaseConnection:
                     min_stock INT NOT NULL,
                     price INT NOT NULL,
                     added_by TEXT NOT NULL,
-                    time_stamp DATE NOT NULL DEFAULT CURRENT_DATE
+                    time_stamp TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
             )
@@ -54,7 +54,7 @@ class DataBaseConnection:
                     price INT NOT NULL,
                     total_price INT NOT NULL,
                     sold_by TEXT NOT NULL,
-                    sale_date DATE NOT NULL DEFAULT CURRENT_DATE
+                    sale_date TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
             )
@@ -63,6 +63,11 @@ class DataBaseConnection:
         except Exception as e:
             print(e)
             print('Successfully Failed to connect to database!')
+
+    def drop_table(self):
+        self.cursor.execute("""DROP TABLE IF EXISTS users CASCADE""")
+        self.cursor.execute("""DROP TABLE IF EXISTS products CASCADE""")
+        self.cursor.execute("""DROP TABLE IF EXISTS sales CASCADE""")
 
 if __name__ == '__main__':
     database_conn = DataBaseConnection()

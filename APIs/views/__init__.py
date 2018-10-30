@@ -41,8 +41,7 @@ def register():
     name = request.json['name']
     username = request.json['username']
     password = request.json['password']
-    time_stamp = datetime.datetime.now()
-    admin = True
+    role = request.json['role']
 
     user = UserValidation(name, username, password)
 
@@ -52,15 +51,14 @@ def register():
         }), 400
     elif not user.valid_password():
         return jsonify({
-            'message': 'Password should be longer than 6 characters,\
-            have atleast an uppercase and a lowercase!'
+            'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
         }), 400
     # elif user.duplicate():
     #     pass
 
-    user = User(name, username, password, time_stamp, admin)
+    user = User(name, username, password, role)
     hash_password = user.password_hash()
-    user = User(name, username, hash_password, time_stamp, admin)
+    user = User(name, username, hash_password, role)
     new_user = user.add_user()
 
     return jsonify({

@@ -5,23 +5,21 @@ from database.dbqueries import DbQueries
 import datetime
 from passlib.hash import pbkdf2_sha256 as sha256
 
-dbq = DbQueries
+dbq = DbQueries()
 util = Utilities()
 
 class User:
     """ Class handles user objects """
-    def __init__(self, name, username, password, time_stamp, admin):
+    def __init__(self, name, username, password, role):
         self.name = name
         self.username = username
         self.password = password
-        self.time_stamp = time_stamp
-        self.admin = admin
+        self.role = role
 
     def add_user(self):
         """Method adds a user to the database
         """
-        dbq.add_user(self.name, self.username, self.password,\
-                    self.time_stamp, self.admin)
+        dbq.add_user(self.name, self.username, self.password, self.role)
         return self.name
 
     def password_hash(self):

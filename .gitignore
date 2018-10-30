@@ -2,6 +2,7 @@ __pycache__
 .vscode
 env
 .env
+.envFile
 app.pyc
 __init__.pyc
 config.pyc
