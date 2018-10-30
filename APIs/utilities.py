@@ -1,6 +1,7 @@
 
 from flask import Flask, request, jsonify, abort, make_response
 import json
+import re
 
 
 class Utilities():
@@ -52,3 +53,51 @@ class Utilities():
     def general_delete(self, store_list, _id):
         list_name = self.get_list_enum(store_list, _id)
         return self.delete_item(store_list, list_name)
+
+class UserValidation():
+    """Class validates all user inputs
+    """
+    def __init__(self, name, username, password):
+        self.name = name
+        self.username = username
+        self.password = password
+
+    # def duplicate(self):
+    #    """Method validates user is not yet registered,
+    #     Returns True for valid, False otherwise
+    #     """ 
+
+    def valid_name(self):
+        """Method validates user's name,
+        Returns True for valid, False otherwise
+        """
+        if not self.name or not isinstance(
+            self.name, str) or self.name.isspace():
+            return False
+        else:
+            return True
+
+    def valid_username(self):
+        """Method validates username,
+        Returns True for valid, False otherwise
+        """
+        if ' ' in self.username or not self.username\
+            or not isinstance(self.username, str)\
+            or self.username.isspace():
+            return False
+        else:
+            return True
+
+    def valid_password(self):
+        """Method validates user's password,
+        Returns True for valid, False otherwise
+        """
+        numbers = re.search(r"[0-9]", self.password)
+        lower_case = re.search(r"[a-z]", self.password)
+        upper_case = re.search(r"[A-Z]", self.password)
+
+        if not self.password or not all((numbers, lower_case, upper_case))\
+                or not len(self.password) > 6:
+            return False
+        else:
+            return True
