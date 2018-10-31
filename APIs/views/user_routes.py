@@ -38,9 +38,51 @@ def login():
             'token': token,
             'message': 'Login sucessful!'}), 200
 
-# @app.route('/api/v1/users', methods=['POST'])
-# def create_user():
-#     return users.create_user()
+@app.route('/api/v1/users', methods=['POST'])
+@jwt_required
+def create_user():
+    """Method for admin to add store attendant account
+    """
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False or auth_user[-2] != 'admin':
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
+    else:
+        name = request.json['name']
+        username = request.json['username']
+        password = request.json['password']
+        role = request.json['role']
+
+        user = UserValidation(name, username, password)
+
+        if not user.valid_name() or not user.valid_username():
+            return jsonify({
+                'message': 'Enter name / username in string format!'
+            }), 400
+        elif not user.valid_password():
+            return jsonify({
+                'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
+            }), 400
+        elif User.query_item('users', 'name', name):
+            return jsonify({
+                'message': 'This name is already registered!'}), 400
+        elif User.query_item('users', 'username', username):
+            return jsonify({
+                'message': 'This username is already taken!'}), 400
+
+        user = User(name, username, password, role)
+        hash_password = user.password_hash()
+        user = User(name, username, hash_password, role)
+        new_user = user.add_user()
+
+        return jsonify({
+            'message': '{} has been registered'.format(new_user)
+        }), 201
+
+
+
 
 # @app.route('/api/v1/users', methods=['GET'])
 # def view_all_users():
