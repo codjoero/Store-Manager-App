@@ -25,16 +25,14 @@ class DbQueries():
         prod_name = args[0]
         category = args[1]
         stock = args[2]
-        min_stock = args[3]
-        price = args[4]
-        added_by = args[5]
+        price = args[3]
+        added_by = args[4]
 
         add_product = """
         INSERT INTO products(prod_name, category, stock,\
-                        min_stock, price)\
-        VALUES('{}', '{}', '{}', '{}', '{}', '{}');
-        """.format(prod_name, category, stock, min_stock,\
-                    price, added_by)
+                        price, added_by)\
+        VALUES('{}', '{}', '{}', '{}', '{}');
+        """.format(prod_name, category, stock, price, added_by)
         cursor.execute(add_product)
 
     def add_sale(self, *args):

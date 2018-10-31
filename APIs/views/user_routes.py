@@ -33,7 +33,10 @@ def login():
     elif not User.password_verification(username, password):
         return jsonify({
             'message': 'Wrong password!'}), 400
-    token = create_access_token(identity=username)
+    token = create_access_token(
+                identity=username, 
+                expires_delta=datetime.timedelta(days=1)
+                )
     return jsonify({
             'token': token,
             'message': 'Login sucessful!'}), 200

@@ -97,3 +97,38 @@ class UserValidation():
             return False
         else:
             return True
+
+class ProductValidation():
+    """Class validates all product inputs
+    """
+    def __init__(self, *args):
+        self.prod_name = args[0]
+        self.category = args[1]
+        self.stock = args[2]
+        self.price = args[3]
+        self.added_by = args[4]
+
+    def valid_product(self):
+        """Method to validate all product attributes
+        """
+        if not self.prod_name or not self.category or\
+            not self.stock or not self.price or\
+            not self.added_by or self.prod_name.isspace():
+            return False
+        else:
+            return True
+
+class SaleValidation():
+    """Class validates all sale records inputs"""
+
+    def __init__(self, name, quantity):
+        self.name = name
+        self.quantity = quantity
+
+    def valid_sale(self):
+       
+        if not self.name or not self.quantity or self.name.isspace():
+            return False
+        else:
+            return True
+
