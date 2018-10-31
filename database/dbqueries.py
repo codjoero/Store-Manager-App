@@ -14,7 +14,7 @@ class DbQueries():
         role = args[3]
 
         add_user = """
-        INSERT INTO users(name, username, password, admin)
+        INSERT INTO users(name, username, password, role)
         VALUES ('{}', '{}', '{}', '{}');
         """.format(name, username, password, role)
         cursor.execute(add_user)
@@ -45,7 +45,7 @@ class DbQueries():
         quantity = args[2]
         price = args[3]
         total_price = args[4]
-        sold_by = args[4]
+        sold_by = args[5]
 
         add_sale = """
         INSERT INTO sales(prod_name, category, quantity, price,\
@@ -54,6 +54,21 @@ class DbQueries():
         """.format(prod_name, category, quantity, price,\
                         total_price, sold_by)
         cursor.execute(add_sale)
+
+    def query_item(self, *args):
+        """Method to query items from tables, given a table name
+        column and check value
+        """
+        table = args[0]
+        column = args[1]
+        value = args[2]
+        query_item = """
+        SELECT * FROM {} WHERE {} = '{}';
+        """.format(table, column, value)
+        cursor.execute(query_item)
+        item = cursor.fetchone()
+        return item
+
 
     def drop_table(self, table):
         """Method drops tables

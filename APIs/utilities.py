@@ -62,11 +62,6 @@ class UserValidation():
         self.username = username
         self.password = password
 
-    # def duplicate(self):
-    #    """Method validates user is not yet registered,
-    #     Returns True for valid, False otherwise
-    #     """ 
-
     def valid_name(self):
         """Method validates user's name,
         Returns True for valid, False otherwise
@@ -81,8 +76,9 @@ class UserValidation():
         """Method validates username,
         Returns True for valid, False otherwise
         """
-        if self.username or self.username.isspace()\
-            or not isinstance(self.username, str):
+        if not self.username or\
+            self.username.isspace() or\
+            not isinstance(self.username, str):
             return False
         else:
             return True
@@ -95,8 +91,9 @@ class UserValidation():
         lower_case = re.search(r"[a-z]", self.password)
         upper_case = re.search(r"[A-Z]", self.password)
 
-        if not self.password or not all((numbers, lower_case, upper_case))\
-                or not len(self.password) > 6:
+        if ' ' in self.password or\
+            not all((numbers, lower_case, upper_case)) or\
+            not len(self.password) > 6:
             return False
         else:
             return True

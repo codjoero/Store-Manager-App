@@ -45,7 +45,7 @@ def register():
 
     user = UserValidation(name, username, password)
 
-    if not user.valid_name() or user.valid_username():
+    if not user.valid_name() or not user.valid_username():
         return jsonify({
             'message': 'Enter name / username in string format!'
         }), 400
@@ -53,8 +53,12 @@ def register():
         return jsonify({
             'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
         }), 400
-    # elif user.duplicate():
-    #     pass
+    elif User.query_item('users', 'name', name):
+        return jsonify({
+            'message': 'This name is already registered!'}), 400
+    elif User.query_item('users', 'username', username):
+        return jsonify({
+            'message': 'This username is already taken!'}), 400
 
     user = User(name, username, password, role)
     hash_password = user.password_hash()
