@@ -64,10 +64,5 @@ class DataBaseConnection:
             print(e)
             print('Successfully Failed to connect to database!')
 
-    def drop_table(self):
-        self.cursor.execute("""DROP TABLE IF EXISTS users CASCADE""")
-        self.cursor.execute("""DROP TABLE IF EXISTS products CASCADE""")
-        self.cursor.execute("""DROP TABLE IF EXISTS sales CASCADE""")
-
 if __name__ == '__main__':
     database_conn = DataBaseConnection()

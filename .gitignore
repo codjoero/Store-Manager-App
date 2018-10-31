@@ -11,3 +11,6 @@ test_app.pyc
 util.pyc
 products.pyc
 sales.pyc
+db.pyc
+dbqueries.pyc
+utilities.pyc
