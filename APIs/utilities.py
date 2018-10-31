@@ -62,11 +62,6 @@ class UserValidation():
         self.username = username
         self.password = password
 
-    # def duplicate(self):
-    #    """Method validates user is not yet registered,
-    #     Returns True for valid, False otherwise
-    #     """ 
-
     def valid_name(self):
         """Method validates user's name,
         Returns True for valid, False otherwise
@@ -81,7 +76,7 @@ class UserValidation():
         """Method validates username,
         Returns True for valid, False otherwise
         """
-        if ' ' in self.username or\
+        if not self.username or\
             self.username.isspace() or\
             not isinstance(self.username, str):
             return False

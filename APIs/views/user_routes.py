@@ -21,10 +21,10 @@ def login():
 
     user = UserValidation('none', username, password)
 
-    if not username or not user.valid_username():
+    if not user.valid_username():
         return jsonify({
             'message': 'Wrong username!'}), 400
-    if not password or not user.valid_password():
+    if not user.valid_password():
         return jsonify({
             'message': 'Wrong password!'}), 400
     elif not User.query_item('users', 'username', username):
