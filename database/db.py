@@ -19,12 +19,12 @@ class DataBaseConnection:
             self.cursor.execute(
                 """
                 CREATE TABLE if not exists users (
-                    _id SERIAL PRIMARY KEY,
+                    user_id SERIAL PRIMARY KEY,
                     name TEXT NOT NULL,
                     username TEXT NOT NULL,
                     password TEXT NOT NULL,
                     role TEXT NOT NULL,
-                    time_stamp TIMESTAMPTZ DEFAULT NOW()
+                    added_on TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
             )
@@ -32,14 +32,15 @@ class DataBaseConnection:
             self.cursor.execute(
                 """
                 CREATE TABLE if not exists products (
-                    _id SERIAL PRIMARY KEY,
+                    prod_id SERIAL PRIMARY KEY,
                     prod_name TEXT NOT NULL,
                     category TEXT NOT NULL,
                     stock INT NOT NULL,
-                    min_stock INT NOT NULL,
+                    min_stock INT DEFAULT 20,
                     price INT NOT NULL,
                     added_by TEXT NOT NULL,
-                    time_stamp TIMESTAMPTZ DEFAULT NOW()
+                    status BOOLEAN DEFAULT FALSE,
+                    adde_on TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
             )
@@ -47,7 +48,7 @@ class DataBaseConnection:
             self.cursor.execute(
                 """
                 CREATE TABLE if not exists sales (
-                    _id SERIAL PRIMARY KEY,
+                    sale_id SERIAL PRIMARY KEY,
                     prod_name TEXT NOT NULL,
                     category TEXT NOT NULL,
                     quantity INT NOT NULL,
@@ -58,6 +59,19 @@ class DataBaseConnection:
                 )
                 """
             )
+
+            self.cursor.execute(
+                """
+                CREATE TABLE if not exists sale_products (
+                    sale_id  INT NOT NULL,
+                    FOREIGN KEY(sale_id) REFERENCES sales(sale_id),
+                    prod_id  INT NOT NULL,
+                    FOREIGN KEY(prod_id) REFERENCES products(prod_id),
+                    added_on TIMESTAMPTZ DEFAULT NOW()
+                )
+                """
+            )
+
             print('Connected to {} successfully!'.format(self.db))
 
         except Exception as e:
