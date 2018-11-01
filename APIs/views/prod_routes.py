@@ -44,7 +44,7 @@ def create_product():
             'message': 'Some fields are wrong or missing!'}), 400
     elif not isinstance(prod_name, str) or not isinstance(category, str):
         return jsonify({
-            'message': '[prod_name, category, added_by] should be characters!'}), 400
+            'message': '[prod_name, category, addesd_by] should be characters!'}), 400
     elif not isinstance(stock, int) or not isinstance(price, int):
         return jsonify({
             'message': 'The Stock and Price must be numbers!'}), 400
@@ -78,7 +78,7 @@ def view_a_product(prod_id):
                 'message': 'There are no products yet!'
             }), 404
         
-        product = Product.get_item('products', 'product_id', int(prod_id))
+        product = Product.get_item('products', 'prod_id', int(prod_id))
         if not product:
             return jsonify({
                 'message': 'This product does not exist!'
