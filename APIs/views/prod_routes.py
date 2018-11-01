@@ -34,7 +34,7 @@ def create_product():
                 'prod_name': 'a string',
                 'category': 'characters',
                 'stock': 'a string',
-                'price': 'a string',
+                'price': 'a string'
             }
         }), 400
 
@@ -53,7 +53,7 @@ def create_product():
     if User.query_item('products', 'prod_name', prod_name):
         return jsonify({
             'message': 'This product exists in the Inventory!'
-        })
+        }), 400
     else:
         product.add_product()
         return jsonify({
@@ -99,7 +99,26 @@ def view_a_product(prod_id):
             'message': 'Try an interger for product id'
             }), 400
 
+@app.route('/api/v1/products', methods=['GET'])
+@jwt_required
+def view_all_product():
+    """Method for admin / store attendant to view all products.
+    returns a list products in the Inventory.
+    """
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False:
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
 
+    product = Product.get_all_items('products')
+    if not product:
+        return jsonify({
+            'message': 'There are no products yet!'
+        }), 404
+    return jsonify({
+        'products': product}), 200
 
 
 # @app.route('/api/v1/products/<int:_id>', methods=['PUT'])
@@ -109,7 +128,3 @@ def view_a_product(prod_id):
 # @app.route('/api/v1/products/<int:_id>', methods=['DELETE'])
 # def delete_product(_id):
 #     return products.delete_product(_id)
-
-# @app.route('/api/v1/products', methods=['GET'])
-# def view_all_product():
-#     return products.view_all_product()
