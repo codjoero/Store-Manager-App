@@ -53,6 +53,10 @@ def register():
         return jsonify({
             'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
         }), 400
+    elif 'admin' != role != 'attendant':
+        return jsonify({
+            'message':'role should either be admin or attendant'
+        }), 400
     elif User.query_item('users', 'name', name):
         return jsonify({
             'message': 'This name is already registered!'}), 400

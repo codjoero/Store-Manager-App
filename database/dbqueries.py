@@ -75,6 +75,21 @@ class DbQueries():
         items = cursor.fetchall()
 
         return items
+    
+    def update_columns(self, *args):
+        """Method updates columns
+        """
+        prod_name = args[0]
+        category = args[1]
+        stock = args[2]
+        price = args[3]
+        prod_id = args[4]
+
+        update_item = """
+        UPDATE products SET prod_name='{}', category='{}', stock='{}', price ='{}'\
+        WHERE prod_id='{}';
+        """.format(prod_name, category, stock, price, prod_id)
+        cursor.execute(update_item)
 
 
     def drop_table(self, table):

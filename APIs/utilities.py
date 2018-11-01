@@ -117,6 +117,17 @@ class ProductValidation():
         else:
             return True
 
+    def valid_prod_fields(self):
+        """Method to validate each field of product
+        """
+        if self.prod_name and ' ' in self.prod_name or\
+            self.category and ' ' in self.category or\
+            self.stock and not isinstance(self.stock, int) or\
+            self.price and not isinstance(self.price, int):
+            return False
+        else:
+            return True
+
 class SaleValidation():
     """Class validates all sale records inputs"""
 

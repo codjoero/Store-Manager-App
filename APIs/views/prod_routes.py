@@ -121,9 +121,58 @@ def view_all_product():
         'products': product}), 200
 
 
-# @app.route('/api/v1/products/<int:_id>', methods=['PUT'])
-# def update_product(_id):
-#     return products.update_product(_id)
+@app.route('/api/v1/products/<prod_id>', methods=['PUT'])
+@jwt_required
+def update_product(prod_id):
+    """Method for admin to modify the details of a product.
+    returns dictionary of updated product.
+    """
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False or auth_user[-2] != 'admin':
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
+    try:
+        prod_name = request.json['prod_name']
+        category = request.json['category']
+        stock = request.json['stock']
+        price = request.json['price']
+        stock = int(stock)
+        price = int(price)
+    
+        prod = ProductValidation(prod_name, category, stock, price)
+        if prod.valid_prod_fields() is False:
+            return jsonify({
+                'message': 'One of the fields is empty!'}), 400
+        elif not isinstance(prod_name, str) or not isinstance(category, str):
+            return jsonify({
+            'message': '[prod_name, category, addesd_by] should be characters!'}), 400
+        elif not isinstance(stock, int) or not isinstance(price, int):
+            return jsonify({
+            'message': 'The Stock and Price must be numbers!'}), 400
+
+        product = Product(prod_name, category, stock, price)
+        prod = product.update_product(prod_id)
+        if not prod:
+            return jsonify({
+                'message': "This product doesn't exists in the Inventory!"}), 400
+        return jsonify({
+            'message': 'product updated!',
+            'Product': prod
+            }), 200
+    except ValueError:
+        return jsonify({
+            'message': 'Prod_id, stock and price should be numbers!'
+        }), 400
+    except Exception:
+        return jsonify({
+            'message': 'Something wrong with the inputs!'
+        }), 400
+
+
+
+
 
 # @app.route('/api/v1/products/<int:_id>', methods=['DELETE'])
 # def delete_product(_id):

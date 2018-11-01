@@ -48,7 +48,7 @@ class DataBaseConnection:
                 """
                 CREATE TABLE IF NOT EXISTS sales (
                     sale_id SERIAL PRIMARY KEY,
-                    total_price INT NOT NULL,
+                    total_sale INT NOT NULL,
                     sold_by VARCHAR(25) NOT NULL,
                     sale_date TIMESTAMPTZ DEFAULT NOW()
                 )

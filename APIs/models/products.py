@@ -58,3 +58,20 @@ class Product:
                 Product.products.append(prod_dict)
         return Product.products
     
+    def update_product(self, prod_id):
+        """Method enables admin to update a product in Inventory.
+        returns a dictionary of updated product.
+        """
+        prod = dbq.query_item('products', 'prod_id', prod_id)
+        if prod is None:
+            return False
+        dbq.update_columns(self.prod_name, self.category, self.stock, 
+                        self.price, prod_id)
+        product = dbq.query_item('products', 'prod_id', prod_id)
+        return {
+            'prod_id': product[0],
+            'prod_name': product[1],
+            'category': product[2],
+            'stock': product[3],
+            'price': product[4]
+        }
