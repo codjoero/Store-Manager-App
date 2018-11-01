@@ -66,7 +66,7 @@ class UserValidation():
         """Method validates user's name,
         Returns True for valid, False otherwise
         """
-        if not self.name or\
+        if not self.name or isinstance(self.name, int) or\
             not isinstance(self.name, str):
             return False
         else:
@@ -76,7 +76,7 @@ class UserValidation():
         """Method validates username,
         Returns True for valid, False otherwise
         """
-        if not self.username or\
+        if ' ' in self.username or not self.username or\
             self.username.isspace() or\
             not isinstance(self.username, str):
             return False
@@ -106,14 +106,13 @@ class ProductValidation():
         self.category = args[1]
         self.stock = args[2]
         self.price = args[3]
-        self.added_by = args[4]
 
     def valid_product(self):
         """Method to validate all product attributes
         """
         if not self.prod_name or not self.category or\
             not self.stock or not self.price or\
-            not self.added_by or self.prod_name.isspace():
+            self.prod_name.isspace():
             return False
         else:
             return True
