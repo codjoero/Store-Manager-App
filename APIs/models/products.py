@@ -40,19 +40,20 @@ class Product:
         Returns a list of all products in Inventory.
         """
         items = dbq.query_all_items(tb_of_items)
+        print (items)
         if items == []:
             return False
         else:
             Product.products.clear()
             for item in items:
                 prod_dict = {
-                    'prod_id': items[0],
-                    'prod_name': items[1],
-                    'category': items[2],
-                    'stock': items[3],
-                    'price': items[4],
-                    'added_by': items[5],
-                    'added_on': items[6]
+                    'prod_id': item[0],
+                    'prod_name': item[1],
+                    'category': item[2],
+                    'stock': item[3],
+                    'price': item[4],
+                    'added_by': item[5],
+                    'added_on': item[7]
                 }
                 Product.products.append(prod_dict)
         return Product.products
