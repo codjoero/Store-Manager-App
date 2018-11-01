@@ -18,12 +18,12 @@ class DataBaseConnection:
 
             self.cursor.execute(
                 """
-                CREATE TABLE if not exists users (
+                CREATE TABLE IF NOT EXISTS users (
                     user_id SERIAL PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    username TEXT NOT NULL,
-                    password TEXT NOT NULL,
-                    role TEXT NOT NULL,
+                    name VARCHAR(255) NOT NULL,
+                    username VARCHAR(255) NOT NULL,
+                    password VARCHAR(500) NOT NULL,
+                    role VARCHAR(255) NOT NULL,
                     added_on TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
@@ -31,30 +31,25 @@ class DataBaseConnection:
 
             self.cursor.execute(
                 """
-                CREATE TABLE if not exists products (
+                CREATE TABLE IF NOT EXISTS products (
                     prod_id SERIAL PRIMARY KEY,
-                    prod_name TEXT NOT NULL,
-                    category TEXT NOT NULL,
+                    prod_name VARCHAR(255) NOT NULL,
+                    category VARCHAR(255) NOT NULL,
                     stock INT NOT NULL,
-                    min_stock INT DEFAULT 20,
                     price INT NOT NULL,
-                    added_by TEXT NOT NULL,
-                    status BOOLEAN DEFAULT FALSE,
-                    adde_on TIMESTAMPTZ DEFAULT NOW()
+                    added_by VARCHAR(25) DEFAULT 'admin',
+                    delete_status BOOLEAN DEFAULT FALSE,
+                    added_on TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
             )
 
             self.cursor.execute(
                 """
-                CREATE TABLE if not exists sales (
+                CREATE TABLE IF NOT EXISTS sales (
                     sale_id SERIAL PRIMARY KEY,
-                    prod_name TEXT NOT NULL,
-                    category TEXT NOT NULL,
-                    quantity INT NOT NULL,
-                    price INT NOT NULL,
                     total_price INT NOT NULL,
-                    sold_by TEXT NOT NULL,
+                    sold_by VARCHAR(25) NOT NULL,
                     sale_date TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
@@ -62,7 +57,7 @@ class DataBaseConnection:
 
             self.cursor.execute(
                 """
-                CREATE TABLE if not exists sale_products (
+                CREATE TABLE IF NOT EXISTS sale_products (
                     sale_id  INT NOT NULL,
                     FOREIGN KEY(sale_id) REFERENCES sales(sale_id),
                     prod_id  INT NOT NULL,
@@ -72,11 +67,11 @@ class DataBaseConnection:
                 """
             )
 
-            print('Connected to {} successfully!'.format(self.db))
+            print('Sucessfully connected to {}!'.format(self.db))
 
         except Exception as e:
             print(e)
-            print('Successfully Failed to connect to database!')
+            print('Miserably Failed to connect to database!')
 
 if __name__ == '__main__':
     database_conn = DataBaseConnection()

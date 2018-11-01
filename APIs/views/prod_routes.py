@@ -23,36 +23,81 @@ def create_product():
         return jsonify({
             'message': 'Unauthorized Access!'
         }), 401
-    else:
+    try:
         prod_name = request.json['prod_name']
         category = request.json['category']
         stock = request.json['stock']
         price = request.json['price']
-        added_by = request.json['added_by']
+    except KeyError:
+        return jsonify({
+            'Expected fields': {
+                'prod_name': 'a string',
+                'category': 'characters',
+                'stock': 'a string',
+                'price': 'a string',
+            }
+        }), 400
 
-        prod = ProductValidation(prod_name, category, stock,\
-                    price, added_by)
-        if not prod.valid_product:
-            return jsonify({
-                'message': 'Some fields are wrong or missing!'}), 400
-        elif not isinstance(prod_name, str) or not isinstance(category, str)\
-                            or not isinstance(added_by, str):
-            return jsonify({
-                'message': '[prod_name, category, added_by] should be characters!'}), 400
-        elif not isinstance(stock, int) or not isinstance(price, int):
-            return jsonify({
-                'message': 'The Stock and Price must be numbers!'}), 400
+    prod = ProductValidation(prod_name, category, stock, price)
+    if not prod.valid_product:
+        return jsonify({
+            'message': 'Some fields are wrong or missing!'}), 400
+    elif not isinstance(prod_name, str) or not isinstance(category, str):
+        return jsonify({
+            'message': '[prod_name, category, added_by] should be characters!'}), 400
+    elif not isinstance(stock, int) or not isinstance(price, int):
+        return jsonify({
+            'message': 'The Stock and Price must be numbers!'}), 400
 
-        product = Product(prod_name, category, stock, price, added_by)
-        if User.query_item('products', 'prod_name', prod_name):
-            return jsonify({
-                'message': 'This product exists in the Inventory!'
-            })
-        else:
-            product.add_product()
-            return jsonify({
-            'message': 'Product successfully added to Inventory!'}), 201
+    product = Product(prod_name, category, stock, price)
+    if User.query_item('products', 'prod_name', prod_name):
+        return jsonify({
+            'message': 'This product exists in the Inventory!'
+        })
+    else:
+        product.add_product()
+        return jsonify({
+        'message': 'Product successfully added to Inventory!'}), 201
 
+
+@app.route('/api/v1/products/<prod_id>', methods=['GET'])
+@jwt_required
+def view_a_product(prod_id):
+    """Method for admin / store attendant to view a specific product.
+    returns a product that matches the given prod_id.
+    """
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False:
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
+    try:
+        if not Product.get_all_items('products'):
+            return jsonify({
+                'message': 'There are no products yet!'
+            }), 404
+        
+        product = Product.get_item('products', 'product_id', int(prod_id))
+        if not product:
+            return jsonify({
+                'message': 'This product does not exist!'
+            }), 404
+        return jsonify({
+            'product': {
+                        'prod_id': product[0],
+                        'prod_name': product[1],
+                        'category': product[2],
+                        'stock': product[3],
+                        'price': product[4],
+                        'added_by': product[5],
+                        'added_on': product[6]
+                    }
+            }), 200
+    except ValueError:
+        return jsonify({
+            'message': 'Try an interger for product id'
+            }), 400
 
 
 
@@ -64,10 +109,6 @@ def create_product():
 # @app.route('/api/v1/products/<int:_id>', methods=['DELETE'])
 # def delete_product(_id):
 #     return products.delete_product(_id)
-
-# @app.route('/api/v1/products/<int:_id>', methods=['GET'])
-# def view_a_product(_id):
-#     return products.view_a_product(_id)
 
 # @app.route('/api/v1/products', methods=['GET'])
 # def view_all_product():

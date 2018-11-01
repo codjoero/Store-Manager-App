@@ -26,13 +26,11 @@ class DbQueries():
         category = args[1]
         stock = args[2]
         price = args[3]
-        added_by = args[4]
 
         add_product = """
-        INSERT INTO products(prod_name, category, stock,\
-                        price, added_by)\
-        VALUES('{}', '{}', '{}', '{}', '{}');
-        """.format(prod_name, category, stock, price, added_by)
+        INSERT INTO products(prod_name, category, stock, price)\
+        VALUES('{}', '{}', '{}', '{}');
+        """.format(prod_name, category, stock, price)
         cursor.execute(add_product)
 
     def add_sale(self, *args):
@@ -66,6 +64,17 @@ class DbQueries():
         cursor.execute(query_item)
         item = cursor.fetchone()
         return item
+
+    def query_all_items(self, tb_of_items):
+        """Method fetches all rows in a table
+        """
+        query_items = """
+        SELECT * FROM {};
+        """.format(tb_of_items)
+        cursor.execute(query_items)
+        items = cursor.fetchall()
+
+        return items
 
 
     def drop_table(self, table):

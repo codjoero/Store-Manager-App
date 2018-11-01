@@ -52,37 +52,54 @@ def create_user():
         return jsonify({
             'message': 'Unauthorized Access!'
         }), 401
-    else:
+    try:
         name = request.json['name']
         username = request.json['username']
         password = request.json['password']
         role = request.json['role']
-
-        user = UserValidation(name, username, password)
-
-        if not user.valid_name() or not user.valid_username():
-            return jsonify({
-                'message': 'Enter name / username in string format!'
-            }), 400
-        elif not user.valid_password():
-            return jsonify({
-                'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
-            }), 400
-        elif User.query_item('users', 'name', name):
-            return jsonify({
-                'message': 'This name is already registered!'}), 400
-        elif User.query_item('users', 'username', username):
-            return jsonify({
-                'message': 'This username is already taken!'}), 400
-
-        user = User(name, username, password, role)
-        hash_password = user.password_hash()
-        user = User(name, username, hash_password, role)
-        new_user = user.add_user()
-
+    except KeyError:
         return jsonify({
-            'message': '{} has been registered'.format(new_user)
-        }), 201
+            'message':'Please input all fields'
+        }), 400
+
+    user = UserValidation(name, username, password)
+
+    if not name or not username or not password or not role:
+        return jsonify({
+            'message':'Please input all fields!'
+        }), 400
+    if 'admin' != role != 'attendant':
+        return jsonify({
+            'message':'role should either be admin or attendant'
+        }), 400
+
+    elif not user.valid_name():
+        return jsonify({
+            'message': 'Enter name in string format!'
+        }), 400
+    elif not user.valid_username():
+        return jsonify({
+            'message': 'Enter username in string format no spaces!'
+        }), 400
+    elif not user.valid_password():
+        return jsonify({
+            'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
+        }), 400
+    elif User.query_item('users', 'name', name):
+        return jsonify({
+            'message': 'This name is already registered!'}), 400
+    elif User.query_item('users', 'username', username):
+        return jsonify({
+            'message': 'This username is already taken!'}), 400
+
+    user = User(name, username, password, role)
+    hash_password = user.password_hash()
+    user = User(name, username, hash_password, role)
+    new_user = user.add_user()
+
+    return jsonify({
+        'message': '{} has been registered'.format(new_user)
+    }), 201
 
 
 
