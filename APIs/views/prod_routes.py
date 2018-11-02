@@ -32,14 +32,14 @@ def create_product():
         return jsonify({
             'Expected fields': {
                 'prod_name': 'a string',
-                'category': 'characters',
-                'stock': 'a string',
-                'price': 'a string'
+                'category': 'a string',
+                'stock': 'a number',
+                'price': 'a number'
             }
         }), 400
 
     prod = ProductValidation(prod_name, category, stock, price)
-    if not prod.valid_product:
+    if not prod.valid_product or not prod.valid_prod_fields:
         return jsonify({
             'message': 'Some fields are wrong or missing!'}), 400
     elif not isinstance(prod_name, str) or not isinstance(category, str):
@@ -91,7 +91,7 @@ def view_a_product(prod_id):
                         'stock': product[3],
                         'price': product[4],
                         'added_by': product[5],
-                        'added_on': product[6]
+                        'added_on': product[7]
                     }
             }), 200
     except ValueError:
@@ -140,11 +140,20 @@ def update_product(prod_id):
         price = request.json['price']
         stock = int(stock)
         price = int(price)
-    
+    except Exception:
+        return jsonify({
+            'Expected fields': {
+                'prod_name': 'a string',
+                'category': 'a string',
+                'stock': 'a number',
+                'price': 'a number'
+            }
+        }), 400
+    try:
         prod = ProductValidation(prod_name, category, stock, price)
-        if prod.valid_prod_fields() is False:
+        if not prod.valid_product or not prod.valid_prod_fields:
             return jsonify({
-                'message': 'One of the fields is empty!'}), 400
+            'message': 'Some fields are wrong or missing!'}), 400
         elif not isinstance(prod_name, str) or not isinstance(category, str):
             return jsonify({
             'message': '[prod_name, category, addesd_by] should be characters!'}), 400
@@ -170,10 +179,34 @@ def update_product(prod_id):
             'message': 'Something wrong with the inputs!'
         }), 400
 
+@app.route('/api/v1/products/<prod_id>', methods=['DELETE'])
+@jwt_required
+def delete_product(prod_id):
+    """Method for admin to delete a product.
+    returns message of successful deletion.
+    """
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False or auth_user[-2] != 'admin':
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
 
-
-
-
-# @app.route('/api/v1/products/<int:_id>', methods=['DELETE'])
-# def delete_product(_id):
-#     return products.delete_product(_id)
+    try:
+        prod_id = int(prod_id)
+        product = Product.get_all_items('products')
+        if not product:
+            return jsonify({
+                'message': 'There are no products in Inventory!'}), 404
+        elif not Product.get_item('products', 'prod_id', prod_id):
+            return jsonify({
+                'message': 'This product does not in Inventoryt!'}), 40
+        
+        Product.delete_product(prod_id)
+        return jsonify({
+            'message': 'Product deleted!'
+        }), 200
+    except ValueError:
+        return jsonify({
+            'message': 'The product id should be a number!'
+}), 400

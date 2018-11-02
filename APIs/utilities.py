@@ -66,6 +66,9 @@ class UserValidation():
         """Method validates user's name,
         Returns True for valid, False otherwise
         """
+        numbers = re.search(r"[0-9]", self.name)
+        if numbers:
+            return False
         if not self.name or isinstance(self.name, int) or\
             not isinstance(self.name, str):
             return False
@@ -76,12 +79,17 @@ class UserValidation():
         """Method validates username,
         Returns True for valid, False otherwise
         """
+        numbers = re.search(r"[0-9]", self.username)
+        if numbers:
+            return False
+        if isinstance(self.username, int):
+            return False
         if ' ' in self.username or not self.username or\
             self.username.isspace() or\
             not isinstance(self.username, str):
             return False
         else:
-            return True
+            return True 
 
     def valid_password(self):
         """Method validates user's password,
@@ -110,6 +118,10 @@ class ProductValidation():
     def valid_product(self):
         """Method to validate all product attributes
         """
+        invalid_name = re.search(r"[0-9]", self.prod_name)
+        invalid_category = re.search(r"[0-9]", self.category)
+        if invalid_name or invalid_category:
+            return False
         if not self.prod_name or not self.category or\
             not self.stock or not self.price or\
             self.prod_name.isspace():
