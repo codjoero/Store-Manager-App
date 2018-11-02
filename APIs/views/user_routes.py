@@ -75,11 +75,11 @@ def create_user():
 
     elif not user.valid_name():
         return jsonify({
-            'message': 'Enter name in string format!'
+            'message': 'Enter name in a correct string format, (john doe)!'
         }), 400
     elif not user.valid_username():
         return jsonify({
-            'message': 'Enter username in string format no spaces!'
+            'message': 'Enter username in a correct string format no spaces, (johndoe)!'
         }), 400
     elif not user.valid_password():
         return jsonify({

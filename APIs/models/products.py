@@ -75,3 +75,8 @@ class Product:
             'stock': product[3],
             'price': product[4]
         }
+    @classmethod
+    def delete_product(self, prod_id):
+        """Method enables admin to delete a product in Inventory.
+        """
+        dbq.delete_item('products', 'prod_id', prod_id)

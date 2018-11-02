@@ -91,6 +91,14 @@ class DbQueries():
         """.format(prod_name, category, stock, price, prod_id)
         cursor.execute(update_item)
 
+    def delete_item(self, *args):
+        table = args[0]
+        column = args[1]
+        value = args[2]
+        delete_item = """
+        DELETE FROM {} WHERE {} = '{}';
+        """.format(table, column, value)
+        cursor.execute(delete_item)
 
     def drop_table(self, table):
         """Method drops tables
