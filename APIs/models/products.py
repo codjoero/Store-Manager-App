@@ -32,6 +32,8 @@ class Product:
         product = dbq.query_item(table, column, value)
         if product == [] or product is None:
             return False
+        if product[6] == True:
+            return False
         return product
 
     @staticmethod
@@ -43,9 +45,9 @@ class Product:
         print (items)
         if items == []:
             return False
-        else:
-            Product.products.clear()
-            for item in items:
+        Product.products.clear()
+        for item in items: 
+            if item[6] == False:
                 prod_dict = {
                     'prod_id': item[0],
                     'prod_name': item[1],
@@ -65,6 +67,8 @@ class Product:
         prod = dbq.query_item('products', 'prod_id', prod_id)
         if prod is None:
             return False
+        if prod[6] == True:
+            return False
         dbq.update_columns(self.prod_name, self.category, self.stock, 
                         self.price, prod_id)
         product = dbq.query_item('products', 'prod_id', prod_id)
@@ -75,8 +79,11 @@ class Product:
             'stock': product[3],
             'price': product[4]
         }
+        
     @classmethod
     def delete_product(self, prod_id):
-        """Method enables admin to delete a product in Inventory.
+        """Method enables admin to delete a product in Inventory,
+        sets the delete_status to True.
         """
-        dbq.delete_item('products', 'prod_id', prod_id)
+        dbq.update_a_col('delete_status', 'TRUE', prod_id)
+

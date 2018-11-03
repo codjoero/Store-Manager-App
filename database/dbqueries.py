@@ -91,6 +91,19 @@ class DbQueries():
         """.format(prod_name, category, stock, price, prod_id)
         cursor.execute(update_item)
 
+    def update_a_col(self, *args):
+        """Method updates a single column
+        """
+        col_name = args[0]
+        col_value = args[1]
+        prod_id = args[2]
+
+        update_item = """
+        UPDATE products SET {}='{}'\
+        WHERE prod_id='{}';
+        """.format(col_name, col_value, prod_id)
+        cursor.execute(update_item)
+
     def delete_item(self, *args):
         table = args[0]
         column = args[1]

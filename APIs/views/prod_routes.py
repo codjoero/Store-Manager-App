@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, make_response
 from APIs import app
 import datetime
+import re
 from APIs.views import user_routes, prod_routes, sale_routes
 from APIs.models.users import User
 from APIs.models.products import Product
@@ -39,12 +40,20 @@ def create_product():
         }), 400
 
     prod = ProductValidation(prod_name, category, stock, price)
+    if not prod_name or not category or not stock or not price:
+        return jsonify({
+            'message': 'Please enter all fields!'})
+    invalid_name = re.search(r"[0-9]", prod_name)
+    invalid_category = re.search(r"[0-9]", category)
+    if invalid_name or invalid_category:
+        return jsonify({
+            'message': 'Please enter strings in name and category!'}), 400
     if not prod.valid_product or not prod.valid_prod_fields:
         return jsonify({
             'message': 'Some fields are wrong or missing!'}), 400
     elif not isinstance(prod_name, str) or not isinstance(category, str):
         return jsonify({
-            'message': '[prod_name, category, addesd_by] should be characters!'}), 400
+            'message': 'prod_name and category must be characters!'}), 400
     elif not isinstance(stock, int) or not isinstance(price, int):
         return jsonify({
             'message': 'The Stock and Price must be numbers!'}), 400
@@ -174,10 +183,10 @@ def update_product(prod_id):
         return jsonify({
             'message': 'Prod_id, stock and price should be numbers!'
         }), 400
-    except Exception:
-        return jsonify({
-            'message': 'Something wrong with the inputs!'
-        }), 400
+    # except Exception:
+    #     return jsonify({
+    #         'message': 'Something wrong with the inputs!'
+    #     }), 400
 
 @app.route('/api/v1/products/<prod_id>', methods=['DELETE'])
 @jwt_required
@@ -200,13 +209,14 @@ def delete_product(prod_id):
                 'message': 'There are no products in Inventory!'}), 404
         elif not Product.get_item('products', 'prod_id', prod_id):
             return jsonify({
-                'message': 'This product does not in Inventoryt!'}), 40
-        
+                'message': 'This product does not exist in Inventory!'}), 404
+        elif Product.delete_status(prod_id):
+            return jsonify({
+                'message': 'This product was deleted from Inventory!'}), 404
         Product.delete_product(prod_id)
         return jsonify({
             'message': 'Product deleted!'
         }), 200
     except ValueError:
         return jsonify({
-            'message': 'The product id should be a number!'
-}), 400
+            'message': 'The product id should be a number!'}), 400
