@@ -38,7 +38,7 @@ class DataBaseConnection:
                     stock INT NOT NULL,
                     price INT NOT NULL,
                     added_by VARCHAR(25) DEFAULT 'admin',
-                    delete_status BOOLEAN DEFAULT FALSE,
+                    delete_statuprices BOOLEAN DEFAULT FALSE,
                     added_on TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
@@ -47,7 +47,7 @@ class DataBaseConnection:
             self.cursor.execute(
                 """
                 CREATE TABLE IF NOT EXISTS sales (
-                    sale_id SERIAL PRIMARY KEY,
+                    sale_id INT PRIMARY KEY,
                     total_sale INT NOT NULL,
                     sold_by VARCHAR(25) NOT NULL,
                     sale_date TIMESTAMPTZ DEFAULT NOW()

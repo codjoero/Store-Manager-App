@@ -36,20 +36,23 @@ class DbQueries():
     def add_sale(self, *args):
         """Method adds a new sale to the database
         """
-        prod_name = args[0]
-        category = args[1]
-        quantity = args[2]
-        price = args[3]
-        total_price = args[4]
-        sold_by = args[5]
+        sale_id = args[0]
+        total_sale = args[1]
+        sold_by = args[2]
 
         add_sale = """
-        INSERT INTO sales(prod_name, category, quantity, price,\
-                        total_price, sold_by)\
-        VALUES ('{}', '{}', '{}', '{}', '{}', '{}');
-        """.format(prod_name, category, quantity, price,\
-                        total_price, sold_by)
+        INSERT INTO sales(sale_id, total_sale, sold_by)\
+        VALUES ('{}', '{}', '{}');
+        """.format(sale_id, total_sale, sold_by)
         cursor.execute(add_sale)
+
+    def query_sale_ids(self):
+        """Method to query sale ids from sales table.
+        """
+        query_id = """
+        SELECT sale_id FROM sales;
+        """
+        cursor.execute(query_id)
 
     def query_item(self, *args):
         """Method to query items from tables, given a table name
