@@ -210,9 +210,6 @@ def delete_product(prod_id):
         elif not Product.get_item('products', 'prod_id', prod_id):
             return jsonify({
                 'message': 'This product does not exist in Inventory!'}), 404
-        elif Product.delete_status(prod_id):
-            return jsonify({
-                'message': 'This product was deleted from Inventory!'}), 404
         Product.delete_product(prod_id)
         return jsonify({
             'message': 'Product deleted!'
