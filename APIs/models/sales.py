@@ -55,16 +55,15 @@ class Sale:
         cart = Sale.get_item('sale_products', 'sale_id', item[0])#rows with sale_id
         print(cart)
         prod_sold = []
-        for x in cart:
-            prod = Product.get_item('products', 'prod_id', x[1])
-            quantity = item[1] / prod[4]
-            product = {
-                'prod_id': prod[0],
-                'prod_name': prod[1],
-                'price': prod[4],
-                'quantity': quantity
-            }
-            prod_sold.append(product)
+        prod = Product.get_item('products', 'prod_id', cart[1])
+        quantity = item[1] / prod[4]
+        product = {
+            'prod_id': prod[0],
+            'prod_name': prod[1],
+            'price': prod[4],
+            'quantity': quantity
+        }
+        prod_sold.append(product)
         return prod_sold
 
     @staticmethod

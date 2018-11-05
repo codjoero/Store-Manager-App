@@ -65,12 +65,12 @@ def get_sale_record(sale_id):
     store attendant views sales made by only themselves
     returns a product that matches the given prod_id.
     """
-    auth_name = get_jwt_identity()
-    auth_user = User.query_item('users', 'username', auth_name)
-    if auth_user is False:
-        return jsonify({
-            'message': 'Unauthorized Access!'
-        }), 401
+    # auth_name = get_jwt_identity()
+    # auth_user = User.query_item('users', 'username', auth_name)
+    # if auth_user is False:
+    #     return jsonify({
+    #         'message': 'Unauthorized Access!'
+    #     }), 401
     try:
         if not Sale.get_all_sales('sales'):
             return jsonify({
