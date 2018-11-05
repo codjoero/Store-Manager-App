@@ -26,8 +26,8 @@ class Product:
 
     @staticmethod
     def get_item(table, column, value):
-        """Method for retrieving a single product
-        Returns a dictionary of the product that has been fetched.
+        """Method for retrieving a single sale
+        Returns a dictionary of the sale that has been fetched.
         """
         product = dbq.query_item(table, column, value)
         if product == [] or product is None:
@@ -38,11 +38,10 @@ class Product:
 
     @staticmethod
     def get_all_items(tb_of_items):
-        """Method fetches all items in the products table
-        Returns a list of all products in Inventory.
+        """Method fetches all sales in the sale table
+        Returns a list of all sales.
         """
         items = dbq.query_all_items(tb_of_items)
-        print (items)
         if items == []:
             return False
         Product.products.clear()

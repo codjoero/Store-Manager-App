@@ -106,7 +106,7 @@ def view_a_product(prod_id):
     except ValueError:
         return jsonify({
             'message': 'Try an interger for product id'
-            }), 400
+        }), 400
 
 @app.route('/api/v1/products', methods=['GET'])
 @jwt_required

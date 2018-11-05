@@ -38,7 +38,7 @@ class DataBaseConnection:
                     stock INT NOT NULL,
                     price INT NOT NULL,
                     added_by VARCHAR(25) DEFAULT 'admin',
-                    delete_statuprices BOOLEAN DEFAULT FALSE,
+                    delete_status BOOLEAN DEFAULT FALSE,
                     added_on TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
