@@ -7,7 +7,7 @@ from APIs.models.users import User
 from APIs.models.products import Product
 from APIs.models.sales import Sale
 from database.db import DataBaseConnection
-from APIs.utilities import Utilities, UserValidation, ProductValidation, SaleValidation
+from APIs.utilities import Utilities, SaleValidation
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity)
@@ -52,12 +52,12 @@ def create_sale_order():
             return jsonify({
                 'message': 'Only {} {} available right now!'.format(product[3], prod_name)
         }), 400
+    prod_id = product[0]
     total_sale = product[4] * quantity
-    new_sale = Sale(prod_name, quantity, total_sale, auth_name)
-    new_sale.add_sale
-
+    new_sale = Sale(prod_name, prod_id, quantity, total_sale, auth_name)
+    add_cart = new_sale.add_sale()
     return jsonify({
-                'message': 'created'}), 200
+                'message': 'Sale record created'}), 200
 
 
 

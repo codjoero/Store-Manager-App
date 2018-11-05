@@ -47,7 +47,7 @@ class DataBaseConnection:
             self.cursor.execute(
                 """
                 CREATE TABLE IF NOT EXISTS sales (
-                    sale_id INT PRIMARY KEY,
+                    sale_id SERIAL PRIMARY KEY,
                     total_sale INT NOT NULL,
                     sold_by VARCHAR(25) NOT NULL,
                     sale_date TIMESTAMPTZ DEFAULT NOW()
