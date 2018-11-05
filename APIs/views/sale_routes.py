@@ -72,15 +72,21 @@ def get_sale_record(sale_id):
             'message': 'Unauthorized Access!'
         }), 401
     try:
-        if not Sale.get_all_sales('sales', 'sale_products'):
+        if not Sale.get_all_sales('sales'):
             return jsonify({
                 'message': 'There are no sales yet!'
             }), 404
-        sale = sale.get_sale('sales', 'sale_id', int(sale_id))
+        sale = Sale.get_sale('sales', 'sale_id', int(sale_id))
         if not sale:
             return jsonify({
                 'message': 'This sale does not exist!'
             }), 404
+        return jsonify({
+                'sale': sale}), 200
+    except ValueError:
+        return jsonify({
+            'message': 'Try an interger for sale id'
+        }), 400
 
 
 
