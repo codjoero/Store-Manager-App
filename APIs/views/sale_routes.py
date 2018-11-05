@@ -57,14 +57,33 @@ def create_sale_order():
     new_sale = Sale(prod_name, prod_id, quantity, total_sale, auth_name)
     add_cart = new_sale.add_sale()
     return jsonify({
-                'message': 'Sale record created'}), 200
+                'message': add_cart}), 200
+
+@app.route('/api/v1/sales/<sale_id>', methods=['GET'])
+def get_sale_record(sale_id):
+    """Method for admin / store attendant to view a specific sale.
+    store attendant views sales made by only themselves
+    returns a product that matches the given prod_id.
+    """
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False:
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
+    try:
+        if not Sale.get_all_sales('sales', 'sale_products'):
+            return jsonify({
+                'message': 'There are no sales yet!'
+            }), 404
+        sale = sale.get_sale('sales', 'sale_id', int(sale_id))
+        if not sale:
+            return jsonify({
+                'message': 'This sale does not exist!'
+            }), 404
 
 
 
-
-# @app.route('/api/v1/sales/<int:_id>', methods=['GET'])
-# def get_sale_record(_id):
-#     return sales.get_sale_record(_id)
 
 # @app.route('/api/v1/sales', methods=['GET'])
 # def get_all_sale_records():
