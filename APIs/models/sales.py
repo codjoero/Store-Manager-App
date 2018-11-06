@@ -53,7 +53,6 @@ class Sale:
     @staticmethod
     def get_sale_products(item):
         cart = Sale.get_item('sale_products', 'sale_id', item[0])#rows with sale_id
-        print(cart)
         prod_sold = []
         prod = Product.get_item('products', 'prod_id', cart[1])
         quantity = item[1] / prod[4]
@@ -72,7 +71,6 @@ class Sale:
         Returns a list of all sales made.
         """
         sales_made = dbq.query_all_items(sales)
-        # print (items)
         if sales == []:
             return False
         Sale.sales.clear()
