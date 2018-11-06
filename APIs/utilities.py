@@ -143,13 +143,22 @@ class ProductValidation():
 class SaleValidation():
     """Class validates all sale records inputs"""
 
-    def __init__(self, prod_name, quantity):
-        self.prod_name = prod_name
-        self.quantity = quantity
+    def __init__(self, products):
+        self.products = products
 
     def valid_sale(self):
-        if not self.prod_name or not self.quantity or self.prod_name.isspace():
-            return False
+        for product in self.products:
+            if not product['prod_name'] or\
+                not product['quantity'] or\
+                product['prod_name'].isspace():
+                return False
+        return True
+    
+    def valid_types(self):
+        for product in self.products:
+            if not isinstance(product['prod_name'], str) or\
+                not isinstance(product['quantity'], int):
+                return False
         return True
 
 

@@ -11,15 +11,15 @@ class Sale:
     """
     sales = []
 
-    def __init__(self, prod_name, prod_id,quantity, total_sale,sold_by):
-        self.prod_name = prod_name
-        self.prod_id = prod_id
-        self.quantity = quantity
+    def __init__(self, prod_id_list, total_sale,sold_by):
+        self.prod_id_list = prod_id_list
         self.total_sale = total_sale
         self.sold_by = sold_by
 
     def add_sale(self):
-        dbq.add_sale(self.total_sale, self.sold_by, self.prod_id)
+        sale = dbq.add_sale(self.total_sale, self.sold_by)
+        for prod_id in self.prod_id_list:
+            dbq.add_sale_products(sale, prod_id)
         return 'Sale record created'
 
     @staticmethod
