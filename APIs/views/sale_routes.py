@@ -60,17 +60,28 @@ def create_sale_order():
                 'message': add_cart}), 200
 
 @app.route('/api/v1/sales/<sale_id>', methods=['GET'])
+@jwt_required
 def get_sale_record(sale_id):
     """Method for admin / store attendant to view a specific sale.
     store attendant views sales made by only themselves
     returns a product that matches the given prod_id.
     """
-    # auth_name = get_jwt_identity()
-    # auth_user = User.query_item('users', 'username', auth_name)
-    # if auth_user is False:
-    #     return jsonify({
-    #         'message': 'Unauthorized Access!'
-    #     }), 401
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    sale = Sale.get_sale('sales', 'sale_id', int(sale_id))
+    try:
+        if auth_user is False:
+            return jsonify({
+                'message': 'Unauthorized Access!'
+            }), 401
+        elif auth_user[-2] != 'admin' and auth_name != sale['sold_by']:
+            return jsonify({
+                'message': 'You have no access to this sale!'
+            }), 401
+    except TypeError:
+        return jsonify({
+            'message': 'This sale does not exist!'
+        }), 400
     try:
         if not Sale.get_all_sales('sales'):
             return jsonify({
@@ -88,9 +99,22 @@ def get_sale_record(sale_id):
             'message': 'Try an interger for sale id'
         }), 400
 
-
-
-
-# @app.route('/api/v1/sales', methods=['GET'])
-# def get_all_sale_records():
-#     return sales.get_all_sale_records()
+@app.route('/api/v1/sales', methods=['GET'])
+@jwt_required
+def get_all_sale_records():
+    """Method for admin to view all sale records.
+    returns a list of all sales.
+    """
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False or auth_user[-2] != 'admin':
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
+    sales = Sale.get_all_sales('sales')
+    if not sales:
+        return jsonify({
+            'message': 'There are no sales yet!'
+        }), 404
+    return jsonify({
+        'Sale Records': sales}), 200
