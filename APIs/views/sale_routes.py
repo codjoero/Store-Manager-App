@@ -26,9 +26,10 @@ def create_sale_order():
             'message': 'Unauthorized Access!'
         }), 401
     try:
-        prod_name = request.json['prod_name']
-        quantity = request.json['quantity']
-        quantity = int(quantity)
+        products = request.json['products']
+        # prod_name = request.json['prod_name']
+        # quantity = request.json['quantity']
+        # quantity = int(quantity)
     except KeyError:
         return jsonify({
             'Expected fields': {
@@ -36,25 +37,35 @@ def create_sale_order():
                 'quantity': 'a number'
             }
         }), 400
-    sale = SaleValidation(prod_name, quantity)
+    sale = SaleValidation(products)
+    # sale = SaleValidation(prod_name, quantity)
     if not sale.valid_sale():
         return jsonify({
             'message': 'One of the fields is empty!'})
-    product = Product.get_item('products', 'prod_name', prod_name)
-    if not product:
+    if not sale.valid_types():
         return jsonify({
-            'message': 'This product is not in the Inventory!'}), 404
-    elif product[3] <= 0:
-        return jsonify({
-            'message': '{} is out of stock!'.format(prod_name)
-        }), 404
-    elif product[3] < quantity:
+            'message': 'prod_name & quantity should be a character & number respectively!'})
+    total_sale = 0
+    prod_id_list = []
+    for prod in products:
+        product = Product.get_item('products', 'prod_name', prod['prod_name'])
+        if not product:
             return jsonify({
-                'message': 'Only {} {} available right now!'.format(product[3], prod_name)
-        }), 400
-    prod_id = product[0]
-    total_sale = product[4] * quantity
-    new_sale = Sale(prod_name, prod_id, quantity, total_sale, auth_name)
+                'message': 'This product is not in the Inventory!'}), 404
+        elif product[3] <= 0:
+            return jsonify({
+                'message': '{} is out of stock!'.format(prod['prod_name'])
+            }), 404
+        elif product[3] < prod['quantity']:
+                return jsonify({
+                    'message': 'Only {} {} available right now!'.format(product[3], prod['prod_name'])
+            }), 400
+        prod_id = product[0]
+        prod_id_list.append(prod_id)
+        prod_sale = product[4] * prod['quantity']
+        total_sale += prod_sale
+
+    new_sale = Sale(prod_id_list, total_sale, auth_name)
     add_cart = new_sale.add_sale()
     return jsonify({
                 'message': add_cart}), 200
