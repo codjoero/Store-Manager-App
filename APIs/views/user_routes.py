@@ -102,8 +102,6 @@ def create_user():
     }), 201
 
 
-
-
 # @app.route('/api/v1/users', methods=['GET'])
 # def view_all_users():
 #     return users.view_all_users()

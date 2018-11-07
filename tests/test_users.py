@@ -2,13 +2,489 @@ import unittest
 import json
 from APIs import app
 from database.db import DataBaseConnection
-from .test_base import ManagerTestCase
+from database.dbqueries import DbQueries
+from .test_utils import Utilities
 
 
-class TestUsers(ManagerTestCase):
-    """Class tests admin register and user login 
-    """
+class ManagerTestCase(Utilities):
     def setUp(self):
         self.client = app.test_client()
         self.db = DataBaseConnection()
-        self.base = ManagerTestCase()
+        self.dbq = DbQueries()
+
+    def tearDown(self):
+        self.dbq.drop_table('users')
+
+    def test_admin_register(self):
+        """Test admin successful registration
+        """
+        admin = dict(
+            name='Jonnie Pemba',
+            username='jonnie',
+            password='Andela8',
+            role='admin'
+        )
+
+        resp = self.client.post(
+            '/api/v1/register',
+            content_type='application/json',
+            data=json.dumps(admin)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Jonnie Pemba has been registered')
+        self.assertEqual(resp.status_code, 201)
+
+    def test_admin_register_no_name(self):
+        """Test admin can not register with empty name field
+        """
+        admin = dict(
+            name='',
+            username='jonnie',
+            password='Andela8',
+            role='admin'
+        )
+
+        resp = self.client.post(
+            '/api/v1/register',
+            content_type='application/json',
+            data=json.dumps(admin)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Enter name / username in string format!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_register_no_username(self):
+        """Test admin can not register with empty username field
+        """
+        admin = dict(
+            name='Jonnie Pemba',
+            username='',
+            password='Andela8',
+            role='admin'
+        )
+
+        resp = self.client.post(
+            '/api/v1/register',
+            content_type='application/json',
+            data=json.dumps(admin)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Enter name / username in string format!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_register_no_password(self):
+        """Test admin can not register with empty password field
+        """
+        admin = dict(
+            name='Jonnie Pemba',
+            username='jonnie',
+            password='',
+            role='admin'
+        )
+
+        resp = self.client.post(
+            '/api/v1/register',
+            content_type='application/json',
+            data=json.dumps(admin)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_register_wrong_password(self):
+        """Test admin can not register with invalid password field
+        """
+        admin = dict(
+            name='Jonnie Pemba',
+            username='jonnie',
+            password='Andela',
+            role='admin'
+        )
+
+        resp = self.client.post(
+            '/api/v1/register',
+            content_type='application/json',
+            data=json.dumps(admin)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_register_wrong_role(self):
+        """Test admin can not register with invalid role field
+        """
+        admin = dict(
+            name='Jonnie Pemba',
+            username='jonnie',
+            password='Andela8',
+            role='keeper'
+        )
+
+        resp = self.client.post(
+            '/api/v1/register',
+            content_type='application/json',
+            data=json.dumps(admin)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'role should be admin!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_register_only_one_admin(self):
+        """Test can not register more than one admin
+        """
+        reply = self.admin_register()
+
+        admin = dict(
+            name='Codjoe Ronnie',
+            username='ronnie',
+            password='Andela8',
+            role='admin'
+        )
+
+        resp = self.client.post(
+            '/api/v1/register',
+            content_type='application/json',
+            data=json.dumps(admin)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Admin is already registered, please login!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_user_login(self):
+        """Test that a user can login
+        """
+        reply = self.admin_register()
+        user = dict(
+            username='jonnie',
+            password='Andela8'
+        )
+        resp = self.client.post(
+            '/api/v1/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+
+        self.assertEqual(reply['message'], 'Login sucessful!')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_login_with_empty_username(self):
+        """Test that a user cannot login with empty username field
+        """
+        reply = self.admin_register()
+        user = dict(
+            username='',
+            password='Andela8'
+        )
+        resp = self.client.post(
+            '/api/v1/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+
+        self.assertEqual(reply['message'], 'Wrong username!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_login_with_empty_password(self):
+        """Test that a user cannot login with empty password field
+        """
+        reply = self.admin_register()
+        user = dict(
+            username='jonnie',
+            password=''
+        )
+        resp = self.client.post(
+            '/api/v1/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+
+        self.assertEqual(reply['message'], 'Wrong password!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_login_with_wrong_username(self):
+        """Test that a user cannot login with wrong username field
+        """
+        reply = self.admin_register()
+        user = dict(
+            username='codjoe',
+            password='Andela8'
+        )
+        resp = self.client.post(
+            '/api/v1/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+
+        self.assertEqual(reply['message'], 'Wrong username!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_login_with_wrong_password(self):
+        """Test that a user cannot login with wrong password field
+        """
+        reply = self.admin_register()
+        user = dict(
+            username='jonnie',
+            password='Andyandy8'
+        )
+        resp = self.client.post(
+            '/api/v1/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+
+        reply = json.loads(resp.data.decode())
+
+
+        self.assertEqual(reply['message'], 'Wrong password!')
+        self.assertEqual(resp.status_code, 400)
+    
+    def test_admin_create_user(self):
+        """Test admin successful creates a store attendant
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='Summer Love',
+            username='love',
+            password='Andela8',
+            role='attendant'
+        )
+
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Summer Love has been registered')
+        self.assertEqual(resp.status_code, 201)
+
+    def test_admin_cannot_create_user_with_empty_fields(self):
+        """Test admin cannot create a store attendant with empty fields
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='',
+            username='',
+            password='',
+            role=''
+        )
+
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Please input all fields!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_cannot_create_user_with_different_roles(self):
+        """Test admin cannot create a store attendant with different roles
+        other than 'admin' or 'attendant'
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='Summer Love',
+            username='love',
+            password='Andela8',
+            role='supervisor'
+        )
+
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'role should either be admin or attendant')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_cannot_create_user_with_invalid_name(self):
+        """Test admin cannot create a store attendant with invalid name
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='Summer Love3',
+            username='love',
+            password='Andela8',
+            role='attendant'
+        )
+
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Enter name in a correct string format, (john doe)!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_cannot_create_user_with_invalid_username(self):
+        """Test admin cannot create a store attendant with invalid username
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='Summer Love',
+            username='love summer',
+            password='Andela8',
+            role='attendant'
+        )
+
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Enter username in a correct string format no spaces, (johndoe)!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_cannot_create_user_with_invalid_password(self):
+        """Test admin cannot create a store attendant with invalid password
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='Summer Love',
+            username='love',
+            password='Andyandy',
+            role='attendant'
+        )
+
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_cannot_create_users_with_same_name(self):
+        """Test admin cannot create a store attendants with same names
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='Summer Love',
+            username='love',
+            password='Andela8',
+            role='attendant'
+        )
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        user = dict(
+            name='Summer Love',
+            username='love',
+            password='Andela8',
+            role='attendant'
+        )
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'This name is already registered!')
+        self.assertEqual(resp.status_code, 400)
+
+    def test_admin_cannot_create_users_with_same_username(self):
+        """Test admin cannot create a store attendants with same usernames
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='Summer Love',
+            username='love',
+            password='Andela8',
+            role='attendant'
+        )
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        user = dict(
+            name='Paul Love',
+            username='love',
+            password='Andela8',
+            role='attendant'
+        )
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'This username is already taken!')
+        self.assertEqual(resp.status_code, 400)

@@ -9,6 +9,7 @@ util = Utilities()
 
 class User:
     """ Class handles user objects """
+
     def __init__(self, name, username, password, role):
         self.name = name
         self.username = username

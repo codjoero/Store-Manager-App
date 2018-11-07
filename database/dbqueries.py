@@ -127,6 +127,6 @@ class DbQueries():
         """Method drops tables
         """
         drop_table = """
-                    DROP TABLE {};
+                    DROP TABLE {} CASCADE;
                     """.format(table)
         cursor.execute(drop_table)

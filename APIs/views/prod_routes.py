@@ -42,7 +42,7 @@ def create_product():
     prod = ProductValidation(prod_name, category, stock, price)
     if not prod_name or not category or not stock or not price:
         return jsonify({
-            'message': 'Please enter all fields!'})
+            'message': 'Please enter all fields!'}), 400
     invalid_name = re.search(r"[0-9]", prod_name)
     invalid_category = re.search(r"[0-9]", category)
     if invalid_name or invalid_category:
@@ -163,9 +163,12 @@ def update_product(prod_id):
         if not prod.valid_product or not prod.valid_prod_fields:
             return jsonify({
             'message': 'Some fields are wrong or missing!'}), 400
+        if not prod_name or not category:
+            return jsonify({
+            'message': 'prod_name and category cannot be empty!'}), 400
         elif not isinstance(prod_name, str) or not isinstance(category, str):
             return jsonify({
-            'message': '[prod_name, category, addesd_by] should be characters!'}), 400
+            'message': '[prod_name, category, added_by] should be characters!'}), 400
         elif not isinstance(stock, int) or not isinstance(price, int):
             return jsonify({
             'message': 'The Stock and Price must be numbers!'}), 400
@@ -183,10 +186,6 @@ def update_product(prod_id):
         return jsonify({
             'message': 'Prod_id, stock and price should be numbers!'
         }), 400
-    # except Exception:
-    #     return jsonify({
-    #         'message': 'Something wrong with the inputs!'
-    #     }), 400
 
 @app.route('/api/v1/products/<prod_id>', methods=['DELETE'])
 @jwt_required
