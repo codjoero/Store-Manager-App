@@ -81,3 +81,24 @@ class Utilities(unittest.TestCase):
         )
         reply = json.loads(response.data.decode())
         return reply
+
+    def admin_add_product(self):
+        """admin adds a product to the inventory
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        product = dict(
+            prod_name='NY_denims',
+            category='denims',
+            stock=20,
+            price=150
+        )
+        resp = self.client.post(
+            '/api/v1/products',
+            content_type='application/json',
+            data=json.dumps(product),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        return reply

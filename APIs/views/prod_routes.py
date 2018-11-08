@@ -130,7 +130,7 @@ def view_all_product():
         'products': product}), 200
 
 
-@app.route('/api/v1/products/<prod_id>', methods=['PUT'])
+@app.route('/api/v1/products/<int:prod_id>', methods=['PUT'])
 @jwt_required
 def update_product(prod_id):
     """Method for admin to modify the details of a product.
@@ -147,8 +147,6 @@ def update_product(prod_id):
         category = request.json['category']
         stock = request.json['stock']
         price = request.json['price']
-        stock = int(stock)
-        price = int(price)
     except Exception:
         return jsonify({
             'Expected fields': {
@@ -168,10 +166,11 @@ def update_product(prod_id):
             'message': 'prod_name and category cannot be empty!'}), 400
         elif not isinstance(prod_name, str) or not isinstance(category, str):
             return jsonify({
-            'message': '[prod_name, category, added_by] should be characters!'}), 400
+            'message': 'prod_name and category should be characters!'}), 400
         elif not isinstance(stock, int) or not isinstance(price, int):
             return jsonify({
             'message': 'The Stock and Price must be numbers!'}), 400
+        
 
         product = Product(prod_name, category, stock, price)
         prod = product.update_product(prod_id)
