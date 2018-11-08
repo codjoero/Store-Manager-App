@@ -24,7 +24,7 @@ class Sale:
 
     @staticmethod
     def get_sale(table, column, value):
-        """Method for retrieving a single sale
+        """Method for retrieving a single saled
         Returns a dictionary of the sale that has been fetched.
         """
         sale = dbq.query_item(table, column, value)

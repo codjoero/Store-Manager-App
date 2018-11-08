@@ -26,8 +26,8 @@ class Product:
 
     @staticmethod
     def get_item(table, column, value):
-        """Method for retrieving a single sale
-        Returns a dictionary of the sale that has been fetched.
+        """Method for retrieving a single product
+        Returns a dictionary of the product that has been fetched.
         """
         product = dbq.query_item(table, column, value)
         if product == [] or product is None:

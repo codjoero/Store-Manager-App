@@ -2,8 +2,12 @@ language: python
 python:
  - "3.6"
 
+services:
+ - postgresql
+
 env:
  global:
+   - APP_SETTINGS="testing"
    - CODECOV_TOKEN="06154fdb-53ed-44a5-880b-64be61c02af8"
 
 install:

@@ -122,8 +122,7 @@ class ProductValidation():
         invalid_category = re.search(r"[0-9]", self.category)
         if invalid_name or invalid_category:
             return False
-        if not self.prod_name or not self.category or\
-            not self.stock or not self.price or\
+        if self.prod_name is None or self.category is None or\
             self.prod_name.isspace():
             return False
         else:

@@ -43,26 +43,24 @@ def register():
     password = request.json['password']
     role = request.json['role']
 
-    user = UserValidation(name, username, password)
+    user = User(name, username, password, role)
+    valid_user = UserValidation(name, username, password)
 
-    if not user.valid_name() or not user.valid_username():
+    if not valid_user.valid_name() or not valid_user.valid_username():
         return jsonify({
             'message': 'Enter name / username in string format!'
         }), 400
-    elif not user.valid_password():
+    if not valid_user.valid_password():
         return jsonify({
             'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
         }), 400
-    elif 'admin' != role != 'attendant':
+    if role != 'admin':
         return jsonify({
-            'message':'role should either be admin or attendant'
+            'message':'role should be admin!'
         }), 400
-    elif User.query_item('users', 'name', name):
+    if User.query_item('users', 'role', role):
         return jsonify({
-            'message': 'This name is already registered!'}), 400
-    elif User.query_item('users', 'username', username):
-        return jsonify({
-            'message': 'This username is already taken!'}), 400
+            'message': 'Admin is already registered, please login!'}), 400
 
     user = User(name, username, password, role)
     hash_password = user.password_hash()

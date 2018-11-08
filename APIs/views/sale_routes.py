@@ -27,24 +27,22 @@ def create_sale_order():
         }), 401
     try:
         products = request.json['products']
-        # prod_name = request.json['prod_name']
-        # quantity = request.json['quantity']
-        # quantity = int(quantity)
     except KeyError:
         return jsonify({
-            'Expected fields': {
-                'prod_name': 'a string',
-                'quantity': 'a number'
-            }
+            'Expected fields': [ 
+                    {
+                    'prod_name': 'a string',
+                    'quantity': 'a number'
+                }
+            ]
         }), 400
     sale = SaleValidation(products)
-    # sale = SaleValidation(prod_name, quantity)
     if not sale.valid_sale():
         return jsonify({
-            'message': 'One of the fields is empty!'})
+            'message': 'One of the fields is empty!'}), 400
     if not sale.valid_types():
         return jsonify({
-            'message': 'prod_name & quantity should be a character & number respectively!'})
+            'message': 'prod_name & quantity should be a character & number respectively!'}), 400
     total_sale = 0
     prod_id_list = []
     for prod in products:
@@ -60,10 +58,15 @@ def create_sale_order():
                 return jsonify({
                     'message': 'Only {} {} available right now!'.format(product[3], prod['prod_name'])
             }), 400
+        new_stock = product[3] - prod['quantity']
+        prod_update = Product(prod['prod_name'], product[2], new_stock, product[4])
+
         prod_id = product[0]
         prod_id_list.append(prod_id)
         prod_sale = product[4] * prod['quantity']
         total_sale += prod_sale
+        prod_update.update_product(prod_id)
+
 
     new_sale = Sale(prod_id_list, total_sale, auth_name)
     add_cart = new_sale.add_sale()
@@ -79,7 +82,7 @@ def get_sale_record(sale_id):
     """
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
-    sale = Sale.get_sale('sales', 'sale_id', int(sale_id))
+    sale = Sale.get_sale('sales', 'sale_id', sale_id)
     try:
         if auth_user is False:
             return jsonify({
@@ -98,13 +101,14 @@ def get_sale_record(sale_id):
             return jsonify({
                 'message': 'There are no sales yet!'
             }), 404
-        sale = Sale.get_sale('sales', 'sale_id', int(sale_id))
+        sale = Sale.get_sale('sales', 'sale_id', sale_id)
         if not sale:
             return jsonify({
                 'message': 'This sale does not exist!'
             }), 404
         return jsonify({
-                'sale': sale}), 200
+                'sale': sale,
+                'message': 'Sale fetched sucessfully!'}), 200
     except ValueError:
         return jsonify({
             'message': 'Try an interger for sale id'
@@ -128,4 +132,5 @@ def get_all_sale_records():
             'message': 'There are no sales yet!'
         }), 404
     return jsonify({
-        'Sale Records': sales}), 200
+        'Sale Records': sales,
+        'message': 'All Sale records fetched sucessfully!'}), 200
