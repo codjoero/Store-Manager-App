@@ -1,6 +1,6 @@
 # Store-Manager-App
 
-[![Build Status](https://travis-ci.org/codjoero/Userprofile.svg?branch=develop)](https://travis-ci.org/codjoero/Userprofile)
+[![Build Status](https://travis-ci.org/codjoero/Store-Manager-App.svg?branch=develop)](https://travis-ci.org/codjoero/Store-Manager-App)
 [![Coverage Status](https://coveralls.io/repos/github/codjoero/Store-Manager-App/badge.svg?branch=develop)](https://coveralls.io/github/codjoero/Store-Manager-App?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/1cc0ea9fdebf640c8169/maintainability)](https://codeclimate.com/github/codjoero/Store-Manager-App/maintainability)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6cc05ba8faff4376bcbf48bd0645c1c2)](https://www.codacy.com/app/codjoero/Store-Manager-App?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=codjoero/Store-Manager-App&amp;utm_campaign=Badge_Grade)
