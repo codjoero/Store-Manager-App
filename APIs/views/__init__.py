@@ -28,10 +28,9 @@ def server_error(error):
 
 """Root endpoint
 """
-@app.route('/')
+@app.route('/', methods=['GET'])
 def welcome():
-    return "Welcome!"
-    # return render_template('index.html')
+    return render_template('index.html')
 
 """Admin account register
 """
