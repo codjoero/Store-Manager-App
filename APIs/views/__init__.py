@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, render_template
 from APIs import app
 import datetime
 from APIs.views import user_routes, prod_routes, sale_routes
@@ -30,7 +30,7 @@ def server_error(error):
 """
 @app.route('/')
 def welcome():
-    return "Welcome!"
+    return render_template('index.html')
 
 """Admin account register
 """

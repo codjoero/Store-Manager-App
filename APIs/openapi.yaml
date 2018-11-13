@@ -1,0 +1,300 @@
+openapi: 3.0.0
+info:
+  title: "Store Manager App"
+  description: "A web app that helps Store-owners manage sales, product inventory records and staff. It also allows staff allocated authority by the Store-owner, to login and start Shopping Carts for customers, interract with the product inventory and make sale records that can be viewed by the owner."
+  version: "1.0.0"
+  contact:
+    email: "rownee2001@gmail.com"
+  license:
+    name: "Andela"
+    url: "http://www.andela.com"
+servers:
+ - url: https://thecodestoremanager-api-heroku.herokuapp.com/api/v1
+   description: Production server
+ - url: http://localhost:5000/api/v1
+   description: Local server for testing
+paths:
+  /register:
+    post:
+      tags:
+      - Users
+      summary: Registration of  Admin
+      description: This endpoint registers admin only once for full control of the app
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: Admin has been registered
+        '400':
+          description: Enter name / username in string format! Password should be longer than 6 characters, have atleast an uppercase and a lowercase! role should be admin! Admin is already registered, please login!
+  /login:
+    post:
+      tags:
+       - Users
+      summary: Logs in a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+      responses:
+        '200':
+          description: Login sucessful
+        '400': 
+          description: Wrong username. Wrong password
+  /users:
+    post:
+      tags:
+       - Users
+      summary: Allows admin to create a user
+      description: This endpoint creates new store attendant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User has been registered
+        '401':
+          description: Unauthorized Access!
+        '400':
+          description: Please input all fields! Enter name in a correct string format, (john doe)!, This name is already registered! This username is already taken!
+      security: 
+        - bearerAuth: []
+  /products:
+    post:
+      tags:
+       - Products
+      summary: Add a new product to the Inventory
+      description: Allows admin to create add a new product to the Inventory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: Product successfully added to Inventory!
+        '401':
+          description: Unauthorized Access!
+        '400':
+          description: Please enter all fields! Some fields are wrong or missing! The Stock and Price must be numbers!
+      security: 
+        - bearerAuth: []
+    get:
+      tags:
+       - Products
+      summary: Returns a list of products in the Inventory
+      responses:
+        '200':
+          description: products list
+        '401':
+          description: Unauthorized Access!
+        '404':
+          description: There are no products yet!
+      security: 
+        - bearerAuth: [] 
+  /products/{prod_id}:
+    get:
+      tags:
+       - Products
+      summary: allows admin / store attendant to view a specific product
+      parameters:
+        - name: prod_id
+          in: path
+          required: true
+          description: id for product to be viewed
+          schema:
+            type : integer
+            format: int64
+            minimum: 1
+      responses:
+        '200':
+          description: product dict object
+        '400': 
+          description: Try an interger for product id
+        '401':
+          description: Unauthorized Access!
+        '404':
+          description: There are no products yet! This product does not exist!
+      security: 
+        - bearerAuth: [] 
+    
+    put:
+      tags:
+       - Products
+      summary: admin to modify details of a product
+      parameters:
+       - name: prod_id
+         in: path
+         required: true
+         description: id for product to be modified
+         schema:
+           type : integer
+           format : int64
+           minimum : 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+      responses:
+        '201':
+          description: product updated!
+        '401':
+          description: Unauthorized Access!
+        '400':
+          description: Some fields are wrong or missing! This product doesn't exists in the Inventory!
+      security: 
+        - bearerAuth: []
+    delete:
+      tags:
+       - Products
+      summary: admin to (soft) delete a product.
+      parameters:
+       - name: prod_id
+         in: path
+         required: true
+         description: id for product to be deleted(soft)
+         schema:
+           type : integer
+           format : int64
+           minimum : 1
+           
+      responses:
+        '200':
+          description: product deleted
+        '401':
+          description: Unauthorized Access!
+        '400':
+          description: The product id should be a number!
+        '404':
+          description: There are no products in Inventory! This product does not exist in Inventory!
+      security: 
+        - bearerAuth: []
+  
+  /sales:
+    post:
+      tags: 
+       - Sales
+      summary: for sale attendant to add sales
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+             $ref: '#/components/schemas/Sale'
+      responses:
+        '200':
+          description: Sale record created
+        '401':
+          description: Unauthorized Access! 
+        '400':
+          description: Only {} products available right now!
+        '404':
+          description: This product is not in the Inventory! prod_name is out of stock!
+      security: 
+        - bearerAuth: []
+    get:
+      tags: 
+       - Sales
+      summary: for admin to view all sale records
+      responses:
+        '200':
+          description: All Sale records fetched sucessfully!
+        '401':
+          description: Unauthorized Access!
+        '404':
+          description: There are no sales yet!
+      security: 
+       - bearerAuth: []
+  /sales/{sale_id}:
+    get:
+      tags: 
+       - Sales
+      summary: for admin / store attendant to view a specific sale
+      description: store attendant views sales made by only themselves
+      parameters:
+        - name: sale_id
+          in: path
+          required: true
+          description: a sale id
+          schema:
+            type: integer
+            minimum: 1
+      responses:
+        '200':
+          description: Sale fetched sucessfully!
+        '400':
+          description: This sale does not exist!
+        '401':
+          description: Unauthorized Access! You have no access to this sale!
+        '404':
+          description: There are no sales yet!
+      security: 
+       - bearerAuth: []    
+components:
+  schemas:
+    User:
+      properties:
+        name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        role: 
+          type: string
+      required:
+        - name
+        - username
+        - password
+        - role
+    Login:
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+    Product:
+      properties:
+        prod_name: 
+          type: string
+        category:
+          type: string
+        stock:
+          type: integer
+        price:
+          type: integer
+      required:
+       - prod_name
+       - category
+       - stock
+       - price
+    Sale:
+      properties:
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              prod_name:
+                type: string
+              quantity:
+                type: integer
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
