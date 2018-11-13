@@ -14,7 +14,7 @@ servers:
  - url: http://localhost:5000/api/v1
    description: Local server for testing
 paths:
-  /register:
+  /api/v1/register:
     post:
       tags:
       - Users
@@ -31,7 +31,7 @@ paths:
           description: Admin has been registered
         '400':
           description: Enter name / username in string format! Password should be longer than 6 characters, have atleast an uppercase and a lowercase! role should be admin! Admin is already registered, please login!
-  /login:
+  /api/v1/login:
     post:
       tags:
        - Users
@@ -47,7 +47,7 @@ paths:
           description: Login sucessful
         '400': 
           description: Wrong username. Wrong password
-  /users:
+  /api/v1/users:
     post:
       tags:
        - Users
@@ -68,7 +68,7 @@ paths:
           description: Please input all fields! Enter name in a correct string format, (john doe)!, This name is already registered! This username is already taken!
       security: 
         - bearerAuth: []
-  /products:
+  /api/v1/products:
     post:
       tags:
        - Products
@@ -102,7 +102,7 @@ paths:
           description: There are no products yet!
       security: 
         - bearerAuth: [] 
-  /products/{prod_id}:
+  /api/v1/products/{prod_id}:
     get:
       tags:
        - Products
@@ -181,7 +181,7 @@ paths:
       security: 
         - bearerAuth: []
   
-  /sales:
+  /api/v1/sales:
     post:
       tags: 
        - Sales
@@ -216,7 +216,7 @@ paths:
           description: There are no sales yet!
       security: 
        - bearerAuth: []
-  /sales/{sale_id}:
+  /api/v1/sales/{sale_id}:
     get:
       tags: 
        - Sales

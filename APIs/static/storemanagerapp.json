@@ -23,7 +23,7 @@
     }
   ],
   "paths": {
-    "/register": {
+    "/api/v1/register": {
       "post": {
         "tags": [
           "Users"
@@ -50,7 +50,7 @@
         }
       }
     },
-    "/login": {
+    "/api/v1/login": {
       "post": {
         "tags": [
           "Users"
@@ -76,7 +76,7 @@
         }
       }
     },
-    "/users": {
+    "/api/v1/users": {
       "post": {
         "tags": [
           "Users"
@@ -111,7 +111,7 @@
         ]
       }
     },
-    "/products": {
+    "/api/v1/products": {
       "post": {
         "tags": [
           "Products"
@@ -168,7 +168,7 @@
         ]
       }
     },
-    "/products/{prod_id}": {
+    "/api/v1/products/{prod_id}": {
       "get": {
         "tags": [
           "Products"
@@ -290,7 +290,7 @@
         ]
       }
     },
-    "/sales": {
+    "/api/v1/sales": {
       "post": {
         "tags": [
           "Sales"
@@ -349,7 +349,7 @@
         ]
       }
     },
-    "/sales/{sale_id}": {
+    "/api/v1/sales/{sale_id}": {
       "get": {
         "tags": [
           "Sales"
