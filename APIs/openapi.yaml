@@ -9,7 +9,7 @@ info:
     name: "Andela"
     url: "http://www.andela.com"
 servers:
- - url: https://thecodestoremanager-api-heroku.herokuapp.com/api/v1
+ - url: https://thecodestoremanager-api-heroku.herokuapp.com
    description: Production server
  - url: http://localhost:5000/api/v1
    description: Local server for testing

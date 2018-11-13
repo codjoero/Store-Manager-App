@@ -14,7 +14,7 @@
   },
   "servers": [
     {
-      "url": "https://thecodestoremanager-api-heroku.herokuapp.com/api/v1",
+      "url": "https://thecodestoremanager-api-heroku.herokuapp.com",
       "description": "Production server"
     },
     {
