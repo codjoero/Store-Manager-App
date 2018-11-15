@@ -11,7 +11,7 @@ info:
 servers:
  - url: https://thecodestoremanager-api-heroku.herokuapp.com
    description: Production server
- - url: http://localhost:5000/api/v1
+ - url: http://localhost:5000
    description: Local server for testing
 paths:
   /api/v1/register:
@@ -66,6 +66,18 @@ paths:
           description: Unauthorized Access!
         '400':
           description: Please input all fields! Enter name in a correct string format, (john doe)!, This name is already registered! This username is already taken!
+      security: 
+        - bearerAuth: []
+  /api/v1/logout:
+    delete:
+      tags:
+       - Users
+      summary: Logs out a user
+      responses:
+        '200':
+          description: You are successfully logged out!
+        '400': 
+          description: You are already logged out!
       security: 
         - bearerAuth: []
   /api/v1/products:
@@ -168,7 +180,6 @@ paths:
            type : integer
            format : int64
            minimum : 1
-           
       responses:
         '200':
           description: product deleted
@@ -180,7 +191,6 @@ paths:
           description: There are no products in Inventory! This product does not exist in Inventory!
       security: 
         - bearerAuth: []
-  
   /api/v1/sales:
     post:
       tags: 
