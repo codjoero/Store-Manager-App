@@ -1,15 +1,13 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify
 from APIs import app
 import datetime
-from APIs.views import user_routes, prod_routes, sale_routes
 from APIs.models.users import User
 from database.db import DataBaseConnection
 from APIs.utilities import Utilities, UserValidation
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
-    get_jwt_identity)
+    get_jwt_identity, get_raw_jwt, get_jti)
 
-db = DataBaseConnection()
 
 @app.route('/api/v1/login', methods=['POST'])
 def login():
@@ -46,6 +44,10 @@ def login():
 def create_user():
     """Method for admin to add store attendant account
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     if auth_user is False or auth_user[-2] != 'admin':
@@ -101,6 +103,22 @@ def create_user():
         'message': '{} has been registered'.format(new_user)
     }), 201
 
+@app.route('/api/v1/logout', methods=['DELETE'])
+@jwt_required
+def logout():
+    """Method for all users to logout of the app
+    Token is blacklisted if still active.
+    """
+    auth_header = request.headers.get('Authorization')
+    if auth_header:
+        auth_token = auth_header.split(" ")[1]
+        tk_jti = get_jti(auth_token)
+        resp = User.logout(tk_jti)
+        return resp
+    else:
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
 
 # @app.route('/api/v1/users', methods=['GET'])
 # def view_all_users():

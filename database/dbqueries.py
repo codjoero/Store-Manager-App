@@ -61,6 +61,15 @@ class DbQueries():
         """.format(sale_id, prod_id)
         cursor.execute(add_sale_prod)
 
+    def add_jti(self, jti):
+        """Method adds a token jti to the database
+        """
+        add_jti = """
+        INSERT INTO blacklisted_tokens(tk_jti)\
+        VALUES ('{}');
+        """.format(jti)
+        cursor.execute(add_jti)
+
     def query_item(self, *args):
         """Method to query items from tables, given a table name
         column and check value

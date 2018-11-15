@@ -44,6 +44,41 @@ class ManagerTestCase(Utilities):
         self.assertEqual(reply['message'], 'Sale record created')
         self.assertEqual(resp.status_code, 200)
 
+    def test_attendant_cannot_make_a_sale_with_blacklisted_token(self):
+        """Tests that 'attendant' cannot make a sale with
+        blacklisted token
+        """
+        reply = self.admin_add_product()
+
+        resp = self.admin_create_user()
+        reply = self.attendant_login()
+        token = reply['token']
+
+        resp = self.client.delete(
+            '/api/v1/logout',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'You are successfully logged out!')
+        self.assertEqual(resp.status_code, 200)
+
+        sale = dict(products = [
+            {
+                "prod_name":"NY_denims", 
+                "quantity":10
+            }
+	    ])
+        resp = self.client.post(
+            '/api/v1/sales',
+            content_type='application/json',
+            data=json.dumps(sale),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        
+        self.assertEqual(reply['message'], 'Invalid Authentication, Please Login!')
+        self.assertEqual(resp.status_code, 401)
+
     def test_only_attendant_can_make_a_sale(self):
         """Tests that only 'attendant' can make a sale
         """
@@ -260,6 +295,50 @@ class ManagerTestCase(Utilities):
         self.assertEqual(reply['message'], 'Sale fetched sucessfully!')
         self.assertEqual(resp.status_code, 200)
 
+    def test_cannot_get_sale_record_with_blacklisted_token(self):
+        """Tests that admin or attendant cannot view a sale
+        with blacklisted token
+        """
+        reply = self.admin_add_product()
+
+        resp = self.admin_create_user()
+        reply = self.attendant_login()
+        token = reply['token']
+        sale = dict(products = [
+            {
+                "prod_name":"NY_denims", 
+                "quantity":10
+            }
+	    ])
+        resp = self.client.post(
+            '/api/v1/sales',
+            content_type='application/json',
+            data=json.dumps(sale),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        
+        self.assertEqual(reply['message'], 'Sale record created')
+        self.assertEqual(resp.status_code, 200)
+
+        resp = self.client.delete(
+            '/api/v1/logout',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'You are successfully logged out!')
+        self.assertEqual(resp.status_code, 200)
+
+        resp = self.client.get(
+            '/api/v1/sales/1',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        
+        self.assertEqual(reply['message'], 'Invalid Authentication, Please Login!')
+        self.assertEqual(resp.status_code, 401)
+
+
     def test_attendant_can_only_view_own_sale(self):
         """Tests that attendant can only view a sale they made
         """
@@ -377,6 +456,52 @@ class ManagerTestCase(Utilities):
         
         self.assertEqual(reply['message'], 'All Sale records fetched sucessfully!')
         self.assertEqual(resp.status_code, 200)
+
+    def test_cannot_get_all_sale_records_with_blacklisted_token(self):
+        """Tests that admin cannot view all sale records with
+        blacklisted token
+        """
+        reply = self.admin_add_product()
+
+        resp = self.admin_create_user()
+        reply = self.attendant_login()
+        token = reply['token']
+        sale = dict(products = [
+            {
+                "prod_name":"NY_denims", 
+                "quantity":10
+            }
+	    ])
+        resp = self.client.post(
+            '/api/v1/sales',
+            content_type='application/json',
+            data=json.dumps(sale),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        
+        self.assertEqual(reply['message'], 'Sale record created')
+        self.assertEqual(resp.status_code, 200)
+ 
+        reply = self.admin_login()
+        token = reply['token']
+
+        resp = self.client.delete(
+            '/api/v1/logout',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'You are successfully logged out!')
+        self.assertEqual(resp.status_code, 200)
+
+        resp = self.client.get(
+            '/api/v1/sales',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        
+        self.assertEqual(reply['message'], 'Invalid Authentication, Please Login!')
+        self.assertEqual(resp.status_code, 401)
 
     def test_admin_only_can_get_all_sale_records(self):
         """Tests that admin only can view all sale records
