@@ -19,6 +19,10 @@ db = DataBaseConnection()
 def create_sale_order():
     """Method for sale attendant to add sales
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     if auth_user is False or auth_user[-2] != 'attendant':
@@ -80,6 +84,10 @@ def get_sale_record(sale_id):
     store attendant views sales made by only themselves
     returns a product that matches the given prod_id.
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     sale = Sale.get_sale('sales', 'sale_id', sale_id)
@@ -120,6 +128,10 @@ def get_all_sale_records():
     """Method for admin to view all sale records.
     returns a list of all sales.
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     if auth_user is False or auth_user[-2] != 'admin':

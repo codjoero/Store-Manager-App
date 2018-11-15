@@ -67,6 +67,16 @@ class DataBaseConnection:
                 """
             )
 
+            self.cursor.execute(
+                """
+                CREATE TABLE IF NOT EXISTS blacklisted_tokens (
+                    tk_id SERIAL PRIMARY KEY,
+                    tk_jti VARCHAR(225) NOT NULL,
+                    blacklisted_on TIMESTAMPTZ DEFAULT NOW()
+                )
+                """
+            )
+
             print('Sucessfully connected to {}!'.format(self.db))
 
         except Exception as e:
