@@ -18,6 +18,10 @@ db = DataBaseConnection()
 def create_product():
     """Method for admin to add product to inventory
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     if auth_user is False or auth_user[-2] != 'admin':
@@ -75,6 +79,10 @@ def view_a_product(prod_id):
     """Method for admin / store attendant to view a specific product.
     returns a product that matches the given prod_id.
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     if auth_user is False:
@@ -114,6 +122,10 @@ def view_all_product():
     """Method for admin / store attendant to view all products.
     returns a list products in the Inventory.
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     if auth_user is False:
@@ -136,6 +148,10 @@ def update_product(prod_id):
     """Method for admin to modify the details of a product.
     returns dictionary of updated product.
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     if auth_user is False or auth_user[-2] != 'admin':
@@ -192,6 +208,10 @@ def delete_product(prod_id):
     """Method for admin to delete a product.
     returns message of successful deletion.
     """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
     if auth_user is False or auth_user[-2] != 'admin':

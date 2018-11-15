@@ -1,5 +1,6 @@
 import unittest
 import json
+import time
 from APIs import app
 from database.db import DataBaseConnection
 from database.dbqueries import DbQueries
@@ -14,6 +15,7 @@ class ManagerTestCase(Utilities):
 
     def tearDown(self):
         self.dbq.drop_table('users')
+        self.dbq.drop_table('blacklisted_tokens')
 
     def test_admin_register(self):
         """Test admin successful registration
@@ -182,6 +184,7 @@ class ManagerTestCase(Utilities):
 
 
         self.assertEqual(reply['message'], 'Login sucessful!')
+        self.assertTrue(reply['token'])
         self.assertEqual(resp.status_code, 200)
 
     def test_login_with_empty_username(self):
@@ -288,6 +291,41 @@ class ManagerTestCase(Utilities):
 
         self.assertEqual(reply['message'], 'Summer Love has been registered')
         self.assertEqual(resp.status_code, 201)
+
+    def test_cannot_create_user_with_blacklisted_token(self):
+        """Test admin cannot create a store attendant 
+        with blacklisted token
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+
+        resp = self.client.delete(
+            '/api/v1/logout',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'You are successfully logged out!')
+        self.assertEqual(resp.status_code, 200)
+
+        user = dict(
+            name='Summer Love',
+            username='love',
+            password='Andela8',
+            role='attendant'
+        )
+
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+
+        self.assertEqual(reply['message'], 'Invalid Authentication, Please Login!')
+        self.assertEqual(resp.status_code, 401)
 
     def test_admin_cannot_create_user_with_empty_fields(self):
         """Test admin cannot create a store attendant with empty fields
@@ -488,3 +526,65 @@ class ManagerTestCase(Utilities):
 
         self.assertEqual(reply['message'], 'This username is already taken!')
         self.assertEqual(resp.status_code, 400)
+
+    def test_user_logout(self):
+        """Test user can logout before token expires
+        """
+        reply = self.admin_register()
+        user = dict(
+            username='jonnie',
+            password='Andela8'
+        )
+        resp = self.client.post(
+            '/api/v1/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'Login sucessful!')
+        self.assertTrue(reply['token'])
+        self.assertEqual(resp.status_code, 200)
+
+        token = reply['token']
+        resp = self.client.delete(
+            '/api/v1/logout',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'You are successfully logged out!')
+        self.assertEqual(resp.status_code, 200)
+
+    def test_cannot_logout_with_blacklisted_token(self):
+        """Test user cannot logout with a blacklisted token
+        """
+        reply = self.admin_register()
+        user = dict(
+            username='jonnie',
+            password='Andela8'
+        )
+        resp = self.client.post(
+            '/api/v1/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'Login sucessful!')
+        self.assertTrue(reply['token'])
+        self.assertEqual(resp.status_code, 200)
+
+        token = reply['token']
+        resp = self.client.delete(
+            '/api/v1/logout',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'You are successfully logged out!')
+        self.assertEqual(resp.status_code, 200)
+
+        resp = self.client.delete(
+            '/api/v1/logout',
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+        reply = json.loads(resp.data.decode())
+        self.assertEqual(reply['message'], 'You are already logged out!')
+        self.assertEqual(resp.status_code, 404)
