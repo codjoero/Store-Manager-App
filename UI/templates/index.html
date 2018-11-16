@@ -16,14 +16,31 @@
             <header class="branding">
                 <h1 class="title">Store Manager</h1>
             </header>
-            <form class="form">
-                <input type="text" class="entry" placeholder="user name" id="login" required/>
-                <input type="password" class="entry" placeholder="password" id="password" required/>
-                <button type="button" id="submit"  onclick="checkLogin()">login</button>
-                <p id="checker"></p>
-            </form>
+            <div class="form">
+                <form class="register">
+                    <input type="text" class="entry" placeholder="name"/>
+                    <input type="text" class="entry" placeholder="user name"/>
+                    <input type="text" class="entry" placeholder="password"/>
+                    <input type="text" class="entry" placeholder="confirm password"/>
+                    <button class="submit"> Create</button>
+                    <p class="message">Registered User? <a href="#">Login</a></p>
+                </form>
+                <form class="login">
+                    <input type="text" class="entry" placeholder="user name" id="login" required/>
+                    <input type="password" class="entry" placeholder="password" id="password" required/>
+                    <button type="button" class="submit"  onclick="checkLogin()">login</button>
+                    <p class="message">New Admin? <a href="#">Register</a></p>
+                    <p id="checker"></p>
+                </form>
+            </div>
         </div>
-    <!-- js -->
     <script src="/UI/static/mystyles.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <script>
+        $('.message a').click(function(){
+            $('form').animate({height: "toggle", opacity: "toggle"}, 'slow');
+        });
+    </script>
     </body>
 </html>

@@ -41,7 +41,7 @@ form .entry{
     font-size: 12px;
 }
 
-form #submit{
+form .submit{
     font-family: 'Roboto', 'sans-serif';
     text-transform: uppercase;
     outline: 0;
@@ -54,8 +54,23 @@ form #submit{
     cursor: pointer;
 }
 
-form #submit:hover{
+form .submit:hover{
     background: #486444;
+}
+
+.form .message{
+    margin: 15px, 0, 0;
+    color: #193615;
+    font-size: 15px;
+}
+
+.form .message a{
+    text-decoration: none;
+    color: #03136d
+}
+
+.form .register{
+    display: none;
 }
 
 #checker{
@@ -66,7 +81,7 @@ form #submit:hover{
 .site{
     display: grid;
     grid-template-columns: 1fr minmax(300px, 400px) 1fr;
-    grid-template-rows: auto 1fr 2fr 2fr;
+    grid-template-rows: auto 100px 2fr 2fr;
 }
 
 .branding{
