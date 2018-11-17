@@ -71,12 +71,12 @@ function loginUser(e){
         if (data['user']['role'] === 'admin' && typeof data['user']['token'] !== null){
             localStorage.setItem("adminToken", data['user']['token'])
             localStorage.setItem("adminLoggedin", true)
-            window.location = "/UI/templates/admin/dashboard.html";
+            window.location = "UI/templates/admin/dashboard.html";
         }
         else if (data['user']['role'] === 'attendant' && typeof data['user']['token'] !== null){
             localStorage.setItem("attendantToken", data['user']['token'])
             localStorage.setItem("attendantLoggedin", true)
-            window.location = "/UI/templates/attendant/dashboard.html";
+            window.location = "UI/templates/attendant/dashboard.html";
         }
     })
     .catch(err => console.log(err))
