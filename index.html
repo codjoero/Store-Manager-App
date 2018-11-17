@@ -28,10 +28,10 @@
                     <p class="message">Registered User? <a href="#">Login</a></p>
                 </form>
                 <form id="loginUser">
-                    <input type="text" class="entry" placeholder="username" id="loginUsername" required/>
-                    <input type="password" class="entry" placeholder="password" id="loginPassword" required/>
+                    <input type="text" id="loginUsername" class="entry" placeholder="username" name="t6" id="loginUsername"/>
+                    <input type="password" id="loginPassword" class="entry" placeholder="password" name="t7" id="loginPassword"/>
                     <input type="submit" value="Login" class="submit"><br>
-                    <span class="msg"></span>
+                    <span class="errMsg"></span>
                     <p class="message">New Admin? <a href="#">Register</a></p>
                 </form>
             </div>
@@ -52,6 +52,8 @@
                 var confirm = $("input[name='t4']").val();
                 var role = $("input[name='t5']").val();
                 var password_error = $("span[name='s1']").val();
+                var loginUsername = $("input[name='t6']").val();
+                var loginPassword = $("input[name='t7']").val();
                 if (name == '')
                     $("#name").css("border-color", "#c77272");
                 else
@@ -72,6 +74,14 @@
                     $("#role").css("border-color", "#c77272");    
                 else
                     $("#role").css("border-color", "#427e3a");
+                if (loginUsername == '')
+                    $("#loginUsername").css("border-color", "#c77272");    
+                else
+                    $("#loginUsername").css("border-color", "#427e3a");
+                if (loginPassword == '')
+                    $("#loginPassword").css("border-color", "#c77272");    
+                else
+                    $("#loginPassword").css("border-color", "#427e3a");
             });
             $('.message').click(() => {
                 if (name == '' || username == '' || password == '' || role == '')
