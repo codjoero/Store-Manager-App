@@ -73,7 +73,7 @@ form .submit:hover{
     display: none;
 }
 
-.msg{
+.msg, .errMsg{
     color: rgb(100, 13, 13);
 }
 
