@@ -233,7 +233,6 @@ aside{
     grid-column: 3;
     grid-row: 2;
     background-color: rgb(120, 150, 144);
-
 }
 .logout{
     grid-column: 4;

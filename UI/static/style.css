@@ -34,14 +34,14 @@ form .entry{
     outline: 1;
     background: #f2f2f2;
     width: 80%;
-    border: 0;
+    border: 1px solid #e6ece9;
     margin: 0 0 15px;
     padding: 10px;
     box-sizing: border-box;
     font-size: 12px;
 }
 
-form #submit{
+form .submit{
     font-family: 'Roboto', 'sans-serif';
     text-transform: uppercase;
     outline: 0;
@@ -54,11 +54,26 @@ form #submit{
     cursor: pointer;
 }
 
-form #submit:hover{
+form .submit:hover{
     background: #486444;
 }
 
-#checker{
+.form .message{
+    margin: 15px, 0, 0;
+    color: #193615;
+    font-size: 15px;
+}
+
+.form .message a{
+    text-decoration: none;
+    color: #03136d
+}
+
+.form #addUser{
+    display: none;
+}
+
+.msg{
     color: rgb(100, 13, 13);
 }
 
@@ -66,7 +81,7 @@ form #submit:hover{
 .site{
     display: grid;
     grid-template-columns: 1fr minmax(300px, 400px) 1fr;
-    grid-template-rows: auto 1fr 2fr 2fr;
+    grid-template-rows: auto 50px 2fr 2fr;
 }
 
 .branding{

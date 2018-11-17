@@ -1,0 +1,26 @@
+language: python
+python:
+ - "3.6"
+
+services:
+ - postgresql
+
+env:
+ global:
+   - APP_SETTINGS="testing"
+   - CODECOV_TOKEN="jC4iB3veU8DPLO2KJYjb4F0hNuWHgcu6n"
+
+install:
+ - "pip install -r requirements.txt"
+ - "pip install coveralls"
+
+before_script:
+ - psql -c "CREATE ROLE codjoe WITH SUPERUSER LOGIN PASSWORD 'codjoe';" -U postgres
+ - psql -c "CREATE DATABASE test_db;" -U postgres
+
+script:
+ - "nosetests --with-coverage --cover-package=APIs"
+   
+after_success:
+ - coveralls
+ - codecov
