@@ -34,7 +34,7 @@ form .entry{
     outline: 1;
     background: #f2f2f2;
     width: 80%;
-    border: 0;
+    border: 1px solid #e6ece9;
     margin: 0 0 15px;
     padding: 10px;
     box-sizing: border-box;
@@ -69,11 +69,11 @@ form .submit:hover{
     color: #03136d
 }
 
-.form .register{
+.form #addUser{
     display: none;
 }
 
-#checker{
+.msg{
     color: rgb(100, 13, 13);
 }
 
@@ -81,7 +81,7 @@ form .submit:hover{
 .site{
     display: grid;
     grid-template-columns: 1fr minmax(300px, 400px) 1fr;
-    grid-template-rows: auto 100px 2fr 2fr;
+    grid-template-rows: auto 50px 2fr 2fr;
 }
 
 .branding{
