@@ -17,29 +17,66 @@
                 <h1 class="title">Store Manager</h1>
             </header>
             <div class="form">
-                <form class="register">
-                    <input type="text" class="entry" placeholder="name"/>
-                    <input type="text" class="entry" placeholder="user name"/>
-                    <input type="text" class="entry" placeholder="password"/>
-                    <input type="text" class="entry" placeholder="confirm password"/>
-                    <button class="submit"> Create</button>
+                <form id="addUser">
+                    <input type="text" id="name" class="entry" name="t1" placeholder="name"/>
+                    <input type="text" id="username" class="entry" name="t2" placeholder="username"/>
+                    <input type="password" id="password" class="entry" name="t3" placeholder="password"/>
+                    <input type="password" id="confirm" class="entry" name="t4" placeholder="confirm password"/>
+                    <input type="text" id="role" class="entry" name="t5" placeholder="role"/>
+                    <input type="submit" value="Register" class="submit"><br>
+                    <span class="msg"></span>
                     <p class="message">Registered User? <a href="#">Login</a></p>
                 </form>
-                <form class="login">
-                    <input type="text" class="entry" placeholder="user name" id="login" required/>
-                    <input type="password" class="entry" placeholder="password" id="password" required/>
-                    <button type="button" class="submit"  onclick="checkLogin()">login</button>
+                <form id="loginUser">
+                    <input type="text" class="entry" placeholder="username" id="loginUsername" required/>
+                    <input type="password" class="entry" placeholder="password" id="loginPassword" required/>
+                    <input type="submit" value="Login" class="submit"><br>
+                    <span class="msg"></span>
                     <p class="message">New Admin? <a href="#">Register</a></p>
-                    <p id="checker"></p>
                 </form>
             </div>
         </div>
-    <script src="/UI/static/mystyles.js"></script>
+    <script src="/UI/static/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
     <script>
-        $('.message a').click(function(){
+        $('.message a').click(() => {
             $('form').animate({height: "toggle", opacity: "toggle"}, 'slow');
+        });
+
+        $(function () {
+            $('.entry').focusout(() => {
+                var name = $("input[name='t1']").val();
+                var username = $("input[name='t2']").val();
+                var password = $("input[name='t3']").val();
+                var confirm = $("input[name='t4']").val();
+                var role = $("input[name='t5']").val();
+                var password_error = $("span[name='s1']").val();
+                if (name == '')
+                    $("#name").css("border-color", "#c77272");
+                else
+                    $("#name").css("border-color", "#427e3a");
+                if (username == '')
+                    $("#username").css("border-color", "#c77272");    
+                else
+                    $("#username").css("border-color", "#427e3a");
+                if (password == '')
+                    $("#password").css("border-color", "#c77272");    
+                else
+                    $("#password").css("border-color", "#427e3a");
+                if (confirm == '' || confirm != password)
+                    $("#confirm").css("border-color", "#c77272");
+                else
+                    $("#confirm").css("border-color", "#427e3a");
+                if (role == '')
+                    $("#role").css("border-color", "#c77272");    
+                else
+                    $("#role").css("border-color", "#427e3a");
+            });
+            $('.message').click(() => {
+                if (name == '' || username == '' || password == '' || role == '')
+                    $('.entry').css("border-color", "#c77272"); 
+            });
         });
     </script>
     </body>
