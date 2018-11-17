@@ -18,14 +18,14 @@ def login():
     password = request.json['password']
 
     user = UserValidation('none', username, password)
-
+    logged_user = User.query_item('users', 'username', username)
     if not user.valid_username():
         return jsonify({
             'message': 'Wrong username!'}), 400
     if not user.valid_password():
         return jsonify({
             'message': 'Wrong password!'}), 400
-    elif not User.query_item('users', 'username', username):
+    elif not logged_user:
         return jsonify({
             'message': 'Wrong username!'}), 400
     elif not User.password_verification(username, password):
@@ -37,7 +37,15 @@ def login():
                 )
     return jsonify({
             'token': token,
-            'message': 'Login sucessful!'}), 200
+            'message': 'Login sucessful!',
+            'user':dict(
+                user_id=logged_user[0],
+                name=logged_user[1],
+                username=logged_user[2],
+                role=logged_user[4],
+                added_on=logged_user[5]
+            )
+            }), 200
 
 @app.route('/api/v1/users', methods=['POST'])
 @jwt_required
