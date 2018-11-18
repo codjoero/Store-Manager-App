@@ -166,7 +166,7 @@ tr:nth-child(even){
 
 /* ACCOUNTS */
 .form{    
-    width: 20vw;
+    width: 40vw;
     float: left;
 }
 
@@ -196,8 +196,12 @@ form .accountButton{
     cursor: pointer;
 }
 
-.updateUser{
+#updateUser{
     display: none;
+}
+
+.msg, .errMsg{
+    color: rgb(100, 13, 13);
 }
 
 /******* THE GRID *******/
@@ -425,6 +429,10 @@ aside{
     grid-column: 1/-1;
 }
 
+.form{
+    grid-column: 1/-1;
+}
+
 a {
     color: inherit;
     text-decoration: inherit;
@@ -550,6 +558,10 @@ a {
     }
 
     .tbupdate{
+        width: 100%;
+    }
+
+    .form{
         width: 100%;
     }
 
