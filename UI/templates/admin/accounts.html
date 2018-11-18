@@ -36,47 +36,117 @@
                         <th>Id#</th>
                         <th>Name</th>
                         <th>username</th>
-                        <th>Grade</th>
+                        <th>role</th>
                         <th></th>
                         <th></th>
                     </tr>
                     <tr>
                         <td><input type="checkbox"></td>
                         <td>02</td>
-                        <td>Jonnie</td>
-                        <td>user</td>
-                        <td>C</td>
+                        <td>Jonnie Pemba</td>
+                        <td>jonnie</td>
+                        <td>admin</td>
                         <td class="txtright"><i class="fa fa-edit"></i></td>
                         <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                     </tr>
                     <tr>
                         <td><input type="checkbox"></td>
                         <td>01</td>
-                        <td>Ronald</td>
-                        <td>admin</td>
-                        <td>A</td>
+                        <td>Moon Walker</td>
+                        <td>walker</td>
+                        <td>attendant</td>
                         <td class="txtright"><i class="fa fa-edit"></i></td>
                         <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                     </tr>                   
                 </table>
-                <form class="tbupdate">
-                    <button type="button" id="addbutton" class="insert"  onclick="">Delete</button>
-                    <input type="text" class="entry" placeholder="employee id">
-                    <input type="text" class="entry" placeholder="name">
-                    <input type="text" class="entry" placeholder="username">
-                    <select class="entry">
-                        <option value="a">A</option>
-                        <option value="a">B</option>
-                        <option value="a">C</option>
-                    </select>
-                    <button type="button" id="addbutton" class="insert"  onclick="">Add user</button>
-                </form>
+                <div class="form">
+                    <form class="addUser">
+                        <input type="submit" id="delteButton" class="accountButton" value="Delete">
+                        <input type="text" id="name" class="entry" name="t1" placeholder="name"/>
+                        <input type="text" id="username" class="entry" name="t2" placeholder="username"/>
+                        <input type="password" id="password" class="entry" name="t3" placeholder="password"/>
+                        <input type="password" id="confirm" class="entry" name="t4" placeholder="confirm password"/>
+                        <select class="entry">
+                            <option value="attendant">attendant</option>
+                            <option value="admin">admin</option>
+                        </select><br>
+                        <input type="submit" id="addButton" class="accountButton" value="add user">
+                    </form>
+                    <form class="updateUser">
+                            <input type="text" id="updateName" class="entry" name="t5" placeholder="name"/>
+                            <input type="text" id="updateUsername" class="entry" name="t6" placeholder="username"/>
+                            <input type="password" id="updatePassword" class="entry" name="t7" placeholder="password"/>
+                            <input type="password" id="updateConfirm" class="entry" name="t8" placeholder="confirm password"/>
+                            <select class="entry">
+                                <option value="attendant">attendant</option>
+                                <option value="admin">admin</option>
+                            </select><br>
+                            <input type="submit" id="updateButton" class="accountButton" value="update user">
+                    </form>
+                </div>
             </main>
             <footer class="foot">
                 <p>Store Manager, Copyright &copy; 2018</p>
             </footer>
         </div>
     <!-- js -->
-    <script src="../../static/mystyles.js"></script>
+    <script src="../../static/accounts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    
+    <script>
+        $('.txtright').click(() => {
+            $('form').animate({height: "toggle", opacity: "toggle"}, 'slow');
+        });
+    
+        $(function () {
+            $('.entry').focusout(() => {
+                var name = $("input[name='t1']").val();
+                var username = $("input[name='t2']").val();
+                var password = $("input[name='t3']").val();
+                var confirm = $("input[name='t4']").val();
+                var password_error = $("span[name='s1']").val();
+                var updateName = $("input[name='t5']").val();
+                var updateUsername = $("input[name='t6']").val();
+                var updatePassword = $("input[name='t7']").val();
+                var updateConfirm = $("input[name='t8']").val();
+                if (name == '')
+                    $("#name").css("border-color", "#c77272");
+                else
+                    $("#name").css("border-color", "#427e3a");
+                if (username == '')
+                    $("#username").css("border-color", "#c77272");    
+                else
+                    $("#username").css("border-color", "#427e3a");
+                if (password == '')
+                    $("#password").css("border-color", "#c77272");    
+                else
+                    $("#password").css("border-color", "#427e3a");
+                if (confirm == '' || confirm != password)
+                    $("#confirm").css("border-color", "#c77272");
+                else
+                    $("#confirm").css("border-color", "#427e3a");
+                if (updateName == '')
+                    $("#updateName").css("border-color", "#c77272");    
+                else
+                    $("#updateName").css("border-color", "#427e3a");
+                if (updateUsername == '')
+                    $("#updateUsername").css("border-color", "#c77272");    
+                else
+                    $("#updateUsername").css("border-color", "#427e3a");
+                if (updatePassword == '')
+                    $("#updatePassword").css("border-color", "#c77272");    
+                else
+                    $("#updatePassword").css("border-color", "#427e3a");
+                if (updateConfirm == ''|| updateConfirm != updatePassword)
+                    $("#updateConfirm").css("border-color", "#c77272");    
+                else
+                    $("#updateConfirm").css("border-color", "#427e3a");
+            });
+            $('.message').click(() => {
+                if (name == '' || username == '' || password == '' || role == '')
+                    $('.entry').css("border-color", "#c77272"); 
+            });
+        });
+    </script>
     </body>
 </html>
