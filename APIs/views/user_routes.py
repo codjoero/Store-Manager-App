@@ -118,6 +118,31 @@ def create_user():
             )
     }), 201
 
+@app.route('/api/v1/users', methods=['GET'])
+def view_all_users():
+    """Method for admin to view all user accounts.
+    returns a list of creaetd user accounts.
+    """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False or auth_user[-2] != 'admin':
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401 
+
+    users = User.get_all_users('users')
+    if not users:
+        return jsonify({
+            'message': 'There are no users yet!'
+        }), 404
+    return jsonify({
+        'users': users}), 200
+
+
 @app.route('/api/v1/logout', methods=['DELETE'])
 @jwt_required
 def logout():
@@ -135,9 +160,6 @@ def logout():
             'message': 'Unauthorized Access!'
         }), 401
 
-# @app.route('/api/v1/users', methods=['GET'])
-# def view_all_users():
-#     return users.view_all_users()
 
 # @app.route('/api/v1/users/<int:_id>', methods=['PUT'])
 # def update_user(_id):
