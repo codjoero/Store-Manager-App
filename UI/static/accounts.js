@@ -42,8 +42,31 @@ function addUser(e){
     .then((data) => {
         msg.innerText = data['message'];
         console.log(data)
+        var row = $('<tr />')
+        var rowData = data['user']
+        var select = '<input="checkbox">'
+        $('#mytable').append(row);
+        row.append($('<td>' + select + '</td>'));
+        row.append($('<td>' + rowData.user_id + '</td>'));
+        row.append($('<td>' + rowData.name + '</td>'));
+        row.append($('<td>' + rowData.username + '</td>'));
+        row.append($('<td>' + rowData.role + '</td>'));
     })
     .catch(err => console.log(err))
+}
+
+//On window load
+function tableContents() {
+    fetch(usersUrl, {
+        method: 'GET',
+        mode: "cors",
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer '+ token 
+        },
+        
+    })
 }
 
 //Normal call functions
