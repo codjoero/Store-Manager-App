@@ -165,7 +165,7 @@ tr:nth-child(even){
 }
 
 /* ACCOUNTS */
-.tbupdate{    
+.form{    
     width: 20vw;
     float: left;
 }
@@ -174,11 +174,30 @@ form .entry{
     font-family: "Roboto", "sans-serif";
     outline: 1;
     background: #f2f2f2;
-    border: 0;
-    margin: 0 0 5px;
-    padding: 8px;
+    width: 80%;
+    border: 1px solid #e6ece9;
+    margin: 5px 0 0;
+    padding: 10px;
     box-sizing: border-box;
     font-size: 12px;
+}
+
+form .accountButton{
+    font-family: 'Roboto', 'sans-serif';
+    text-transform: uppercase;
+    outline: 0;
+    background: #597c55;
+    width: 80%;
+    border: none;
+    margin: 5px 0 0;
+    padding: 10px;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.updateUser{
+    display: none;
 }
 
 /******* THE GRID *******/
@@ -203,7 +222,6 @@ aside{
 .site{
     display: grid;
     grid-template-columns: auto 8fr;
-    /* grid-template-rows: auto 2fr 1fr; */
     grid-gap: 7px;
     grid-template-areas:
         "hd        hd"
