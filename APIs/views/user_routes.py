@@ -46,7 +46,6 @@ def login():
                 added_on=logged_user[5]
             )
             }), 200
-
 @app.route('/api/v1/users', methods=['POST'])
 @jwt_required
 def create_user():
@@ -106,9 +105,17 @@ def create_user():
     hash_password = user.password_hash()
     user = User(name, username, hash_password, role)
     new_user = user.add_user()
+    added_user = User.query_item('users', 'username', username)
 
     return jsonify({
-        'message': '{} has been registered'.format(new_user)
+        'message': '{} has been registered'.format(new_user),
+        'user':dict(
+                user_id=added_user[0],
+                name=added_user[1],
+                username=added_user[2],
+                role=added_user[4],
+                added_on=added_user[5]
+            )
     }), 201
 
 @app.route('/api/v1/logout', methods=['DELETE'])
