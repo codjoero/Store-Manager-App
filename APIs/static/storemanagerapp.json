@@ -109,6 +109,65 @@
             "bearerAuth": []
           }
         ]
+      },
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Returns a list of user records",
+        "responses": {
+          "200": {
+            "description": "user list"
+          },
+          "401": {
+            "description": "Invalid Authentication, Please Login! Unauthorized Access!"
+          },
+          "404": {
+            "description": "There are no users yet!"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{user_id}": {
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "allows admin to edit a user account",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "description": "id for user account to be editted",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated!"
+          },
+          "400": {
+            "description": "Please input all fields! Enter name in a correct string format, (john doe)!, Password should be longer than 6 characters, have atleast an uppercase and a lowercase!"
+          },
+          "401": {
+            "description": "Unauthorized Access! Invalid Authentication, Please Login!"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/logout": {
