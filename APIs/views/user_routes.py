@@ -119,6 +119,7 @@ def create_user():
     }), 201
 
 @app.route('/api/v1/users', methods=['GET'])
+@jwt_required
 def view_all_users():
     """Method for admin to view all user accounts.
     returns a list of creaetd user accounts.
@@ -132,8 +133,7 @@ def view_all_users():
     if auth_user is False or auth_user[-2] != 'admin':
         return jsonify({
             'message': 'Unauthorized Access!'
-        }), 401 
-
+        }), 401
     users = User.get_all_users('users')
     if not users:
         return jsonify({
@@ -142,6 +142,70 @@ def view_all_users():
     return jsonify({
         'users': users}), 200
 
+@app.route('/api/v1/users/<int:user_id>', methods=['PUT'])
+@jwt_required
+def edit_user(user_id):
+    """Method for admin to modify the details of a user.
+    returns dictionary of updated user.
+    """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False or auth_user[-2] != 'admin':
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
+    try:
+        name = request.json['name']
+        username = request.json['username']
+        password = request.json['password']
+        role = request.json['role']
+    except KeyError:
+        return jsonify({
+            'message':'Please input all fields'
+        }), 400
+    try:
+        user = UserValidation(name, username, password)
+        if not name or not username or not password or not role:
+            return jsonify({
+                'message':'Please input all fields!'
+            }), 400
+        if 'admin' != role != 'attendant':
+            return jsonify({
+                'message':'role should either be admin or attendant'
+            }), 400
+
+        elif not user.valid_name():
+            return jsonify({
+                'message': 'Enter name in a correct string format, (john doe)!'
+            }), 400
+        elif not user.valid_username():
+            return jsonify({
+                'message': 'Enter username in a correct string format no spaces, (johndoe)!'
+            }), 400
+        elif not user.valid_password():
+            return jsonify({
+                'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
+            }), 400
+    
+        user = User(name, username, password, role)
+        hash_password = user.password_hash()
+        user = User(name, username, hash_password, role)
+        updated_user = user.update_user(user_id)
+        if not updated_user:
+            return jsonify({
+                'message': "This user doesn't exist!"}), 400
+        return jsonify({
+            'message': 'user updated!',
+            'User': updated_user
+            }), 200
+    except ValueError:
+        return jsonify({
+            'message': 'User_id should be numbers!'
+        }), 400
 
 @app.route('/api/v1/logout', methods=['DELETE'])
 @jwt_required
