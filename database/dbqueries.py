@@ -110,6 +110,21 @@ class DbQueries():
         """.format(prod_name, category, stock, price, prod_id)
         cursor.execute(update_item)
 
+    def update_user(self, *args):
+        """Method updates columns
+        """
+        name = args[0]
+        username = args[1]
+        password = args[2]
+        role = args[3]
+        user_id = args[4]
+
+        update_user = """
+        UPDATE users SET name='{}', username='{}', password='{}', role ='{}'\
+        WHERE user_id='{}';
+        """.format(name, username, password, role, user_id)
+        cursor.execute(update_user)
+
     def update_a_col(self, *args):
         """Method updates a single column
         """

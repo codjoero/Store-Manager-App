@@ -29,6 +29,23 @@ class User:
         """
         return sha256.hash(self.password)
 
+    def update_user(self, user_id):
+        """Method enables admin to update a user information.
+        returns a dictionary of updated user.
+        """
+        user = dbq.query_item('users', 'user_id', user_id)
+        if user is None:
+            return False
+        dbq.update_user(self.name, self.username, self.password, 
+                        self.role, user_id)
+        user = dbq.query_item('users', 'user_id', user_id)
+        return {
+            'user_id': user[0],
+            'name': user[1],
+            'username': user[2],
+            'role': user[4]
+        }
+
     @staticmethod
     def get_all_users(tb_of_users):
         """Method fetches all users in the users table
