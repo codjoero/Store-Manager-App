@@ -43,7 +43,6 @@ class User:
                     'user_id': item[0],
                     'name': item[1],
                     'username': item[2],
-                    'password': item[3],
                     'role': item[4],
                     'added_on': item[5]
                 }

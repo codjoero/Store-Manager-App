@@ -55,8 +55,11 @@ def create_user():
         return jsonify({
             'message': 'Invalid Authentication, Please Login!'
         }), 401
+    print(request.headers)
     auth_name = get_jwt_identity()
+    print(auth_name)
     auth_user = User.query_item('users', 'username', auth_name)
+    print(auth_user)
     if auth_user is False or auth_user[-2] != 'admin':
         return jsonify({
             'message': 'Unauthorized Access!'
@@ -119,6 +122,7 @@ def create_user():
     }), 201
 
 @app.route('/api/v1/users', methods=['GET'])
+@jwt_required
 def view_all_users():
     """Method for admin to view all user accounts.
     returns a list of creaetd user accounts.
@@ -132,8 +136,7 @@ def view_all_users():
     if auth_user is False or auth_user[-2] != 'admin':
         return jsonify({
             'message': 'Unauthorized Access!'
-        }), 401 
-
+        }), 401
     users = User.get_all_users('users')
     if not users:
         return jsonify({
