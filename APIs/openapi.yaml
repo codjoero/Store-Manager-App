@@ -95,6 +95,11 @@ paths:
             type : integer
             format: int64
             minimum: 1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
       responses:
         '200':
           description: User updated!
