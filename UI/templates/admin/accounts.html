@@ -65,7 +65,6 @@
                 </table>
                 <div class="form">
                     <form id="addUser">
-                        <input type="submit" id="delteButton" class="accountButton" value="Delete">
                         <input type="text" id="name" class="entry" name="t1" placeholder="name"/>
                         <input type="text" id="username" class="entry" name="t2" placeholder="username"/>
                         <input type="password" id="password" class="entry" name="t3" placeholder="password"/>
@@ -78,16 +77,16 @@
                         <input type="submit" id="addButton" class="accountButton" value="add user">
                     </form>
                     <form id="updateUser">
-                            <input type="text" id="updateName" class="entry" name="t5" placeholder="name"/>
-                            <input type="text" id="updateUsername" class="entry" name="t6" placeholder="username"/>
-                            <input type="password" id="updatePassword" class="entry" name="t7" placeholder="password"/>
-                            <input type="password" id="updateConfirm" class="entry" name="t8" placeholder="confirm password"/>
-                            <select class="entry">
-                                <option value="attendant">attendant</option>
-                                <option value="admin">admin</option>
-                            </select><br>
-                            <span class="msg"></span>
-                            <input type="submit" id="updateButton" class="accountButton" value="update user">
+                        <input type="text" id="updateName" class="entry" name="t5" placeholder="name"/>
+                        <input type="text" id="updateUsername" class="entry" name="t6" placeholder="username"/>
+                        <input type="password" id="updatePassword" class="entry" name="t7" placeholder="password"/>
+                        <input type="password" id="updateConfirm" class="entry" name="t8" placeholder="confirm password"/>
+                        <select class="entry">
+                            <option value="attendant">attendant</option>
+                            <option value="admin">admin</option>
+                        </select><br>
+                        <span class="msg" id="updateMsg"></span>
+                        <input type="submit" id="updateButton" class="accountButton" value="update user">
                     </form>
                 </div>
             </main>
