@@ -5,6 +5,8 @@ const errMsg = document.querySelector('span.errMsg')
 const token = localStorage.getItem("token");
 const adminLoggedin = localStorage.getItem("adminLoggedin");
 
+const mytableBody = document.querySelector('#mytable > tbody');
+
 // Listeners
 document.getElementById('addUser').addEventListener
 ('submit', addUser)
@@ -42,21 +44,13 @@ function addUser(e){
     .then((data) => {
         msg.innerText = data['message'];
         console.log(data)
-        var row = $('<tr />')
-        var rowData = data['user']
-        var select = '<input="checkbox">'
-        $('#mytable').append(row);
-        row.append($('<td>' + select + '</td>'));
-        row.append($('<td>' + rowData.user_id + '</td>'));
-        row.append($('<td>' + rowData.name + '</td>'));
-        row.append($('<td>' + rowData.username + '</td>'));
-        row.append($('<td>' + rowData.role + '</td>'));
+        location.reload(true);
     })
     .catch(err => console.log(err))
 }
 
 //On window load
-function tableContents() {
+function loadTable() {
     fetch(usersUrl, {
         method: 'GET',
         mode: "cors",
@@ -65,12 +59,49 @@ function tableContents() {
             'Content-type': 'application/json',
             'Authorization': 'Bearer '+ token 
         },
-        
+    })
+    .then(errHandler)
+    .then((res) => res.json())
+    .then((data) => {
+        populateTable(data['users']);
+    })
+    .catch(err => console.log(err))
+}
+
+//Add users to table
+function populateTable(users) {
+    //clear out HTML data
+    while (mytableBody.firstChild) {
+        mytableBody.removeChild(mytableBody.firstChild);
+    }
+    //Populate table
+    users.forEach((user) => {
+        drawTable(user);
     })
 }
 
-//Normal call functions
+function drawTable(user) {
+    var row = $('<tr />')
+    var select = '<input type="checkbox">'
+    var edit = '<i class="fa fa-edit" onclick="editRow()"></i>'
+    var del = '<i class="fa fa-close" onclick="deleteRow(this)"></i>'
+    $('#mytable').append(row);
+    row.append($('<td>' + select + '</td>'));
+    row.append($('<td>' + user.user_id + '</td>'));
+    row.append($('<td>' + user.name + '</td>'));
+    row.append($('<td>' + user.username + '</td>'));
+    row.append($('<td>' + user.role + '</td>'));
+    row.append($('<td class="txtright">' + edit + '</td>'));
+    row.append($('<td class="txtdel">' + del + '</td>'));
+}
+
+//Delete table row
 function deleteRow(call) {
     var i = call.parentNode.parentNode.rowIndex;
     document.getElementById("mytable").deleteRow(i);
+}
+
+//Edit table row
+function editRow(call) {
+    $('form').animate({height: "toggle", opacity: "toggle"}, 'slow');
 }

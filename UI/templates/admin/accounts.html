@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
-    <body onload="tableContents()">
+    <body onload="loadTable()">
         <div class="site">
             <header class="branding">
                 <h1 class="title">Store Manager</h1>
@@ -31,33 +31,37 @@
                 <h2 class="db">User Accounts</h2>
                 <p class="user"><i class="fa fa-user-circle-o"></i> Admin</p>
                 <table id="mytable">
-                    <tr>
-                        <th>Select</th>
-                        <th>Id#</th>
-                        <th>Name</th>
-                        <th>username</th>
-                        <th>role</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>02</td>
-                        <td>Jonnie Pemba</td>
-                        <td>jonnie</td>
-                        <td>admin</td>
-                        <td class="txtright"><i class="fa fa-edit"></i></td>
-                        <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>01</td>
-                        <td>Moon Walker</td>
-                        <td>walker</td>
-                        <td>attendant</td>
-                        <td class="txtright"><i class="fa fa-edit"></i></td>
-                        <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
-                    </tr>                   
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Id#</th>
+                            <th>Name</th>
+                            <th>username</th>
+                            <th>role</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>2</td>
+                            <td>Jonnie Pemba</td>
+                            <td>jonnie</td>
+                            <td>admin</td>
+                            <td class="txtright"><i class="fa fa-edit"onclick="editRow(this)"></i></td>
+                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>1</td>
+                            <td>Moon Walker</td>
+                            <td>walker</td>
+                            <td>attendant</td>
+                            <td class="txtright"><i class="fa fa-edit"onclick="editRow(this)"></i></td>
+                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
+                        </tr>  
+                    </tbody>                 
                 </table>
                 <div class="form">
                     <form id="addUser">
@@ -96,10 +100,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
     <script>
-        $('.txtright').click(() => {
-            $('form').animate({height: "toggle", opacity: "toggle"}, 'slow');
-        });
-    
         $(function () {
             $('.entry').focusout(() => {
                 var name = $("input[name='t1']").val();
