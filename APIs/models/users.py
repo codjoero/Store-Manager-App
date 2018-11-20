@@ -10,6 +10,7 @@ util = Utilities()
 
 class User:
     """ Class handles user objects """
+    users = []
 
     def __init__(self, name, username, password, role):
         self.name = name
@@ -27,6 +28,43 @@ class User:
         """Method for hashing passwords
         """
         return sha256.hash(self.password)
+
+    def update_user(self, user_id):
+        """Method enables admin to update a user information.
+        returns a dictionary of updated user.
+        """
+        user = dbq.query_item('users', 'user_id', user_id)
+        if user is None:
+            return False
+        dbq.update_user(self.name, self.username, self.password, 
+                        self.role, user_id)
+        user = dbq.query_item('users', 'user_id', user_id)
+        return {
+            'user_id': user[0],
+            'name': user[1],
+            'username': user[2],
+            'role': user[4]
+        }
+
+    @staticmethod
+    def get_all_users(tb_of_users):
+        """Method fetches all users in the users table
+        Returns a list of all users.
+        """
+        items = dbq.query_all_items(tb_of_users)
+        if items == []:
+            return False
+        User.users.clear()
+        for item in items:
+                user_dict = {
+                    'user_id': item[0],
+                    'name': item[1],
+                    'username': item[2],
+                    'role': item[4],
+                    'added_on': item[5]
+                }
+                User.users.append(user_dict)
+        return User.users
 
     @staticmethod
     def password_verification(username, password):
