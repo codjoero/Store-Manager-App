@@ -41,7 +41,7 @@ function addUser(e){
         })
         .then(handleResponse)
         .then((data) => {
-            msg.innerText = data['message'];
+            msg.innerText = data['message'] + '<br>';
             loadTable();
         })
         .catch(err => {
@@ -84,7 +84,7 @@ function updateUser(e){
         })
         .then(handleResponse)
         .then((data) => {
-            updateMsg.innerText = data['message'];
+            updateMsg.innerText = data['message'] + '<br>';
             loadTable();
         })
         .catch(err => {
@@ -162,12 +162,6 @@ function drawTable(user) {
     row.append($('<td class="txtdel">' + del + '</td>'));
 }
 
-//Delete table row
-function deleteRow(call) {
-    var i = call.parentNode.parentNode.rowIndex;
-    document.getElementById("mytable").deleteRow(i);
-}
-
 //Edit table row
 function editRow(call) {
     var table = document.getElementById('mytable')
@@ -184,4 +178,10 @@ function editRow(call) {
     name.value = data[0];
     username.value = data[1];
     $('form').animate({height: "toggle", opacity: "toggle"}, 'slow');
+}
+
+//Delete table row
+function deleteRow(call) {
+    var i = call.parentNode.parentNode.rowIndex;
+    document.getElementById("mytable").deleteRow(i);
 }
