@@ -1,8 +1,51 @@
 //Declarations
 const productsUrl = 'https://thecodestoremanager-api-heroku.herokuapp.com/api/v1/products'
+const msg = document.querySelector('span.msg')
 const token = localStorage.getItem("token");
 const adminLoggedin = localStorage.getItem("adminLoggedin");
 const mytableBody = document.querySelector('#mytable > tbody');
+
+// Listeners
+document.getElementById('addProduct').addEventListener
+('submit', addProduct)
+
+//Fetch-api functions
+function addProduct(e){
+    e.preventDefault();
+
+    let prodName = document.getElementById('prodName').value;
+    let category = document.getElementById('category').value;
+    let stock = document.getElementById('stock').value;
+    let price = document.getElementById('price').value;
+    let product = {
+        prod_name:prodName,
+		category:category,
+		stock:parseInt(stock, 10),
+		price:parseInt(price, 10)
+    };
+    fetch(productsUrl, {
+        method: 'POST',
+        mode: "cors",
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-type': 'application/json',
+            'Authorization': 'Bearer '+ token 
+        },
+        body:JSON.stringify(product)
+    })
+    .then(handleResponse)
+    .then((data) => {
+        msg.innerText = data['message'];
+        loadTable();
+    })
+    .catch(err => {
+        msg.innerHTML = err['message'] + '<br>';
+        if (err['msg'] === 'Token has expired') {
+            window.location = "/UI/templates/index.html";
+        }
+        console.log(err)
+    })
+}
 
 //Handle response
 function handleResponse(response) {

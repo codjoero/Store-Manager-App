@@ -167,6 +167,10 @@ tbody tr:nth-child(even){
     cursor: pointer;
 }
 
+#updateProduct{
+    display: none;
+}
+
 /* ACCOUNTS */
 .form{    
     width: 40vw;
