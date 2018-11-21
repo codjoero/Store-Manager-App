@@ -88,6 +88,30 @@ function updateProduct(e){
     })
 }
 
+function deleteProduct(_id){
+    const deleteProdUrl = `https://thecodestoremanager-api-heroku.herokuapp.com/api/v1/products/${_id}`
+    fetch(deleteProdUrl, {
+        method: 'DELETE',
+        mode: "cors",
+        headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Authorization': 'Bearer '+ token 
+        }
+    })
+    .then(handleResponse)
+    .then((data) => {
+        msg.innerText = data['message'];
+        // loadTable();
+    })
+    .catch(err => {
+        msg.innerHTML = err['message'] + '<br>';
+        if (err['msg'] === 'Token has expired') {
+            window.location = "/UI/templates/index.html";
+        }
+        console.log(err)
+    })
+}
+
 //Handle response
 function handleResponse(response) {
     return response.json()
@@ -182,6 +206,9 @@ function editRow(call) {
 
 //Delete table row
 function deleteRow(call) {
+    var table = document.getElementById('mytable')
     var i = call.parentNode.parentNode.rowIndex;
+    deleteProd_id = table.rows[i].cells[1].innerHTML
+    deleteProduct(deleteProd_id);
     document.getElementById("mytable").deleteRow(i);
 }
