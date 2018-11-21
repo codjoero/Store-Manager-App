@@ -30,8 +30,6 @@
             <main class="stock">
                 <h2 class="db">Inventory</h2>
                 <p class="user"><i class="fa fa-user-circle-o"></i> Admin</p>
-                <button type="button" id="freezebutton" class="insert"  onclick="">Freeze product</button>
-                <button type="button" id="addbutton" class="insert"  onclick="">Add product</button>
                 <table id="mytable">
                     <thead>
                         <tr>
@@ -55,7 +53,7 @@
                             <td>20</td>
                             <td>200</td>
                             <td>01-02-2018</td>
-                            <td class="txtright"><i class="fa fa-edit" onclick="deleteRow(this)"></i></td>
+                            <td class="txtright"><i class="fa fa-edit" onclick="editRow(this)"></i></td>
                             <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
                         <tr>
@@ -66,11 +64,29 @@
                             <td>20</td>
                             <td>150</td>
                             <td>22-05-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
+                            <td class="txtright"><i class="fa fa-edit" onclick="editRow(this)"></i></td>
                             <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
                     </tbody>
                 </table>
+                <div class="form">
+                    <form id="addProduct">
+                        <input type="text" id="prodName" class="entry" name="t1" placeholder="product name"/>
+                        <input type="text" id="category" class="entry" name="t2" placeholder="category"/>
+                        <input type="number" id="stock" class="entry" name="t3" min="1" placeholder="stock"/>
+                        <input type="number" id="price" class="entry" name="t4" min="25" placeholder="price"/><br>
+                        <span class="msg"></span>
+                        <input type="submit" id="addButton" class="accountButton" value="add product">
+                    </form>
+                    <form id="updateProduct">
+                        <input type="text" id="uProdName" class="entry" name="t5" placeholder="product name"/>
+                        <input type="text" id="uCategory" class="entry" name="t6" placeholder="category"/>
+                        <input type="number" id="uStock" class="entry" name="t7" min="1" placeholder="stock"/>
+                        <input type="number" id="uPrice" class="entry" name="t8" min="25" placeholder="price"/><br>
+                        <span class="msg" id="updateMsg"></span>
+                        <input type="submit" id="updateButton" class="accountButton" value="update product">
+                    </form>
+                </div>
             </main>
             <footer class="foot">
                 <p>Store Manager, Copyright &copy; 2018</p>
@@ -79,5 +95,52 @@
     <!-- js -->
     <script src="../../static/inventory.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $(function () {
+            $('.entry').focusout(() => {
+                var prod_name = $("input[name='t1']").val();
+                var category = $("input[name='t2']").val();
+                var stock = $("input[name='t3']").val();
+                var price = $("input[name='t4']").val();
+                var uprodName = $("input[name='t5']").val();
+                var uCategory = $("input[name='t6']").val();
+                var uStock = $("input[name='t7']").val();
+                var uPrice = $("input[name='t8']").val();
+                if (prod_name == '')
+                    $("#prodName").css("border-color", "#c77272");
+                else
+                    $("#prodName").css("border-color", "#427e3a");
+                if (category == '')
+                    $("#category").css("border-color", "#c77272");    
+                else
+                    $("#category").css("border-color", "#427e3a");
+                if (stock == '')
+                    $("#stock").css("border-color", "#c77272");    
+                else
+                    $("#stock").css("border-color", "#427e3a");
+                if (price == '')
+                    $("#price").css("border-color", "#c77272");    
+                else
+                    $("#price").css("border-color", "#427e3a");
+                if (uprodName == '')
+                    $("#uProdName").css("border-color", "#c77272");    
+                else
+                    $("#uProdName").css("border-color", "#427e3a");
+                if (uCategory == '')
+                    $("#uCategory").css("border-color", "#c77272");    
+                else
+                    $("#uCategory").css("border-color", "#427e3a");
+                if (uStock == '')
+                    $("#uStock").css("border-color", "#c77272");    
+                else
+                    $("#uStock").css("border-color", "#427e3a");
+                if (uPrice == '')
+                    $("#uPrice").css("border-color", "#c77272");    
+                else
+                    $("#uPrice").css("border-color", "#427e3a");
+            });
+        });
+    </script>
     </body>
 </html>
