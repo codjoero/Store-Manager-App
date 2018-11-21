@@ -5,7 +5,6 @@ const updateMsg = document.getElementById('updateMsg')
 const errMsg = document.querySelector('span.errMsg')
 const token = localStorage.getItem("token");
 const adminLoggedin = localStorage.getItem("adminLoggedin");
-
 const mytableBody = document.querySelector('#mytable > tbody');
 
 // Listeners
@@ -14,13 +13,6 @@ document.getElementById('addUser').addEventListener
 document.getElementById('updateUser').addEventListener
 ('submit', updateUser)
 
-const errHandler = (response) => {
-    if (!response.ok){
-        console.log(response)
-    }
-    return response
-}
-
 //Fetch-api functions
 function addUser(e){
     e.preventDefault();
@@ -28,32 +20,40 @@ function addUser(e){
     let name = document.getElementById('name').value;
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
+    let confirmPassword = document.getElementById('confirm').value;
     let role = document.getElementById('role').value;
 
-    fetch(usersUrl, {
-        method: 'POST',
-        mode: "cors",
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-type': 'application/json',
-            'Authorization': 'Bearer '+ token 
-        },
-        body:JSON.stringify({
-            name:name, username:username, password:password, role:role
-        })
-    })
-    .then(handleResponse)
-    .then((data) => {
-        msg.innerText = data['message'];
-        loadTable();
-    })
-    .catch(err => {
-        msg.innerHTML = err['message'];
-        if (err['msg'] === 'Token has expired') {
-            msg.innerHTML = 'lets log him out';
+    try {
+        if (password != confirmPassword) {
+            throw 'Passwords not matching!'
         }
-        console.log(err)
-    })
+        fetch(usersUrl, {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer '+ token 
+            },
+            body:JSON.stringify({
+                name:name, username:username, password:password, role:role
+            })
+        })
+        .then(handleResponse)
+        .then((data) => {
+            msg.innerText = data['message'];
+            loadTable();
+        })
+        .catch(err => {
+            msg.innerHTML = err['message'] + '<br>';
+            if (err['msg'] === 'Token has expired') {
+                window.location = "/UI/templates/index.html";
+            }
+            console.log(err)
+        })
+    } catch (err) {
+        msg.innerHTML = err
+    }
 }
 
 function updateUser(e){
@@ -63,32 +63,40 @@ function updateUser(e){
     let name = document.getElementById('updateName').value;
     let username = document.getElementById('updateUsername').value;
     let password = document.getElementById('updatePassword').value;
+    let confirmPassword = document.getElementById('updateConfirm').value;
     let role = document.getElementById('role').value;
 
-    fetch(updateUserUrl, {
-        method: 'PUT',
-        mode: "cors",
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-type': 'application/json',
-            'Authorization': 'Bearer '+ token 
-        },
-        body:JSON.stringify({
-            name:name, username:username, password:password, role:role
-        })
-    })
-    .then(handleResponse)
-    .then((data) => {
-        updateMsg.innerText = data['message'];
-        loadTable();
-    })
-    .catch(err => {
-        updateMsg.innerHTML = err['message'];
-        if (err['msg'] === 'Token has expired') {
-            updateMsg.innerHTML = 'lets log him out';
+    try {
+        if (password != confirmPassword) {
+            throw 'Passwords not matching!'
         }
-        console.log(err)
-    })
+        fetch(updateUserUrl, {
+            method: 'PUT',
+            mode: "cors",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-type': 'application/json',
+                'Authorization': 'Bearer '+ token 
+            },
+            body:JSON.stringify({
+                name:name, username:username, password:password, role:role
+            })
+        })
+        .then(handleResponse)
+        .then((data) => {
+            updateMsg.innerText = data['message'];
+            loadTable();
+        })
+        .catch(err => {
+            updateMsg.innerHTML = err['message'] + '<br>';
+            if (err['msg'] === 'Token has expired') {
+                window.location = "/UI/templates/index.html";
+            }
+            console.log(err);
+        })
+    } catch (err) {
+        updateMsg.innerHTML = err
+    }
 }
 
 //Handle response
@@ -118,7 +126,13 @@ function loadTable() {
     .then((data) => {
         populateTable(data['users']);
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+        if (err['msg'] === 'Token has expired' ||
+            err['message'] === 'Invalid Authentication, Please Login!') {
+            window.location = "/UI/templates/index.html";
+        }
+        console.log(err)
+    })
 }
 
 //Add users to table

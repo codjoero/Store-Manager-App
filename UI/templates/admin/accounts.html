@@ -74,6 +74,7 @@
                             <option value="admin">admin</option>
                         </select><br>
                         <span class="msg"></span>
+                        <span id="msg2"></span>
                         <input type="submit" id="addButton" class="accountButton" value="add user">
                     </form>
                     <form id="updateUser">
@@ -139,13 +140,14 @@
                 else
                     $("#updatePassword").css("border-color", "#427e3a");
                 if (updateConfirm == ''|| updateConfirm != updatePassword)
-                    $("#updateConfirm").css("border-color", "#c77272");    
+                    $("#updateConfirm").css("border-color", "#c77272"),
+                    $("#updateMsg").val = 'Passwords dont much!';
                 else
                     $("#updateConfirm").css("border-color", "#427e3a");
             });
-            $('.message').click(() => {
-                if (name == '' || username == '' || password == '' || role == '')
-                    $('.entry').css("border-color", "#c77272"); 
+            $('#updateButton').click(() => { 
+                if (updateConfirm == ''|| updateConfirm != updatePassword)
+                    $("#updateMsg").val = 'Passwords dont much!';
             });
         });
     </script>
