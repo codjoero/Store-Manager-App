@@ -2,6 +2,7 @@
 const logoutUrl = 'https://thecodestoremanager-api-heroku.herokuapp.com/api/v1/logout'
 const msg = document.querySelector('span.msg')
 const token = localStorage.getItem("token");
+const loggedUser = localStorage.getItem("loggedUser")
 
 //Listeners
 document.querySelector('.logout').addEventListener
@@ -19,7 +20,6 @@ function logoutUser(){
     })
     .then(handleResponse)
     .then((data) => {
-        console.log(data);
         window.location = "/UI/templates/index.html";
     })
     .catch(err => {
@@ -40,4 +40,10 @@ function handleResponse(response) {
             return Promise.reject(json)
         }
     })
+}
+
+//On window load
+function style() {
+    let paragraph = document.querySelector("span.loggedin");
+    paragraph.innerHTML += loggedUser;
 }

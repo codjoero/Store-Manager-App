@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
-    <body>
+    <body onload="style()">
         <div class="site">
             <header class="branding">
                 <h1 class="title">Store Manager</h1>
@@ -29,7 +29,7 @@
             </aside>
             <main class="dash">
                 <h2 class="db">Dashboard</h2>
-                <p id="user"><i class="fa fa-user-circle-o"></i> Jonnie</p>
+                <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
                 <div class="cart"><a href="cart.html"><i class="fa fa-cart-arrow-down"></i> Cart</a></div>
                 <div class="cust"><a href="#"><i class="fa fa-smile-o"></i> Customer</a></div>
                 <div class="mysales"><a href="mysales.html"><i class="fa fa-money"></i> mySales</a></div>
@@ -46,6 +46,6 @@
             </footer>
         </div>
     <!-- js -->
-    <script src="../../static/mystyles.js"></script>
+    <script src="../../static/dashboard.js"></script>
     </body>
 </html>

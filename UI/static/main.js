@@ -77,12 +77,12 @@ function loginUser(e){
 
         if (data['user']['role'] === 'admin' && typeof data['token'] !== null){
             localStorage.setItem("token", data['token'])
-            localStorage.setItem("adminLoggedin", true)
+            localStorage.setItem("loggedUser", data['user']['username'])
             window.location = "UI/templates/admin/dashboard.html";
         }
-        else if (data['user']['role'] === 'attendant' && typeof data['user']['token'] !== null){
-            localStorage.setItem("token", data['user']['token'])
-            localStorage.setItem("attendantLoggedin", true)
+        else if (data['user']['role'] === 'attendant' && typeof data['token'] !== null){
+            localStorage.setItem("token", data['token'])
+            localStorage.setItem("loggedUser", data['user']['username'])
             window.location = "UI/templates/attendant/dashboard.html";
         }
     })

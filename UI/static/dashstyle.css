@@ -74,6 +74,10 @@ html{
     color: rgb(37, 44, 44)
 }
 
+.loggedin{
+    text-transform: capitalize;
+}
+
 .dash i{
     font-size: 160%;
 }
