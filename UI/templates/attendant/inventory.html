@@ -7,7 +7,7 @@
         <meta name="keywords" content="all in one app, store management">
         <meta name="author" content="Ronnie N">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Store Manager | mySales</title>
+        <title>Store Manager | Inventory</title>
         <link rel="stylesheet" href="../../static/dashstyle.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -28,65 +28,48 @@
                 </ul>
             </aside>
             <main class="stock">
-                <h2 class="db">mySale Records</h2>
-                <p class="user"><i class="fa fa-user-circle-o"></i> Jonnie</p>
-                <table>
+                <h2 class="db">Inventory</h2>
+                <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
+                <table id="mytable">
+                    <thead>
                         <tr>
                             <th>product name</th>
                             <th>Id#</th>
                             <th>category</th>
-                            <th>sale date</th>
+                            <th>stock</th>
+                            <th>min_stock</th>
                             <th>price</th>
+                            <th>stocked on</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <tr>
                             <td>Bell-bottoms</td>
                             <td>15</td>
                             <td>pants</td>
-                            <td>08-10-2018</td>
+                            <td>30</td>
+                            <td>20</td>
                             <td>200</td>
+                            <td>01-02-2018</td>
                         </tr>
                         <tr>
                             <td>NY-pants</td>
-                            <td>05</td>
+                            <td>5</td>
                             <td>pants</td>
-                            <td>08-10-2018</td>
-                            <td>150</td>                            
+                            <td>25</td>
+                            <td>20</td>
+                            <td>150</td>
+                            <td>22-05-2018</td>
                         </tr>
-                        <tr>
-                            <td>Cindarella-shoes</td>
-                            <td>08</td>
-                            <td>kids</td>
-                            <td>08-10-2018</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td>Jamaican-boys</td>
-                            <td>18</td>
-                            <td>kids</td>
-                            <td>08-10-2018</td>
-                            <td>85</td>   
-                        </tr>
-                        <tr>
-                            <td>Neckless-G</td>
-                            <td>101</td>
-                            <td>accessories</td>
-                            <td>08-10-2018</td>
-                            <td>75</td>    
-                        </tr>
-                        <tr>
-                            <th>Total</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <th>610</th>    
-                        </tr>
-                    </table>
+                    </tbody>
+                </table>
             </main>
             <footer class="foot">
                 <p>Store Manager, Copyright &copy; 2018</p>
             </footer>
         </div>
     <!-- js -->
-    <script src="../../static/mystyles.js"></script>
+    <script src="../../static/attendant/inventory.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </body>
 </html>

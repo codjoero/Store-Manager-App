@@ -22,27 +22,34 @@ function addAdmin(e){
     let name = document.getElementById('name').value;
     let username = document.getElementById('username').value;
     let password = document.getElementById('password').value;
-    let confirm = document.getElementById('confirm').value;
+    let confirmPassword = document.getElementById('confirm').value;
     let role = document.getElementById('role').value;
 
-    fetch(registerUrl, {
-        method: 'POST',
-        mode: "cors",
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-type': 'application/json'
-        },
-        body:JSON.stringify({
-            name:name, username:username, password:password, role:role
+    try {
+        if (password != confirmPassword) {
+            throw 'Passwords not matching!'
+        }
+        fetch(registerUrl, {
+            method: 'POST',
+            mode: "cors",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-type': 'application/json'
+            },
+            body:JSON.stringify({
+                name:name, username:username, password:password, role:role
+            })
         })
-    })
-    .then(errHandler)
-    .then((res) => res.json())
-    .then((data) => {
-        msg.innerText = data['message'];
-        console.log(data)
-    })
-    .catch(err => console.log(err))
+        .then(errHandler)
+        .then((res) => res.json())
+        .then((data) => {
+            msg.innerText = data['message'];
+            console.log(data)
+        })
+        .catch(err => console.log(err))
+    } catch (err) {
+        msg.innerHTML = err
+    }
 }
 
 function loginUser(e){
@@ -70,12 +77,12 @@ function loginUser(e){
 
         if (data['user']['role'] === 'admin' && typeof data['token'] !== null){
             localStorage.setItem("token", data['token'])
-            localStorage.setItem("adminLoggedin", true)
+            localStorage.setItem("loggedUser", data['user']['username'])
             window.location = "/UI/templates/admin/dashboard.html";
         }
-        else if (data['user']['role'] === 'attendant' && typeof data['user']['token'] !== null){
-            localStorage.setItem("token", data['user']['token'])
-            localStorage.setItem("attendantLoggedin", true)
+        else if (data['user']['role'] === 'attendant' && typeof data['token'] !== null){
+            localStorage.setItem("token", data['token'])
+            localStorage.setItem("loggedUser", data['user']['username'])
             window.location = "/UI/templates/attendant/dashboard.html";
         }
     })
