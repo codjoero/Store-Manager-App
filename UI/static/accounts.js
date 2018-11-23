@@ -4,7 +4,7 @@ const msg = document.querySelector('span.msg')
 const updateMsg = document.getElementById('updateMsg')
 const errMsg = document.querySelector('span.errMsg')
 const token = localStorage.getItem("token");
-const adminLoggedin = localStorage.getItem("adminLoggedin");
+const loggedUser = localStorage.getItem("loggedUser")
 const mytableBody = document.querySelector('#mytable > tbody');
 
 // Listeners
@@ -112,6 +112,10 @@ function handleResponse(response) {
 }
 
 //On window load
+window.onload=function(){
+    loadTable();
+    style();
+    }
 function loadTable() {
     fetch(usersUrl, {
         method: 'GET',
@@ -133,6 +137,11 @@ function loadTable() {
         }
         console.log(err)
     })
+}
+
+function style() {
+    let paragraph = document.querySelector("span.loggedin");
+    paragraph.innerHTML += loggedUser;
 }
 
 //Add users to table

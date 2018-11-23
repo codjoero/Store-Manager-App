@@ -2,7 +2,7 @@
 const productsUrl = 'https://thecodestoremanager-api-heroku.herokuapp.com/api/v1/products'
 const msg = document.querySelector('span.msg')
 const token = localStorage.getItem("token");
-const adminLoggedin = localStorage.getItem("adminLoggedin");
+const loggedUser = localStorage.getItem("loggedUser")
 const mytableBody = document.querySelector('#mytable > tbody');
 
 // Listeners
@@ -125,6 +125,10 @@ function handleResponse(response) {
 }
 
 //On window load
+window.onload=function(){
+    loadTable();
+    style();
+    }
 function loadTable() {
     fetch(productsUrl, {
         method: 'GET',
@@ -148,7 +152,12 @@ function loadTable() {
     })
 }
 
-//Add users to table
+function style() {
+    let paragraph = document.querySelector("span.loggedin");
+    paragraph.innerHTML += loggedUser;
+}
+
+//Add products to table
 function populateTable(products) {
     //clear out HTML data
     while (mytableBody.firstChild) {
