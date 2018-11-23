@@ -109,6 +109,11 @@ footer{
     margin: 0 1.5vw;
 }
 
+#salelist{
+    float: left;
+    position: relative;
+}
+
 table{
     border-collapse: collapse;
     border-spacing: 0;
@@ -123,6 +128,10 @@ th, td {
     font-size: 20px;
 }
 
+#stockTable tr {
+    cursor: pointer;
+}
+
 thead tr:nth-child(odd){
     background-color: rgba(236, 233, 233, 0.9);
 }
@@ -131,6 +140,22 @@ tbody tr:nth-child(odd){
 }
 tbody tr:nth-child(even){
     background-color: rgba(236, 233, 233, 0.9);
+}
+
+aside .saleButton{
+    font-family: 'Roboto', 'sans-serif';
+    text-transform: uppercase;
+    outline: 0;
+    background: #597c55;
+    width: 40%;
+    border: none;
+    margin: 5px 0 0;
+    padding: 10px;
+    position: relative;
+    color: #ffffff;
+    font-size: 12px;
+    float: right;
+    cursor: pointer;
 }
 
 /* CATEGORIES */
@@ -312,90 +337,9 @@ aside{
     grid-gap: 6px;
 }
 
-.kids{
-    grid-column: 1;
-    grid-row: 2;
-    background-color: rgb(120, 150, 144);
-}
-
-.shirts{
-    grid-column: 2;
-    grid-row: 2;
-    background-color: rgb(120, 150, 144);
-}
-
-.tops{
-    grid-column: 3;
-    grid-row: 2;
-    background-color: rgb(120, 150, 144);
-}
-
-.bottoms{
-    grid-column: 1;
-    grid-row: 3;
-    background-color: rgb(120, 150, 144);
-}
-
-.denims{
-    grid-column: 2;
-    grid-row: 3;
-    background-color: rgb(120, 150, 144);
-}
-
-.jackets{
-    grid-column: 3;
-    grid-row: 3;
-    background-color: rgb(120, 150, 144);
-}
-
-.pants{
-    grid-column: 1;
-    grid-row: 4;
-    background-color: rgb(120, 150, 144);
-}
-
-.suits{
-    grid-column: 2;
-    grid-row: 4;
-    background-color: rgb(120, 150, 144);
-}
-
-.access{
-    grid-column: 3;
-    grid-row: 4;
-    background-color: rgb(120, 150, 144);
-}
-
-.beach{
-    grid-column: 1;
-    grid-row: 5;
-    background-color: rgb(120, 150, 144);
-}
-
-.bags{
-    grid-column: 2;
-    grid-row: 5;
-    background-color: rgb(120, 150, 144);
-}
-
-.ling{
-    grid-column: 3;
-    grid-row: 5;
-    background-color: rgb(120, 150, 144);
-}
-
-.new{
-    grid-column: 1;
-    grid-row: 6;
-    background-color: rgb(120, 150, 144);
-    text-transform: uppercase;
-}
-
-.back{
-    grid-column: 3;
-    grid-row: 6;
-    background-color: rgb(120, 150, 144);
-    text-transform: uppercase;
+.shopper #stockTable {
+    grid-column: 1/4;
+    grid-row: 2/7;
 }
 
 .shoplist{

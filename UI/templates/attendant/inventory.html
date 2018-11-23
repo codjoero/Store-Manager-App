@@ -29,8 +29,9 @@
             </aside>
             <main class="stock">
                 <h2 class="db">Inventory</h2>
-                <p class="user"><i class="fa fa-user-circle-o"></i> Jonnie</p>
-                <table>
+                <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
+                <table id="mytable">
+                    <thead>
                         <tr>
                             <th>product name</th>
                             <th>Id#</th>
@@ -40,6 +41,8 @@
                             <th>price</th>
                             <th>stocked on</th>
                         </tr>
+                    </thead>
+                    <tbody>
                         <tr>
                             <td>Bell-bottoms</td>
                             <td>15</td>
@@ -51,21 +54,22 @@
                         </tr>
                         <tr>
                             <td>NY-pants</td>
-                            <td>05</td>
+                            <td>5</td>
                             <td>pants</td>
                             <td>25</td>
                             <td>20</td>
                             <td>150</td>
                             <td>22-05-2018</td>
                         </tr>
-                        
-                    </table>
+                    </tbody>
+                </table>
             </main>
             <footer class="foot">
                 <p>Store Manager, Copyright &copy; 2018</p>
             </footer>
         </div>
     <!-- js -->
-    <script src="../../static/mystyles.js"></script>
+    <script src="../../static/attendant/inventory.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </body>
 </html>

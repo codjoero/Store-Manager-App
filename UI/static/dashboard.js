@@ -43,6 +43,9 @@ function handleResponse(response) {
 }
 
 //On window load
+window.onload=function(){
+    style();
+    }
 function style() {
     let paragraph = document.querySelector("span.loggedin");
     paragraph.innerHTML += loggedUser;
