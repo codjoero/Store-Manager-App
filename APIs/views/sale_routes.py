@@ -48,7 +48,7 @@ def create_sale_order():
         return jsonify({
             'message': 'prod_name & quantity should be a character & number respectively!'}), 400
     total_sale = 0
-    prod_id_list = []
+    sale_prod_list = []
     for prod in products:
         product = Product.get_item('products', 'prod_name', prod['prod_name'])
         if not product:
@@ -62,17 +62,20 @@ def create_sale_order():
                 return jsonify({
                     'message': 'Only {} {} available right now!'.format(product[3], prod['prod_name'])
             }), 400
-        new_stock = product[3] - prod['quantity']
-        prod_update = Product(prod['prod_name'], product[2], new_stock, product[4])
 
+        new_stock = product[3] - prod['quantity']
         prod_id = product[0]
-        prod_id_list.append(prod_id)
         prod_sale = product[4] * prod['quantity']
         total_sale += prod_sale
+        prod_update = Product(prod['prod_name'], product[2], new_stock, product[4])
         prod_update.update_product(prod_id)
+        sale_prod = dict(
+            prod_id = prod_id,
+            quantity = prod['quantity']
+        )
+        sale_prod_list.append(sale_prod)
 
-
-    new_sale = Sale(prod_id_list, total_sale, auth_name)
+    new_sale = Sale(sale_prod_list, total_sale, auth_name)
     add_cart = new_sale.add_sale()
     return jsonify({
                 'message': add_cart}), 200

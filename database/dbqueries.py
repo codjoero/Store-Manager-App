@@ -53,12 +53,13 @@ class DbQueries():
         """
         sale_id = args[0]
         prod_id = args[1]
+        quantity = args[2]
 
         add_sale_prod = """
-        INSERT INTO sale_products(sale_id, prod_id)\
-        VALUES ('{}', '{}')
+        INSERT INTO sale_products(sale_id, prod_id, quantity)\
+        VALUES ('{}', '{}', '{}')
         RETURNING sale_id;
-        """.format(sale_id, prod_id)
+        """.format(sale_id, prod_id, quantity)
         cursor.execute(add_sale_prod)
 
     def add_jti(self, jti):
@@ -84,6 +85,20 @@ class DbQueries():
         item = cursor.fetchone()
         return item
 
+    def query_many(self, *args):
+        """Method to query items with same sale_id from tables, 
+        given a table name column and check value
+        """
+        table = args[0]
+        column = args[1]
+        value = args[2]
+        query_item = """
+        SELECT sale_id, prod_id, quantity FROM {} WHERE {} = '{}';
+        """.format(table, column, value)
+        cursor.execute(query_item)
+        items = cursor.fetchall()
+        return items
+
     def query_all_items(self, tb_of_items):
         """Method fetches all rows in a table
         """
@@ -92,7 +107,6 @@ class DbQueries():
         """.format(tb_of_items)
         cursor.execute(query_items)
         items = cursor.fetchall()
-
         return items
     
     def update_columns(self, *args):

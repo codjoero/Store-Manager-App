@@ -62,6 +62,7 @@ class DataBaseConnection:
                     FOREIGN KEY(sale_id) REFERENCES sales(sale_id),
                     prod_id  INT NOT NULL,
                     FOREIGN KEY(prod_id) REFERENCES products(prod_id),
+                    quantity  INT NOT NULL,
                     added_on TIMESTAMPTZ DEFAULT NOW()
                 )
                 """
