@@ -58,7 +58,6 @@ class Sale:
         Returns a list of the items that have been fetched.
         """
         sale = dbq.query_many(table, column, value)
-        print(sale)
         if sale == [] or sale is None:
             return False
         return sale
@@ -69,7 +68,6 @@ class Sale:
         cart = Sale.get_many('sale_products', 'sale_id', sale[0]) #rows with sale_id
         for prod in cart:
             product = Product.get_item('products', 'prod_id', prod[1])
-            # quantity = sale[1] / product[4]
             product = {
                 'prod_id': product[0],
                 'prod_name': product[1],
