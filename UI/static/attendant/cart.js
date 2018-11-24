@@ -108,13 +108,9 @@ function style() {
 //Add products to table
 function populateTable(products) {
     //clear out HTML data
-    while (stockTableBody.firstChild) {
-        stockTableBody.removeChild(stockTableBody.firstChild);
-    }
-
-    while (saleBody.firstChild) {
-        saleBody.removeChild(saleBody.firstChild);
-    }
+    clearTable(stockTableBody)
+    clearTable(saleBody)
+    
     //Populate table
     products.forEach((product) => {
         drawTable(product);
@@ -179,4 +175,11 @@ function saleAddup(rows, totalSale) {
     }
     totalsCell = rows[1].cells[2];
     totalsCell.innerHTML = totalSale
+}
+
+//Clear all table rows
+function clearTable(tableBody) {
+    while (tableBody.firstChild) {
+        tableBody.removeChild(tableBody.firstChild);
+    }
 }
