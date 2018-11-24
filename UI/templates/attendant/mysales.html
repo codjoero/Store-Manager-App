@@ -27,66 +27,80 @@
                     <a href="#"><li><i class="fa fa-cog"></i> Settings</li></a>
                 </ul>
             </aside>
-            <main class="stock">
-                <h2 class="db">mySale Records</h2>
-            <span class="loggedin"><i class="fa fa-user-circle-o"></i> User</span>
-                <table>
+            <main class="shopper">
+                <h2 class="db">Sales Report</h2>
+                <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
+                <table id="stockTable">
+                    <thead>
                         <tr>
-                            <th>product name</th>
                             <th>Id#</th>
-                            <th>category</th>
+                            <th>No. prods</th>
+                            <th>sold by</th>
                             <th>sale date</th>
-                            <th>price</th>
+                            <th>Total sale</th>
                         </tr>
-                        <tr>
-                            <td>Bell-bottoms</td>
-                            <td>15</td>
-                            <td>pants</td>
-                            <td>08-10-2018</td>
-                            <td>200</td>
+                    </thead>
+                    <tbody>
+                        <tr onclick="saleProduct(this)">
+                            <td>1</td>
+                            <td>5</td>
+                            <td>walker</td>
+                            <td>Wed 2018-11-28</td>
+                            <td>1200</td>
                         </tr>
-                        <tr>
-                            <td>NY-pants</td>
-                            <td>05</td>
-                            <td>pants</td>
-                            <td>08-10-2018</td>
-                            <td>150</td>                            
+                        <tr onclick="saleProduct(this)">
+                            <td>2</td>
+                            <td>2</td>
+                            <td>walker</td>
+                            <td>Wed 2018-11-28</td>
+                            <td>1500</td>
                         </tr>
-                        <tr>
-                            <td>Cindarella-shoes</td>
-                            <td>08</td>
-                            <td>kids</td>
-                            <td>08-10-2018</td>
-                            <td>100</td>
-                        </tr>
-                        <tr>
-                            <td>Jamaican-boys</td>
-                            <td>18</td>
-                            <td>kids</td>
-                            <td>08-10-2018</td>
-                            <td>85</td>   
-                        </tr>
-                        <tr>
-                            <td>Neckless-G</td>
-                            <td>101</td>
-                            <td>accessories</td>
-                            <td>08-10-2018</td>
-                            <td>75</td>    
-                        </tr>
-                        <tr>
-                            <th>Total</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <th>610</th>    
-                        </tr>
+                    </tbody>
+                </table>
+                <aside class="shoplist">
+                    <h2 class="thelist">Products List</h2>
+                    <span class="msg"></span>
+                    <table id="sale">
+                        <thead>
+                            <tr>
+                                <th>Items</th>
+                                <th>Qnty</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bell-bottoms</td>
+                                <td>2</td>
+                                <td>200</td>
+                            </tr>
+                            <tr>
+                                <td>NY-pants</td>
+                                <td>1</td>
+                                <td>150</td>
+                            </tr>
+                            <tr>
+                                <td>Eiffel-top</td>
+                                <td>1</td>
+                                <td>120</td>
+                            </tr>
+                        </tbody>
+                        <thead>
+                            <tr>
+                                <th>Total</th>
+                                <th></th> 
+                                <th></th> 
+                            </tr>
+                        </thead>
                     </table>
+                </aside>
             </main>
             <footer class="foot">
                 <p>Store Manager, Copyright &copy; 2018</p>
             </footer>
         </div>
     <!-- js -->
-    <script src="../../static/mystyles.js"></script>
+    <script src="../../static/attendant/mysales.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </body>
 </html>

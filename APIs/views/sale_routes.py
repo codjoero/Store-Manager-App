@@ -137,7 +137,7 @@ def get_all_sale_records():
         }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
-    if auth_user is False or auth_user[-2] != 'admin':
+    if auth_user is False:
         return jsonify({
             'message': 'Unauthorized Access!'
         }), 401
@@ -146,6 +146,16 @@ def get_all_sale_records():
         return jsonify({
             'message': 'There are no sales yet!'
         }), 404
-    return jsonify({
-        'Sale Records': sales,
-        'message': 'All Sale records fetched sucessfully!'}), 200
+    elif auth_user[-2] == 'admin':
+        return jsonify({
+            'Sale Records': sales,
+            'message': 'All Sale records fetched sucessfully!'}), 200
+    else:
+        attendant_sales = []
+        for i in range(len(sales)):
+            sold_by = sales[i]['sold_by']
+            if sold_by == auth_user[2]:
+                attendant_sales.append(sales[i])
+        return jsonify({
+            'Sale Records': attendant_sales,
+            'message': 'All Sale records fetched sucessfully!'}), 200
