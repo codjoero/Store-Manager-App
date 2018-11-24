@@ -20,13 +20,13 @@ function logoutUser(){
     })
     .then(handleResponse)
     .then((data) => {
-        window.location = "/UI/templates/index.html";
+        window.location = "UI/templates/index.html";
     })
     .catch(err => {
         if (err['msg'] === 'Token has expired') {
-            window.location = "/UI/templates/index.html";
+            window.location = "UI/templates/index.html";
         }
-        window.location = "/UI/templates/index.html";
+        window.location = "UI/templates/index.html";
     })
 }
 
