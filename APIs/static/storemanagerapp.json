@@ -177,6 +177,44 @@
             "bearerAuth": []
           }
         ]
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "admin to delete a user.",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "description": "id for user to be deleted",
+            "schema": {
+              "type": "integer",
+              "format": "int64",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user deleted"
+          },
+          "400": {
+            "description": "The user id should be a number!"
+          },
+          "401": {
+            "description": "Unauthorized Access!"
+          },
+          "404": {
+            "description": "There are no store attendants added! This attendant does not exist!"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/logout": {
