@@ -207,6 +207,40 @@ def edit_user(user_id):
             'message': 'User_id should be numbers!'
         }), 400
 
+@app.route('/api/v1/users/<int:user_id>', methods=['DELETE'])
+@jwt_required
+def delete_user(user_id):
+    """Method for admin to delete a user.
+    returns message of successful deletion.
+    """
+    if not User.valid_token(request.headers):
+        return jsonify({
+            'message': 'Invalid Authentication, Please Login!'
+        }), 401
+    auth_name = get_jwt_identity()
+    auth_user = User.query_item('users', 'username', auth_name)
+    if auth_user is False or auth_user[-2] != 'admin':
+        return jsonify({
+            'message': 'Unauthorized Access!'
+        }), 401
+
+    try:
+        user_id = int(user_id)
+        users = User.get_all_users('users')
+        if not users:
+            return jsonify({
+                'message': 'There are no store attendants added!'}), 404
+        elif not User.query_item('users', 'user_id', user_id):
+            return jsonify({
+                'message': 'This attendant does not exist!'}), 404
+        User.delete_user(user_id)
+        return jsonify({
+            'message': 'User deleted!'
+        }), 200
+    except ValueError:
+        return jsonify({
+            'message': 'The user id should be a number!'}), 400
+
 @app.route('/api/v1/logout', methods=['DELETE'])
 @jwt_required
 def logout():
@@ -223,12 +257,3 @@ def logout():
         return jsonify({
             'message': 'Unauthorized Access!'
         }), 401
-
-
-# @app.route('/api/v1/users/<int:_id>', methods=['PUT'])
-# def update_user(_id):
-#     return users.update_user(_id)
-
-# @app.route('/api/v1/users/<int:_id>', methods=['DELETE'])
-# def delete_user(_id):
-#     return users.delete_user(_id)
