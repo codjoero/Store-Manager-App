@@ -89,6 +89,12 @@ class User:
             return item
 
     @staticmethod
+    def delete_user(user_id):
+        """Method enables admin to delete an attendant.
+        """
+        dbq.delete_item('users', 'user_id', user_id)
+
+    @staticmethod
     def logout(tk_jti):
         """Method to check jti in blacklisted_tokens
        
