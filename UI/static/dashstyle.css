@@ -337,6 +337,92 @@ aside{
     grid-gap: 6px;
 }
 
+.kids{
+    grid-column: 1;
+    grid-row: 2;
+    background-color: rgb(120, 150, 144);
+}
+
+.shirts{
+    grid-column: 2;
+    grid-row: 2;
+    background-color: rgb(120, 150, 144);
+}
+
+.tops{
+    grid-column: 3;
+    grid-row: 2;
+    background-color: rgb(120, 150, 144);
+}
+
+.shoes{
+    grid-column: 1;
+    grid-row: 3;
+    background-color: rgb(120, 150, 144);
+}
+
+.denims{
+    grid-column: 2;
+    grid-row: 3;
+    background-color: rgb(120, 150, 144);
+}
+
+.jackets{
+    grid-column: 3;
+    grid-row: 3;
+    background-color: rgb(120, 150, 144);
+}
+
+.pants{
+    grid-column: 1;
+    grid-row: 4;
+    background-color: rgb(120, 150, 144);
+}
+
+.suits{
+    grid-column: 2;
+    grid-row: 4;
+    background-color: rgb(120, 150, 144);
+}
+
+.access{
+    grid-column: 3;
+    grid-row: 4;
+    background-color: rgb(120, 150, 144);
+}
+
+.beach{
+    grid-column: 1;
+    grid-row: 5;
+    background-color: rgb(120, 150, 144);
+}
+
+.bags{
+    grid-column: 2;
+    grid-row: 5;
+    background-color: rgb(120, 150, 144);
+}
+
+.ling{
+    grid-column: 3;
+    grid-row: 5;
+    background-color: rgb(120, 150, 144);
+}
+
+.new{
+    grid-column: 1;
+    grid-row: 6;
+    background-color: rgb(120, 150, 144);
+    text-transform: uppercase;
+}
+
+.back{
+    grid-column: 3;
+    grid-row: 6;
+    background-color: rgb(120, 150, 144);
+    text-transform: uppercase;
+}
+
 .shopper #stockTable {
     grid-column: 1/4;
     grid-row: 2/7;
