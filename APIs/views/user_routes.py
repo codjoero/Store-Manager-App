@@ -135,14 +135,10 @@ def view_all_users():
             'message': 'Unauthorized Access!'
         }), 401
     users = User.get_all_users('users')
-    if not users:
-        return jsonify({
-            'message': 'There are no users yet!'
-        }), 404
     return jsonify({
         'users': users}), 200
 
-@app.route('/api/v1/users/<int:user_id>', methods=['PUT'])
+@app.route('/api/v1/users/<user_id>', methods=['PUT'])
 @jwt_required
 def edit_user(user_id):
     """Method for admin to modify the details of a user.
@@ -194,7 +190,7 @@ def edit_user(user_id):
         user = User(name, username, password, role)
         hash_password = user.password_hash()
         user = User(name, username, hash_password, role)
-        updated_user = user.update_user(user_id)
+        updated_user = user.update_user(int(user_id))
         if not updated_user:
             return jsonify({
                 'message': "This user doesn't exist!"}), 400
@@ -207,7 +203,7 @@ def edit_user(user_id):
             'message': 'User_id should be numbers!'
         }), 400
 
-@app.route('/api/v1/users/<int:user_id>', methods=['DELETE'])
+@app.route('/api/v1/users/<user_id>', methods=['DELETE'])
 @jwt_required
 def delete_user(user_id):
     """Method for admin to delete a user.

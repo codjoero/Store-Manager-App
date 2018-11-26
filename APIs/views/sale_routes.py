@@ -156,6 +156,9 @@ def get_all_sale_records():
             sold_by = sales[i]['sold_by']
             if sold_by == auth_user[2]:
                 attendant_sales.append(sales[i])
+        if not attendant_sales:
+            return jsonify({
+                'message': "You haven't made any sales!"}), 404
         return jsonify({
-            'Sale Records': attendant_sales,
-            'message': 'All Sale records fetched sucessfully!'}), 200
+                'Sale Records': attendant_sales,
+                'message': 'All Sale records fetched sucessfully!'}), 200
