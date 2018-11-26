@@ -68,13 +68,13 @@ class Sale:
         cart = Sale.get_many('sale_products', 'sale_id', sale[0]) #rows with sale_id
         for prod in cart:
             product = Product.get_item('products', 'prod_id', prod[1])
-            product = {
+            sale_product = {
                 'prod_id': product[0],
                 'prod_name': product[1],
                 'price': product[4],
                 'quantity': prod[2]
             }
-            prod_sold.append(product)
+            prod_sold.append(sale_product)
         return prod_sold
 
     @staticmethod

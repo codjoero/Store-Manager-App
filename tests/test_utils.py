@@ -67,11 +67,49 @@ class Utilities(unittest.TestCase):
         reply = json.loads(resp.data.decode())
         return reply
 
+    def admin_create_user2(self):
+        """admin creates second store attendant
+        """
+        resp = self.admin_register()
+        reply = self.admin_login()
+        token = reply['token']
+        user = dict(
+            name='Paul Walker',
+            username='walker',
+            password='Andela8',
+            role='attendant'
+        )
+
+        resp = self.client.post(
+            '/api/v1/users',
+            content_type='application/json',
+            data=json.dumps(user),
+            headers={'Authorization': 'Bearer {}'.format(token)}
+        )
+
+        reply = json.loads(resp.data.decode())
+        return reply
+
     def attendant_login(self):
-        """Admin login
+        """attendant login
         """
         user = dict(
             username='love',
+            password='Andela8'
+        )
+        response = self.client.post(
+            '/api/v1/login',
+            content_type='application/json',
+            data=json.dumps(user)
+        )
+        reply = json.loads(response.data.decode())
+        return reply
+
+    def attendant2_login(self):
+        """attendant2 login
+        """
+        user = dict(
+            username='walker',
             password='Andela8'
         )
         response = self.client.post(
