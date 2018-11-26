@@ -178,6 +178,7 @@ aside .saleButton{
 
 #thelist{
     float: left;
+    text-transform: capitalize
 }
 
 /* INVENTORY2 */
@@ -337,86 +338,86 @@ aside{
     grid-gap: 6px;
 }
 
-.kids{
+#kids{
     grid-column: 1;
     grid-row: 2;
     background-color: rgb(120, 150, 144);
 }
 
-.shirts{
+#shirts{
     grid-column: 2;
     grid-row: 2;
     background-color: rgb(120, 150, 144);
 }
 
-.tops{
+#tops{
     grid-column: 3;
     grid-row: 2;
     background-color: rgb(120, 150, 144);
 }
 
-.shoes{
+#shoes{
     grid-column: 1;
     grid-row: 3;
     background-color: rgb(120, 150, 144);
 }
 
-.denims{
+#denims{
     grid-column: 2;
     grid-row: 3;
     background-color: rgb(120, 150, 144);
 }
 
-.jackets{
+#jackets{
     grid-column: 3;
     grid-row: 3;
     background-color: rgb(120, 150, 144);
 }
 
-.pants{
+#pants{
     grid-column: 1;
     grid-row: 4;
     background-color: rgb(120, 150, 144);
 }
 
-.suits{
+#suits{
     grid-column: 2;
     grid-row: 4;
     background-color: rgb(120, 150, 144);
 }
 
-.access{
+#accessories{
     grid-column: 3;
     grid-row: 4;
     background-color: rgb(120, 150, 144);
 }
 
-.beach{
+#beach{
     grid-column: 1;
     grid-row: 5;
     background-color: rgb(120, 150, 144);
 }
 
-.bags{
+#bags{
     grid-column: 2;
     grid-row: 5;
     background-color: rgb(120, 150, 144);
 }
 
-.ling{
+#lingerie{
     grid-column: 3;
     grid-row: 5;
     background-color: rgb(120, 150, 144);
 }
 
-.new{
+#new{
     grid-column: 1;
     grid-row: 6;
     background-color: rgb(120, 150, 144);
     text-transform: uppercase;
 }
 
-.back{
+#back{
     grid-column: 3;
     grid-row: 6;
     background-color: rgb(120, 150, 144);
