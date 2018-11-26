@@ -41,11 +41,11 @@ function addUser(e){
         })
         .then(handleResponse)
         .then((data) => {
-            msg.innerText = data['message'] + '<br>';
-            loadTable();
+            msg.innerText = data['message'];
+            location.reload(true);
         })
         .catch(err => {
-            msg.innerHTML = err['message'] + '<br>';
+            msg.innerHTML = err['message'];
             if (err['msg'] === 'Token has expired') {
                 window.location = "/UI/templates/index.html";
             }
@@ -84,11 +84,11 @@ function updateUser(e){
         })
         .then(handleResponse)
         .then((data) => {
-            updateMsg.innerText = data['message'] + '<br>';
-            loadTable();
+            updateMsg.innerText = data['message'];
+            location.reload(true);
         })
         .catch(err => {
-            updateMsg.innerHTML = err['message'] + '<br>';
+            updateMsg.innerHTML = err['message'];
             if (err['msg'] === 'Token has expired') {
                 window.location = "/UI/templates/index.html";
             }
