@@ -97,7 +97,7 @@ function loadTable() {
 
 //Add users to table
 function populateTable(users) {
-    api.clearTable('mytableBody');
+    api.clearTable(mytableBody);
     //Populate table
     users.forEach((user) => {
         drawTable(user);
