@@ -114,6 +114,7 @@ footer{
     position: relative;
 }
 
+
 table{
     border-collapse: collapse;
     border-spacing: 0;
@@ -147,15 +148,18 @@ aside .saleButton{
     text-transform: uppercase;
     outline: 0;
     background: #597c55;
-    width: 40%;
+    width: 30%;
     border: none;
     margin: 5px 0 0;
     padding: 10px;
     position: relative;
     color: #ffffff;
     font-size: 12px;
-    float: right;
     cursor: pointer;
+}
+
+#makeSale {
+    float: right;
 }
 
 /* CATEGORIES */

@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
-const api = new Api();
+const api = new Api;
 
 //Declarations
-const msg = document.querySelector('span.msg');
 const topMsg = document.getElementById('topMsg');
 const stockTableBody = document.querySelector('#stockTable > tbody');
 const saleBody = document.querySelector('#sale > tbody');
@@ -20,7 +19,6 @@ function loadTable() {
         populateTable(saleRecords);
     })
     .catch(err => {
-        msg.innerHTML = err['message'] + '<br>';
         api.errCheck(err);
         console.log(err);
         topMsg.innerText = err['message'];
