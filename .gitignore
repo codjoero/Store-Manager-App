@@ -15,3 +15,6 @@ db.pyc
 dbqueries.pyc
 utilities.pyc
 shell/
+node_modules/
+.eslintrc.js
+package.json
