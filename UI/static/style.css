@@ -28,6 +28,24 @@ form{
     text-align: center;
 }
 
+.form .progress-bar {
+    display: none;
+    width: 0%;
+    height: 5px;
+    background: linear-gradient(to right,
+    rgb(78,128,72),rgb(90,200,250),rgb(0,132,255),
+    rgb(52,170,220),rgb(88,86,217),rgb(78,128,72));
+    background-size: 350px 5px;
+    border-radius: 10px;
+    animation: loading 8s ease-in-out infinite;
+}
+
+@keyframes loading {
+    to {
+        width: 100%;
+    }
+}
+
 /* Login */
 form .entry{
     font-family: "Roboto", "sans-serif";
