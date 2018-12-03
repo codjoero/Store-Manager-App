@@ -66,12 +66,12 @@ function loginUser(e){
         if (data['user']['role'] === 'admin' && typeof data['token'] !== null){
             localStorage.setItem('token', data['token']);
             localStorage.setItem('loggedUser', data['user']['username']);
-            window.location = '/UI/templates/admin/dashboard.html';
+            window.location = 'UI/templates/admin/dashboard.html';
         }
         else if (data['user']['role'] === 'attendant' && typeof data['token'] !== null){
             localStorage.setItem('token', data['token']);
             localStorage.setItem('loggedUser', data['user']['username']);
-            window.location = '/UI/templates/attendant/dashboard.html';
+            window.location = 'UI/templates/attendant/dashboard.html';
         }
     })
     .catch(err => {
