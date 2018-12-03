@@ -35,7 +35,24 @@
                         <tr>
                             <th>product name</th>
                             <th>Id#</th>
-                            <th>category</th>
+                            <th>category
+                                <select id='toFilter' onchange='filterCategories()'>
+                                    <option disabled selected>Select</option>
+                                    <option value="kids">Kids</option>
+                                    <option value="shirts">Shirts</option>
+                                    <option value="tops">Tops</option>
+                                    <option value="shoes">Shoes</option>
+                                    <option value="denims">Denims</option>
+                                    <option value="jackets">Jackets</option>
+                                    <option value="pants">Pants</option>
+                                    <option value="suits">Suits</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="beach">Beach</option>
+                                    <option value="bags">Bags</option>
+                                    <option value="lingerie">Lingerie</option>
+                                    <option value='all'>All</option>
+                                </select>
+                            </th>
                             <th>stock</th>
                             <th>min_stock</th>
                             <th>price</th>
@@ -69,6 +86,7 @@
             </footer>
         </div>
     <!-- js -->
+    <script src="../../static/api.js"></script>
     <script src="../../static/attendant/inventory.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </body>
