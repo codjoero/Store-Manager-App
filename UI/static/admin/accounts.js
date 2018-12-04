@@ -2,6 +2,7 @@ const api = new Api();
 
 //Declarations
 const msg = document.querySelector('span.msg');
+const topMsg = document.getElementById('topMsg');
 const updateMsg = document.getElementById('updateMsg');
 const mytableBody = document.querySelector('#mytable > tbody');
 
@@ -80,6 +81,19 @@ function updateUser(e){
     }
 }
 
+function deleteUser(_id){
+    api.delete(`users/${_id}`)
+    .then(api.handleResponse)
+    .then((data) => {
+        topMsg.innerText = data['message'];
+    })
+    .catch(err => {
+        topMsg.innerHTML = err['message'];
+        api.errCheck(err);
+        console.log(err);
+    });
+}
+
 //On window load
 window.onload=function(){
     loadTable();
@@ -108,7 +122,7 @@ function drawTable(user) {
     var row = $('<tr />');
     var select = '<input type="checkbox">';
     var edit = '<i class="fa fa-edit" onclick="editRow(this)"></i>';
-    var del = '<i class="fa fa-close" onclick="deleteRow(this)"></i>';
+    var del = '<i class="fa fa-close" onclick="delRow(this)"></i>';
     $('#mytable').append(row);
     row.append($('<td>' + select + '</td>'));
     row.append($('<td>' + user.user_id + '</td>'));
@@ -138,7 +152,10 @@ function editRow(call) {
 }
 
 //Delete table row
-function deleteRow(call) {
+function delRow(call) {
+    var table = document.getElementById('mytable');
     var i = call.parentNode.parentNode.rowIndex;
+    deleteUser_id = table.rows[i].cells[1].innerHTML;
+    deleteUser(deleteUser_id);
     document.getElementById('mytable').deleteRow(i);
 }
