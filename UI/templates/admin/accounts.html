@@ -30,6 +30,7 @@
             <main class="stock">
                 <h2 class="db">User Accounts</h2>
                 <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
+                <span class="msg" id="topMsg"></span>
                 <table id="mytable">
                     <thead>
                         <tr>
@@ -50,7 +51,7 @@
                             <td>jonnie</td>
                             <td>admin</td>
                             <td class="txtright"><i class="fa fa-edit"onclick="editRow(this)"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
+                            <td class="txtdel"><i class="fa fa-close" onclick="delRow(this)"></i></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
@@ -59,7 +60,7 @@
                             <td>walker</td>
                             <td>attendant</td>
                             <td class="txtright"><i class="fa fa-edit"onclick="editRow(this)"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
+                            <td class="txtdel"><i class="fa fa-close" onclick="delRow(this)"></i></td>
                         </tr>  
                     </tbody>                 
                 </table>
