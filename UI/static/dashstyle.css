@@ -12,7 +12,7 @@
 }
 
 html{
-    background: url(../static/layout.jpg) no-repeat center fixed;
+    background: #f1f7f2;
     position: relative;
     height: 100vh;
     background-size: cover;
@@ -30,10 +30,9 @@ html{
 /* Header */
 .branding{
     position: relative;
-    background:rgba(28, 88, 86, 0.5);
     overflow: visible;
     font-size: 3.2vw;
-    color: #0f3317;
+    color: #3a3b3a;
     width: 100vw;
 }
 
@@ -41,17 +40,17 @@ html{
 .sidebar{
     position: relative;
     height: 80vh;
-    background: rgba(68, 71, 73, 0.8);
 }
 
 .sidebar ul li{
     text-decoration: none;
     position: inherit;
     font-size: 1.5vw;
-    color: rgba(230, 230, 230, 0.9);
+    background: rgba(167, 173, 177, 0.8);
+    color: rgba(5, 5, 5, 0.9);
     list-style: none;
     padding: 15px 5vw 15px 1vw;
-    border-bottom: 2px solid rgba(68, 71, 73, 0.8);
+    border-bottom: 2px solid rgba(238, 240, 241, 0.8);
     cursor: pointer;
 }
 
@@ -74,6 +73,10 @@ html{
     color: rgb(37, 44, 44)
 }
 
+.loggedin{
+    text-transform: capitalize;
+}
+
 .dash i{
     font-size: 160%;
 }
@@ -85,7 +88,7 @@ html{
 /* footer */
 footer{
     position: relative;
-    background:rgba(28, 88, 86, 0.5);
+    background:rgba(167, 173, 177, 0.8);
     font-size: 15px;
     text-align: center;
     bottom: 0;
@@ -105,6 +108,12 @@ footer{
     margin: 0 1.5vw;
 }
 
+#salelist{
+    float: left;
+    position: relative;
+}
+
+
 table{
     border-collapse: collapse;
     border-spacing: 0;
@@ -119,11 +128,37 @@ th, td {
     font-size: 20px;
 }
 
-tr:nth-child(odd){
+#stockTable tr {
+    cursor: pointer;
+}
+
+thead tr:nth-child(odd){
+    background-color: rgba(236, 233, 233, 0.9);
+}
+tbody tr:nth-child(odd){
     background-color: rgba(194, 193, 193, 0.9);
 }
-tr:nth-child(even){
+tbody tr:nth-child(even){
     background-color: rgba(236, 233, 233, 0.9);
+}
+
+aside .saleButton{
+    font-family: 'Roboto', 'sans-serif';
+    text-transform: uppercase;
+    outline: 0;
+    background: #597c55;
+    width: 30%;
+    border: none;
+    margin: 5px 0 0;
+    padding: 10px;
+    position: relative;
+    color: #ffffff;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+#makeSale {
+    float: right;
 }
 
 /* CATEGORIES */
@@ -146,6 +181,7 @@ tr:nth-child(even){
 
 #thelist{
     float: left;
+    text-transform: capitalize
 }
 
 /* INVENTORY2 */
@@ -164,25 +200,29 @@ tr:nth-child(even){
     cursor: pointer;
 }
 
+#updateProduct{
+    display: none;
+}
+
 /* ACCOUNTS */
 .form{    
-    width: 20vw;
+    width: 40vw;
     float: left;
 }
 
 form .entry{
     font-family: "Roboto", "sans-serif";
     outline: 1;
-    background: #f2f2f2;
+    background: #c9c7c7;
     width: 80%;
     border: 1px solid #e6ece9;
     margin: 5px 0 0;
     padding: 10px;
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: 15px;
 }
 
-form .accountButton{
+.accountButton{
     font-family: 'Roboto', 'sans-serif';
     text-transform: uppercase;
     outline: 0;
@@ -192,12 +232,84 @@ form .accountButton{
     margin: 5px 0 0;
     padding: 10px;
     color: #ffffff;
-    font-size: 12px;
+    font-size: 15px;
     cursor: pointer;
 }
 
-.updateUser{
+#updateUser{
     display: none;
+}
+
+.msg, .errMsg{
+    color: rgb(100, 13, 13);
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid rgb(50, 116, 41);
+    width: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+  
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+.modal-button {
+    font-family: 'Roboto', 'sans-serif';
+    text-transform: uppercase;
+    background: #597c55;
+    border: none;
+    color: #ffffff;
+    padding: 15px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modal-button:hover {
+    background-color: rgb(26, 63, 27);
+    color: white;
+  }
+
+.modal-body {
+    text-align: center;
+}
+
+.modal-footer {
+    text-align: center;
 }
 
 /******* THE GRID *******/
@@ -233,7 +345,7 @@ aside{
 .site .dash{
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 2fr 2fr;
-    grid-template-rows: auto 2fr 2fr 2fr 2fr 2fr;
+    grid-template-rows: auto 2fr 2fr 2fr 2fr;
     grid-gap: 9px;
 }
 
@@ -297,90 +409,95 @@ aside{
     grid-gap: 6px;
 }
 
-.kids{
+#kids{
     grid-column: 1;
     grid-row: 2;
     background-color: rgb(120, 150, 144);
 }
 
-.shirts{
+#shirts{
     grid-column: 2;
     grid-row: 2;
     background-color: rgb(120, 150, 144);
 }
 
-.tops{
+#tops{
     grid-column: 3;
     grid-row: 2;
     background-color: rgb(120, 150, 144);
 }
 
-.bottoms{
+#shoes{
     grid-column: 1;
     grid-row: 3;
     background-color: rgb(120, 150, 144);
 }
 
-.denims{
+#denims{
     grid-column: 2;
     grid-row: 3;
     background-color: rgb(120, 150, 144);
 }
 
-.jackets{
+#jackets{
     grid-column: 3;
     grid-row: 3;
     background-color: rgb(120, 150, 144);
 }
 
-.pants{
+#pants{
     grid-column: 1;
     grid-row: 4;
     background-color: rgb(120, 150, 144);
 }
 
-.suits{
+#suits{
     grid-column: 2;
     grid-row: 4;
     background-color: rgb(120, 150, 144);
 }
 
-.access{
+#accessories{
     grid-column: 3;
     grid-row: 4;
     background-color: rgb(120, 150, 144);
 }
 
-.beach{
+#beach{
     grid-column: 1;
     grid-row: 5;
     background-color: rgb(120, 150, 144);
 }
 
-.bags{
+#bags{
     grid-column: 2;
     grid-row: 5;
     background-color: rgb(120, 150, 144);
 }
 
-.ling{
+#lingerie{
     grid-column: 3;
     grid-row: 5;
     background-color: rgb(120, 150, 144);
 }
 
-.new{
+#new{
     grid-column: 1;
     grid-row: 6;
     background-color: rgb(120, 150, 144);
     text-transform: uppercase;
 }
 
-.back{
+#back{
     grid-column: 3;
     grid-row: 6;
     background-color: rgb(120, 150, 144);
     text-transform: uppercase;
+}
+
+.shopper #stockTable {
+    grid-column: 1/4;
+    grid-row: 2/7;
 }
 
 .shoplist{
@@ -425,6 +542,10 @@ aside{
     grid-column: 1/-1;
 }
 
+.form{
+    grid-column: 1/-1;
+}
+
 a {
     color: inherit;
     text-decoration: inherit;
@@ -435,28 +556,41 @@ a {
 @media (max-width: 640px){
     /* Main site */
     .site{
+        margin: 0 0.5em;
         display: grid;
-        grid-gap: 10px;
+        grid-gap: 1px;
         grid-template-areas:
             "hd"
-            "main"
             "sidebar"
+            "main"
             "ft";
     }
 
     .sidebar{
-        display: none;
+        position: relative;
+        height: 6vh;
+    }
+    
+    .sidebar ul li{
+        float: left;
+        font-size: 2vw;
+        padding: 10px 1.5vw;
+        border-right: 3px solid rgba(238, 240, 241, 0.8);
     }
 
     .dash{
-        margin: 0 0.5em;
+        margin: 0;
+    }
+
+    footer{
+        margin-top: 50px;
     }
 
     /* The Dash Grid */
     .site .dash{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-gap: 8px;
+        grid-gap: 5px;
     }
     .cart{
         grid-column: 1;
@@ -539,17 +673,21 @@ a {
         grid-column: 1/-1;
         grid-row: 6;
         width: 100%;
-        /* float: left; */
     }
 
     #freezebutton{
         grid-column: 1/-1;
         grid-row: 5;
         width: 100%;
-        /* float: left; */
     }
 
     .tbupdate{
+        width: 100%;
+    }
+
+    .form{
+        grid-column: 1/-1;
+        grid-row: 5;
         width: 100%;
     }
 
@@ -559,24 +697,20 @@ a {
 }
 
 
-@media (max-width: 320px){
+@media (max-width: 411px){
     /* Main site */
     .site{
         display: grid;
         grid-gap: 10px;
         grid-template-areas:
             "hd"
-            "main"
             "sidebar"
+            "main"
             "ft";
     }
 
-    .sidebar{
-        display: none;
-    }
-
     .dash{
-        margin: 0 0.5em;
+        margin: 0;
     }
 
     /* The Dash Grid */
@@ -645,7 +779,7 @@ a {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto auto auto auto;
-        margin: 0 1em;
+        margin: 0;
     }
 
     .stock .user{
@@ -672,6 +806,9 @@ a {
         grid-column: 1/-1;
         grid-row: 5;
         width: 100%;
+    }
+    .modal-content {
+        width: 200px;
     }
 }
 

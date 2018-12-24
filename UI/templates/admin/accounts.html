@@ -29,60 +29,78 @@
             </aside>
             <main class="stock">
                 <h2 class="db">User Accounts</h2>
-                <p class="user"><i class="fa fa-user-circle-o"></i> Admin</p>
+                <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
+                <span class="msg" id="topMsg"></span>
                 <table id="mytable">
-                    <tr>
-                        <th>Select</th>
-                        <th>Id#</th>
-                        <th>Name</th>
-                        <th>username</th>
-                        <th>role</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>02</td>
-                        <td>Jonnie Pemba</td>
-                        <td>jonnie</td>
-                        <td>admin</td>
-                        <td class="txtright"><i class="fa fa-edit"></i></td>
-                        <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>01</td>
-                        <td>Moon Walker</td>
-                        <td>walker</td>
-                        <td>attendant</td>
-                        <td class="txtright"><i class="fa fa-edit"></i></td>
-                        <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
-                    </tr>                   
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>Id#</th>
+                            <th>Name</th>
+                            <th>username</th>
+                            <th>role</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>2</td>
+                            <td>Jonnie Pemba</td>
+                            <td>jonnie</td>
+                            <td>admin</td>
+                            <td class="txtright"><i class="fa fa-edit"onclick="editRow(this)"></i></td>
+                            <td class="txtdel"><i class="fa fa-close" onclick="delRow(this)"></i></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>1</td>
+                            <td>Moon Walker</td>
+                            <td>walker</td>
+                            <td>attendant</td>
+                            <td class="txtright"><i class="fa fa-edit"onclick="editRow(this)"></i></td>
+                            <td class="txtdel"><i class="fa fa-close" onclick="delRow(this)"></i></td>
+                        </tr>  
+                    </tbody>                 
                 </table>
                 <div class="form">
-                    <form class="addUser">
-                        <input type="submit" id="delteButton" class="accountButton" value="Delete">
+                    <form id="addUser">
                         <input type="text" id="name" class="entry" name="t1" placeholder="name"/>
                         <input type="text" id="username" class="entry" name="t2" placeholder="username"/>
                         <input type="password" id="password" class="entry" name="t3" placeholder="password"/>
                         <input type="password" id="confirm" class="entry" name="t4" placeholder="confirm password"/>
+                        <select class="entry" id="role">
+                            <option value="attendant">attendant</option>
+                            <option value="admin">admin</option>
+                        </select><br>
+                        <span class="msg"></span>
+                        <span id="msg2"></span>
+                        <input type="submit" id="addButton" class="accountButton" value="add user">
+                    </form>
+                    <form id="updateUser">
+                        <input type="text" id="updateName" class="entry" name="t5" placeholder="name"/>
+                        <input type="text" id="updateUsername" class="entry" name="t6" placeholder="username"/>
+                        <input type="password" id="updatePassword" class="entry" name="t7" placeholder="password"/>
+                        <input type="password" id="updateConfirm" class="entry" name="t8" placeholder="confirm password"/>
                         <select class="entry">
                             <option value="attendant">attendant</option>
                             <option value="admin">admin</option>
                         </select><br>
-                        <input type="submit" id="addButton" class="accountButton" value="add user">
+                        <span class="msg" id="updateMsg"></span>
+                        <input type="submit" id="updateButton" class="accountButton" value="update user">
                     </form>
-                    <form class="updateUser">
-                            <input type="text" id="updateName" class="entry" name="t5" placeholder="name"/>
-                            <input type="text" id="updateUsername" class="entry" name="t6" placeholder="username"/>
-                            <input type="password" id="updatePassword" class="entry" name="t7" placeholder="password"/>
-                            <input type="password" id="updateConfirm" class="entry" name="t8" placeholder="confirm password"/>
-                            <select class="entry">
-                                <option value="attendant">attendant</option>
-                                <option value="admin">admin</option>
-                            </select><br>
-                            <input type="submit" id="updateButton" class="accountButton" value="update user">
-                    </form>
+                </div>
+                <div id="confirm-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                          <h3>Are you sure?</h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="modal-yes" class="modal-button">Yes</button>
+                          <button id="modal-no" class="modal-button">No</button>
+                        </div>
+                    </div>
                 </div>
             </main>
             <footer class="foot">
@@ -90,14 +108,11 @@
             </footer>
         </div>
     <!-- js -->
-    <script src="../../static/accounts.js"></script>
+    <script src="../../static/api.js"></script>
+    <script src="../../static/admin/accounts.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
     <script>
-        $('.txtright').click(() => {
-            $('form').animate({height: "toggle", opacity: "toggle"}, 'slow');
-        });
-    
         $(function () {
             $('.entry').focusout(() => {
                 var name = $("input[name='t1']").val();
@@ -138,13 +153,14 @@
                 else
                     $("#updatePassword").css("border-color", "#427e3a");
                 if (updateConfirm == ''|| updateConfirm != updatePassword)
-                    $("#updateConfirm").css("border-color", "#c77272");    
+                    $("#updateConfirm").css("border-color", "#c77272"),
+                    $("#updateMsg").val = 'Passwords dont much!';
                 else
                     $("#updateConfirm").css("border-color", "#427e3a");
             });
-            $('.message').click(() => {
-                if (name == '' || username == '' || password == '' || role == '')
-                    $('.entry').css("border-color", "#c77272"); 
+            $('#updateButton').click(() => { 
+                if (updateConfirm == ''|| updateConfirm != updatePassword)
+                    $("#updateMsg").val = 'Passwords dont much!';
             });
         });
     </script>

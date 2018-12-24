@@ -7,7 +7,7 @@
         <meta name="keywords" content="all in one app, store management">
         <meta name="author" content="Ronnie N">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Store Manager | Inventory</title>
+        <title>Store Manager | Shopper Cart</title>
         <link rel="stylesheet" href="../../static/dashstyle.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -21,45 +21,64 @@
                 <ul>
                     <a href="dashboard.html"><li><i class="fa fa-users"></i> Dashboard</li></a>
                     <a href="inventory.html"><li><i class="fa fa-calendar-check-o"></i> Inventory</li></a>
-                    <a href="reports.html"><li><i class="fa fa-bar-chart"></i> Reports</li></a>
-                    <a href="accounts.html"><li><i class="fa fa-address-book-o"></i> Accounts</li></a>
-                    <a href="categories.html"><li><i class="fa fa-tags"></i> Categories</li></a>
-                    <a href="settings.html"><li><i class="fa fa-gears"></i> Settings</li></a>
+                    <a href="#"><li><i class="fa fa-bar-chart"></i> Reports</li></a>
+                    <a href="#"><li><i class="fa fa-address-book-o"></i> Accounts</li></a>
+                    <a href="#"><li><i class="fa fa-tags"></i> Categories</li></a>
+                    <a href="#"><li><i class="fa fa-cog"></i> Settings</li></a>
                 </ul>
             </aside>
             <main class="shopper">
-                <h2 class="db">Sales Report</h2>
+                <h2 class="categ">Items</h2>
                 <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
                 <span class="msg" id="topMsg"></span>
                 <table id="stockTable">
                     <thead>
                         <tr>
+                            <th>product name</th>
                             <th>Id#</th>
-                            <th>No. prods</th>
-                            <th>sold by</th>
-                            <th>sale date</th>
-                            <th>Total sale</th>
+                            <th>category
+                                <select id='toFilter' onchange='filterCategories()'>
+                                    <option disabled selected>Select</option>
+                                    <option value="kids">Kids</option>
+                                    <option value="shirts">Shirts</option>
+                                    <option value="tops">Tops</option>
+                                    <option value="shoes">Shoes</option>
+                                    <option value="denims">Denims</option>
+                                    <option value="jackets">Jackets</option>
+                                    <option value="pants">Pants</option>
+                                    <option value="suits">Suits</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="beach">Beach</option>
+                                    <option value="bags">Bags</option>
+                                    <option value="lingerie">Lingerie</option>
+                                    <option value='all'>All</option>
+                                </select>
+                            </th>
+                            <th>stock</th>
+                            <th>price</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr onclick="saleProduct(this)">
-                            <td>1</td>
-                            <td>5</td>
-                            <td>walker</td>
-                            <td>Wed 2018-11-28</td>
-                            <td>1200</td>
+                            <td>Bell-bottoms</td>
+                            <td>15</td>
+                            <td>pants</td>
+                            <td>30</td>
+                            <td>200</td>
                         </tr>
                         <tr onclick="saleProduct(this)">
-                            <td>2</td>
-                            <td>2</td>
-                            <td>walker</td>
-                            <td>Wed 2018-11-28</td>
-                            <td>1500</td>
+                            <td>NY-pants</td>
+                            <td>5</td>
+                            <td>pants</td>
+                            <td>25</td>
+                            <td>150</td>
                         </tr>
                     </tbody>
                 </table>
                 <aside class="shoplist">
-                    <h2 class="thelist">Products List</h2>
+                    <h2 class="thelist">Shopping List</h2>
+                    <input type="submit" id="cancelSale" class="saleButton" value="cancel">
+                    <input type="submit" id="makeSale" class="saleButton" value="make sale">
                     <span class="msg"></span>
                     <table id="sale">
                         <thead>
@@ -100,9 +119,20 @@
                 <p>Store Manager, Copyright &copy; 2018</p>
             </footer>
         </div>
+        <div id="confirm-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-body">
+                  <h3>Are you sure?</h3>
+                </div>
+                <div class="modal-footer">
+                  <button id="modal-yes" class="modal-button">Yes</button>
+                  <button id="modal-no" class="modal-button">No</button>
+                </div>
+            </div>
+        </div>
     <!-- js -->
     <script src="../../static/api.js"></script>
-    <script src="../../static/admin/reports.js"></script>
+    <script src="../../static/attendant/cart.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </body>
 </html>

@@ -29,14 +29,31 @@
             </aside>
             <main class="stock">
                 <h2 class="db">Inventory</h2>
-                <p class="user"><i class="fa fa-user-circle-o"></i> Admin</p>
-                <button type="button" id="freezebutton" class="insert"  onclick="">Freeze product</button>
-                <button type="button" id="addbutton" class="insert"  onclick="">Add product</button>
+                <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
+                <span class="msg" id="topMsg"></span>
                 <table id="mytable">
+                    <thead>
                         <tr>
                             <th>product name</th>
                             <th>Id#</th>
-                            <th>category</th>
+                            <th>category
+                                <select id='toFilter' onchange='filterCategories()'>
+                                    <option disabled selected>Select</option>
+                                    <option value="kids">Kids</option>
+                                    <option value="shirts">Shirts</option>
+                                    <option value="tops">Tops</option>
+                                    <option value="shoes">Shoes</option>
+                                    <option value="denims">Denims</option>
+                                    <option value="jackets">Jackets</option>
+                                    <option value="pants">Pants</option>
+                                    <option value="suits">Suits</option>
+                                    <option value="accessories">Accessories</option>
+                                    <option value="beach">Beach</option>
+                                    <option value="bags">Bags</option>
+                                    <option value="lingerie">Lingerie</option>
+                                    <option value='all'>All</option>
+                                </select>
+                            </th>
                             <th>stock</th>
                             <th>min_stock</th>
                             <th>price</th>
@@ -44,7 +61,9 @@
                             <th></th>
                             <th></th>
                         </tr>
-                        <tr>
+                    </thead>
+                    <tbody>
+                        <tr class="content">
                             <td>Bell-bottoms</td>
                             <td>15</td>
                             <td>pants</td>
@@ -52,71 +71,132 @@
                             <td>20</td>
                             <td>200</td>
                             <td>01-02-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
+                            <td class="txtright"><i class="fa fa-edit" onclick="editRow(this)"></i></td>
                             <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
-                        <tr>
+                        <tr class="content">
                             <td>NY-pants</td>
-                            <td>05</td>
+                            <td>5</td>
                             <td>pants</td>
                             <td>25</td>
                             <td>20</td>
                             <td>150</td>
                             <td>22-05-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
+                            <td class="txtright"><i class="fa fa-edit" onclick="editRow(this)"></i></td>
                             <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
                         </tr>
-                        <tr>
-                            <td>Eiffel-top</td>
-                            <td>10</td>
-                            <td>tops</td>
-                            <td>45</td>
-                            <td>20</td>
-                            <td>120</td>
-                            <td>18-06-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Cindarella-shoes</td>
-                            <td>08</td>
-                            <td>kids</td>
-                            <td>38</td>
-                            <td>40</td>
-                            <td>100</td>
-                            <td>23-08-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Jamaican-boys</td>
-                            <td>18</td>
-                            <td>kids</td>
-                            <td>38</td>
-                            <td>35</td>
-                            <td>85</td>
-                            <td>11-04-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
-                        </tr>
-                        <tr>
-                            <td>Neckless-G</td>
-                            <td>101</td>
-                            <td>accessories</td>
-                            <td>18</td>
-                            <td>25</td>
-                            <td>75</td>
-                            <td>17-05-2018</td>
-                            <td class="txtright"><i class="fa fa-edit"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
-                        </tr>
-                    </table>
+                    </tbody>
+                </table>
+                <div class="form">
+                    <form id="addProduct">
+                        <input type="text" id="prodName" class="entry" name="t1" placeholder="product name"/>
+                        <select class="entry" id="category">
+                            <option value="kids">Kids</option>
+                            <option value="shirts">Shirts</option>
+                            <option value="tops">Tops</option>
+                            <option value="shoes">Shoes</option>
+                            <option value="denims">Denims</option>
+                            <option value="jackets">Jackets</option>
+                            <option value="pants">Pants</option>
+                            <option value="suits">Suits</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="beach">Beach</option>
+                            <option value="bags">Bags</option>
+                            <option value="lingerie">Lingerie</option>
+                        </select><br>
+                        <input type="number" id="stock" class="entry" name="t3" min="1" placeholder="stock"/>
+                        <input type="number" id="price" class="entry" name="t4" min="25" placeholder="price"/><br>
+                        <span class="msg"></span>
+                        <input type="submit" id="addButton" class="accountButton" value="add product">
+                    </form>
+                    <form id="updateProduct">
+                        <input type="text" id="uProdName" class="entry" name="t5" placeholder="product name"/>
+                        <select class="entry" id="uCategory">
+                            <option value="kids">Kids</option>
+                            <option value="shirts">Shirts</option>
+                            <option value="tops">Tops</option>
+                            <option value="shoes">Shoes</option>
+                            <option value="denims">Denims</option>
+                            <option value="jackets">Jackets</option>
+                            <option value="pants">Pants</option>
+                            <option value="suits">Suits</option>
+                            <option value="accessories">Accessories</option>
+                            <option value="beach">Beach</option>
+                            <option value="bags">Bags</option>
+                            <option value="lingerie">Lingerie</option>
+                        </select><br>
+                        <input type="number" id="uStock" class="entry" name="t7" min="1" placeholder="stock"/>
+                        <input type="number" id="uPrice" class="entry" name="t8" min="25" placeholder="price"/><br>
+                        <span class="msg" id="updateMsg"></span>
+                        <input type="submit" id="updateButton" class="accountButton" value="update product">
+                    </form>
+                </div>
+                <div id="confirm-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                          <h3>Are you sure?</h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="modal-yes" class="modal-button">Yes</button>
+                          <button id="modal-no" class="modal-button">No</button>
+                        </div>
+                    </div>
+                </div>
             </main>
             <footer class="foot">
                 <p>Store Manager, Copyright &copy; 2018</p>
             </footer>
         </div>
     <!-- js -->
-    <script src="../../static/inventory.js"></script>
+    <script src="../../static/api.js"></script>
+    <script src="../../static/admin/inventory.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <script>
+        $(function () {
+            $('.entry').focusout(() => {
+                var prod_name = $("input[name='t1']").val();
+                var category = $("input[name='t2']").val();
+                var stock = $("input[name='t3']").val();
+                var price = $("input[name='t4']").val();
+                var uprodName = $("input[name='t5']").val();
+                var uCategory = $("input[name='t6']").val();
+                var uStock = $("input[name='t7']").val();
+                var uPrice = $("input[name='t8']").val();
+                if (prod_name == '')
+                    $("#prodName").css("border-color", "#c77272");
+                else
+                    $("#prodName").css("border-color", "#427e3a");
+                if (category == '')
+                    $("#category").css("border-color", "#c77272");    
+                else
+                    $("#category").css("border-color", "#427e3a");
+                if (stock == '')
+                    $("#stock").css("border-color", "#c77272");    
+                else
+                    $("#stock").css("border-color", "#427e3a");
+                if (price == '')
+                    $("#price").css("border-color", "#c77272");    
+                else
+                    $("#price").css("border-color", "#427e3a");
+                if (uprodName == '')
+                    $("#uProdName").css("border-color", "#c77272");    
+                else
+                    $("#uProdName").css("border-color", "#427e3a");
+                if (uCategory == '')
+                    $("#uCategory").css("border-color", "#c77272");    
+                else
+                    $("#uCategory").css("border-color", "#427e3a");
+                if (uStock == '')
+                    $("#uStock").css("border-color", "#c77272");    
+                else
+                    $("#uStock").css("border-color", "#427e3a");
+                if (uPrice == '')
+                    $("#uPrice").css("border-color", "#c77272");    
+                else
+                    $("#uPrice").css("border-color", "#427e3a");
+            });
+        });
+    </script>
     </body>
 </html>
