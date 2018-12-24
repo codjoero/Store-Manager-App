@@ -38,8 +38,8 @@ class Product:
 
     @staticmethod
     def get_all_items(tb_of_items):
-        """Method fetches all items in a table
-        Returns a list of all items.
+        """Method fetches all sales in the sale table
+        Returns a list of all sales.
         """
         items = dbq.query_all_items(tb_of_items)
         if items == []:

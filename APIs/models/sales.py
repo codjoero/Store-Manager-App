@@ -11,22 +11,20 @@ class Sale:
     """
     sales = []
 
-    def __init__(self, sale_prod_list, total_sale,sold_by):
-        self.sale_prod_list = sale_prod_list
+    def __init__(self, prod_id_list, total_sale,sold_by):
+        self.prod_id_list = prod_id_list
         self.total_sale = total_sale
         self.sold_by = sold_by
 
     def add_sale(self):
-        sale_id = dbq.add_sale(self.total_sale, self.sold_by)
-        for sale_prod in self.sale_prod_list:
-            prod_id = sale_prod['prod_id']
-            quantity = sale_prod['quantity']
-            dbq.add_sale_products(sale_id, prod_id, quantity)
+        sale = dbq.add_sale(self.total_sale, self.sold_by)
+        for prod_id in self.prod_id_list:
+            dbq.add_sale_products(sale, prod_id)
         return 'Sale record created'
 
     @staticmethod
     def get_sale(table, column, value):
-        """Method for retrieving a single sale
+        """Method for retrieving a single saled
         Returns a dictionary of the sale that has been fetched.
         """
         sale = dbq.query_item(table, column, value)
@@ -38,7 +36,7 @@ class Sale:
                 'total_sale': sale[1],
                 'sold_by': sale[2],
                 'sale_date': sale[3],
-                'products': cart 
+                'products': cart, 
             }
         return sale_dict
 
@@ -53,28 +51,18 @@ class Sale:
         return sale
 
     @staticmethod
-    def get_many(table, column, value):
-        """Method for retrieving items
-        Returns a list of the items that have been fetched.
-        """
-        sale = dbq.query_many(table, column, value)
-        if sale == [] or sale is None:
-            return False
-        return sale
-
-    @staticmethod
-    def get_sale_products(sale):
+    def get_sale_products(item):
+        cart = Sale.get_item('sale_products', 'sale_id', item[0])#rows with sale_id
         prod_sold = []
-        cart = Sale.get_many('sale_products', 'sale_id', sale[0]) #rows with sale_id
-        for prod in cart:
-            product = Product.get_item('products', 'prod_id', prod[1])
-            sale_product = {
-                'prod_id': product[0],
-                'prod_name': product[1],
-                'price': product[4],
-                'quantity': prod[2]
-            }
-            prod_sold.append(sale_product)
+        prod = Product.get_item('products', 'prod_id', cart[1])
+        quantity = item[1] / prod[4]
+        product = {
+            'prod_id': prod[0],
+            'prod_name': prod[1],
+            'price': prod[4],
+            'quantity': quantity
+        }
+        prod_sold.append(product)
         return prod_sold
 
     @staticmethod
@@ -83,16 +71,16 @@ class Sale:
         Returns a list of all sales made.
         """
         sales_made = dbq.query_all_items(sales)
-        if sales_made == []:
+        if sales == []:
             return False
         Sale.sales.clear()
-        for sale in sales_made:
-            cart = Sale.get_sale_products(sale)
+        for item in sales_made:
+            cart = Sale.get_sale_products(item)
             sale_dict = {
-                'sale_id': sale[0],
-                'total_sale': sale[1],
-                'sold_by': sale[2],
-                'sale_date': sale[3],
+                'sale_id': item[0],
+                'total_sale': item[1],
+                'sold_by': item[2],
+                'sale_date': item[3],
                 'products': cart, 
             }
             Sale.sales.append(sale_dict)

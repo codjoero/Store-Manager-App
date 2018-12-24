@@ -12,41 +12,24 @@ It also allows staff allocated authority by the Store-owner, to login and start 
 
 ### Dev Setup
 
-To get the project, clone it using [Github Repo](https://github.com/codjoero/Store-Manager-App). Also the current App is on [github pages](https://codjoero.github.io/Store-Manager-App/)
+To get the project, clone it using [Github Repo](https://github.com/codjoero/Store-Manager-App). Also the current work in progress App is on [github pages](https://codjoero.github.io/Store-Manager-App/)
 
 This is app is hosted on [heroku](https://thecodestoremanager-api-heroku.herokuapp.com/).
 
-## Heroku Endpoints
+# Heroku Endpoints
 
 | Functionality | HTTP Method | Endpoint    | 
 |---------------|:-----------:|------------:|
-| `index / welcome` |     | / |
-| `new account` | POST | /api/v1/user |
-| `update account` | PUT | /api/v1/user/id |
-| `delete account` | DELETE | /api/v1/user/id |
-| `add new product` | POST | /api/v1/products |
-| `modify product` | PUT | /api/v1/products/id |
-| `delete product` | DELETE | /api/v1/products/id |
-| `add a sale order` | POST | /api/v1/sales |
-| `view a sale order` | GET | /api/v1/sales/id |
-| `view all sale records` | GET | /api/v1/sales |
-
-## Functionality
-
-| Function | Access |
-| ------------- | ------------- |
-|`Admin registeration` | admin |
-|`User login` | store attendant and admin |
-|`Add accounts for store attendants` | admin |
-|`Add products` | admin |
-|`Update store attendant's accounts`| admin |
-|`Delete store attendant's accounts` | admin |
-|`Update products` | admin |
-|`Delete product` | admin |
-|`View all products` | store attendant and admin |
-|`Add sale records` | store attendant |
-|`View all users' sale records` | admin |
-|`View a store attendant sale records` | store attendant and admin |
+| index / welcome |     | / |
+| new account | POST | /api/v1/user |
+| update account | PUT | /api/v1/user/id |
+| delete account | DELETE | /api/v1/user/id |
+| add new product | POST | /api/v1/products |
+| modify product | PUT | /api/v1/products/id |
+| delete product | DELETE | /api/v1/products/id |
+| add a sale order | POST | /api/v1/sales |
+| view a sale order | GET | /api/v1/sales/id |
+| view all sale records | GET | /api/v1/sales |
 
 ### Documentation
 
@@ -58,36 +41,14 @@ The documentation can be found [here](https://documenter.getpostman.com/view/545
     Internet
 
 [gh-pages](https://codjoero.github.io/Store-Manager-App/)
-### Note
-- admin can be registered only if non exists
-- Current admin:
-```sh
-   username: jonnie
-   password: Andela8
-```
 
 ### Installation
 
 * Clone project to your local machine
-```sh
-  $ git clone https://github.com/codjoero/Store-Manager-App.git
-  ```
-* Run through the following settings
-```sh
-    $ cd Store-Manager-App
-    $ pip install virtualenv
-    $ virtualenv env
-    $ . env/bin/activate (windows: $ source env/Scripts/activate)
-    $ pip install -r requirements.txt
-    $ python3 run.py
-```
+* Current updated branch - features.
 
 ### Tests
-```sh
-   $ . env/bin/activate (windows: $ source env/Scripts/activate)
-   $ pip install pytest
-   $ python3 -m pytest
-```
+#### Pending....
 
 ### Tech used 
 App built with the following tech:-
@@ -102,7 +63,7 @@ Create a branch from **feature**, make a PR and I will review and merge if possi
 ### Author
 Ronald Nsereko
 ### Acknowledgements
-Thanks to the developers at [Andela](https://andela.com). And to all that have made this development process possible, you're heros to me.
+To all developers at [Andela](https://andela.com) I salute thee. And to all that have made this development process possible, you're heros to me.
 
 #### License
 Andela Opensource

@@ -53,13 +53,12 @@ class DbQueries():
         """
         sale_id = args[0]
         prod_id = args[1]
-        quantity = args[2]
 
         add_sale_prod = """
-        INSERT INTO sale_products(sale_id, prod_id, quantity)\
-        VALUES ('{}', '{}', '{}')
+        INSERT INTO sale_products(sale_id, prod_id)\
+        VALUES ('{}', '{}')
         RETURNING sale_id;
-        """.format(sale_id, prod_id, quantity)
+        """.format(sale_id, prod_id)
         cursor.execute(add_sale_prod)
 
     def add_jti(self, jti):
@@ -85,20 +84,6 @@ class DbQueries():
         item = cursor.fetchone()
         return item
 
-    def query_many(self, *args):
-        """Method to query items with same sale_id from tables, 
-        given a table name column and check value
-        """
-        table = args[0]
-        column = args[1]
-        value = args[2]
-        query_item = """
-        SELECT sale_id, prod_id, quantity FROM {} WHERE {} = '{}';
-        """.format(table, column, value)
-        cursor.execute(query_item)
-        items = cursor.fetchall()
-        return items
-
     def query_all_items(self, tb_of_items):
         """Method fetches all rows in a table
         """
@@ -107,6 +92,7 @@ class DbQueries():
         """.format(tb_of_items)
         cursor.execute(query_items)
         items = cursor.fetchall()
+
         return items
     
     def update_columns(self, *args):
@@ -123,21 +109,6 @@ class DbQueries():
         WHERE prod_id='{}';
         """.format(prod_name, category, stock, price, prod_id)
         cursor.execute(update_item)
-
-    def update_user(self, *args):
-        """Method updates columns
-        """
-        name = args[0]
-        username = args[1]
-        password = args[2]
-        role = args[3]
-        user_id = args[4]
-
-        update_user = """
-        UPDATE users SET name='{}', username='{}', password='{}', role ='{}'\
-        WHERE user_id='{}';
-        """.format(name, username, password, role, user_id)
-        cursor.execute(update_user)
 
     def update_a_col(self, *args):
         """Method updates a single column

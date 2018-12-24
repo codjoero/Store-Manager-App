@@ -18,7 +18,6 @@ class ManagerTestCase(Utilities):
         self.dbq.drop_table('users')
         self.dbq.drop_table('products')
         self.dbq.drop_table('sales')
-        self.dbq.drop_table('sale_products')
 
     def test_attendant_make_a_sale(self):
         """Tests that 'attendant' can make a sale
@@ -504,10 +503,11 @@ class ManagerTestCase(Utilities):
         self.assertEqual(reply['message'], 'Invalid Authentication, Please Login!')
         self.assertEqual(resp.status_code, 401)
 
-    def test_attendant_cannot_get_sale_record_they_didnot_make(self):
-        """Tests that attendant cannot view sale records they didnot make
+    def test_admin_only_can_get_all_sale_records(self):
+        """Tests that admin only can view all sale records
         """
         reply = self.admin_add_product()
+
         resp = self.admin_create_user()
         reply = self.attendant_login()
         token = reply['token']
@@ -528,14 +528,11 @@ class ManagerTestCase(Utilities):
         self.assertEqual(reply['message'], 'Sale record created')
         self.assertEqual(resp.status_code, 200)
 
-        resp = self.admin_create_user2()
-        reply = self.attendant2_login()
-        token = reply['token']
-
         resp = self.client.get(
             '/api/v1/sales',
             headers={'Authorization': 'Bearer {}'.format(token)}
         )
         reply = json.loads(resp.data.decode())
-        self.assertEqual(reply['message'], "You haven't made any sales!")
-        self.assertEqual(resp.status_code, 404)
+        
+        self.assertEqual(reply['message'], 'Unauthorized Access!')
+        self.assertEqual(resp.status_code, 401)

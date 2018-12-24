@@ -64,7 +64,8 @@ class ManagerTestCase(Utilities):
         self.assertEqual(resp.status_code, 201)
 
     def test_cannot_create_product_with_blacklisted_token(self):
-        """Test admin cannot create a product with a blacklisted token
+        """Test admin cannot create a product with
+        a blacklisted token
         """
         resp = self.admin_register()
         reply = self.admin_login()
@@ -256,7 +257,8 @@ class ManagerTestCase(Utilities):
         self.assertEqual(resp.status_code, 200)
 
     def test_cannot_view_a_product_with_blacklisted_token(self):
-        """Tests that a user cannot view a product in the Inventory with blacklisted token
+        """Tests that a user cannot view a product in the Inventory
+        with blacklisted token
         """
         resp = self.admin_register()
         reply = self.admin_login()
@@ -328,7 +330,8 @@ class ManagerTestCase(Utilities):
         self.assertEqual(resp.status_code, 200)
 
     def test_cannot_view_all_products_with_blacklisted_token(self):
-        """Tests that a user cannot view all products in the Inventory with blacklisted token
+        """Tests that a user cannot view all products in the Inventory
+        with blacklisted token
         """
         resp = self.admin_register()
         reply = self.admin_login()

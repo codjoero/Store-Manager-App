@@ -48,7 +48,7 @@ def create_sale_order():
         return jsonify({
             'message': 'prod_name & quantity should be a character & number respectively!'}), 400
     total_sale = 0
-    sale_prod_list = []
+    prod_id_list = []
     for prod in products:
         product = Product.get_item('products', 'prod_name', prod['prod_name'])
         if not product:
@@ -62,20 +62,17 @@ def create_sale_order():
                 return jsonify({
                     'message': 'Only {} {} available right now!'.format(product[3], prod['prod_name'])
             }), 400
-
         new_stock = product[3] - prod['quantity']
+        prod_update = Product(prod['prod_name'], product[2], new_stock, product[4])
+
         prod_id = product[0]
+        prod_id_list.append(prod_id)
         prod_sale = product[4] * prod['quantity']
         total_sale += prod_sale
-        prod_update = Product(prod['prod_name'], product[2], new_stock, product[4])
         prod_update.update_product(prod_id)
-        sale_prod = dict(
-            prod_id = prod_id,
-            quantity = prod['quantity']
-        )
-        sale_prod_list.append(sale_prod)
 
-    new_sale = Sale(sale_prod_list, total_sale, auth_name)
+
+    new_sale = Sale(prod_id_list, total_sale, auth_name)
     add_cart = new_sale.add_sale()
     return jsonify({
                 'message': add_cart}), 200
@@ -137,7 +134,7 @@ def get_all_sale_records():
         }), 401
     auth_name = get_jwt_identity()
     auth_user = User.query_item('users', 'username', auth_name)
-    if auth_user is False:
+    if auth_user is False or auth_user[-2] != 'admin':
         return jsonify({
             'message': 'Unauthorized Access!'
         }), 401
@@ -146,19 +143,6 @@ def get_all_sale_records():
         return jsonify({
             'message': 'There are no sales yet!'
         }), 404
-    elif auth_user[-2] == 'admin':
-        return jsonify({
-            'Sale Records': sales,
-            'message': 'All Sale records fetched sucessfully!'}), 200
-    else:
-        attendant_sales = []
-        for i in range(len(sales)):
-            sold_by = sales[i]['sold_by']
-            if sold_by == auth_user[2]:
-                attendant_sales.append(sales[i])
-        if not attendant_sales:
-            return jsonify({
-                'message': "You haven't made any sales!"}), 404
-        return jsonify({
-                'Sale Records': attendant_sales,
-                'message': 'All Sale records fetched sucessfully!'}), 200
+    return jsonify({
+        'Sale Records': sales,
+        'message': 'All Sale records fetched sucessfully!'}), 200
