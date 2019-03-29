@@ -54,10 +54,7 @@ def register():
         return jsonify({
             'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
         }), 400
-    if User.query_item('users', 'role', 'admin'):
-        return jsonify({
-            'message': 'Admin is already registered, please login!'}), 400
-
+      
     user = User(name, username, password, role)
     hash_password = user.password_hash()
     user = User(name, username, hash_password, role)
