@@ -10,8 +10,12 @@ class DataBaseConnection:
                 self.db = 'test_db'
             else:
                 self.db = 'deploy_db'
-            self.conn = psycopg2.connect(dbname=self.db, user='codjoe',\
-                    host='localhost', password='codjoe', port='5432')
+            self.conn = psycopg2.connect(
+                dbname='dbitfem42fl54o', 
+                user='rzpwemisydoivg',
+                password='44f93da11e564e5395fd1d8726e8d1953f52b36e5b833154251a80ebce8d9092', 
+                host='ec2-107-22-241-243.compute-1.amazonaws.com', 
+                port='5432')
 
             self.cursor = self.conn.cursor()
             self.conn.autocommit = True
