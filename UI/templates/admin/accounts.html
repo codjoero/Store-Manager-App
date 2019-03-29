@@ -30,6 +30,7 @@
             <main class="stock">
                 <h2 class="db">User Accounts</h2>
                 <span class="loggedin"><i class="fa fa-user-circle-o"></i> </span>
+                <span class="msg" id="topMsg"></span>
                 <table id="mytable">
                     <thead>
                         <tr>
@@ -50,7 +51,7 @@
                             <td>jonnie</td>
                             <td>admin</td>
                             <td class="txtright"><i class="fa fa-edit"onclick="editRow(this)"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
+                            <td class="txtdel"><i class="fa fa-close" onclick="delRow(this)"></i></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox"></td>
@@ -59,7 +60,7 @@
                             <td>walker</td>
                             <td>attendant</td>
                             <td class="txtright"><i class="fa fa-edit"onclick="editRow(this)"></i></td>
-                            <td class="txtdel"><i class="fa fa-close" onclick="deleteRow(this)"></i></td>
+                            <td class="txtdel"><i class="fa fa-close" onclick="delRow(this)"></i></td>
                         </tr>  
                     </tbody>                 
                 </table>
@@ -89,6 +90,17 @@
                         <span class="msg" id="updateMsg"></span>
                         <input type="submit" id="updateButton" class="accountButton" value="update user">
                     </form>
+                </div>
+                <div id="confirm-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                          <h3>Are you sure?</h3>
+                        </div>
+                        <div class="modal-footer">
+                          <button id="modal-yes" class="modal-button">Yes</button>
+                          <button id="modal-no" class="modal-button">No</button>
+                        </div>
+                    </div>
                 </div>
             </main>
             <footer class="foot">
