@@ -32,11 +32,11 @@ def server_error(error):
 def welcome():
     return "Welcome!"
 
-"""Admin account register
+"""User account register
 """
 @app.route('/api/v1/register', methods=['POST'])
 def register():
-    """Method for admin to add an Admin account
+    """Method for a user to add an account
     """
     name = request.json['name']
     username = request.json['username']
@@ -54,11 +54,7 @@ def register():
         return jsonify({
             'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
         }), 400
-    if role != 'admin':
-        return jsonify({
-            'message':'role should be admin!'
-        }), 400
-    if User.query_item('users', 'role', role):
+    if User.query_item('users', 'role', 'admin'):
         return jsonify({
             'message': 'Admin is already registered, please login!'}), 400
 
