@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response, render_template
 from APIs import app
 import datetime
 from APIs.views import user_routes, prod_routes, sale_routes
@@ -28,9 +28,9 @@ def server_error(error):
 
 """Root endpoint
 """
-@app.route('/')
+@app.route('/', methods=['GET'])
 def welcome():
-    return "Welcome!"
+    return render_template('index.html')
 
 """User account register
 """
@@ -54,7 +54,7 @@ def register():
         return jsonify({
             'message': 'Password should be longer than 6 characters, have atleast an uppercase and a lowercase!'
         }), 400
-
+      
     user = User(name, username, password, role)
     hash_password = user.password_hash()
     user = User(name, username, hash_password, role)
