@@ -74,21 +74,10 @@ def create_product():
 
 
 @app.route('/api/v1/products/<prod_id>', methods=['GET'])
-@jwt_required
 def view_a_product(prod_id):
     """Method for admin / store attendant to view a specific product.
     returns a product that matches the given prod_id.
     """
-    if not User.valid_token(request.headers):
-        return jsonify({
-            'message': 'Invalid Authentication, Please Login!'
-        }), 401
-    auth_name = get_jwt_identity()
-    auth_user = User.query_item('users', 'username', auth_name)
-    if auth_user is False:
-        return jsonify({
-            'message': 'Unauthorized Access!'
-        }), 401
     try:
         if not Product.get_all_items('products'):
             return jsonify({
@@ -117,22 +106,10 @@ def view_a_product(prod_id):
         }), 400
 
 @app.route('/api/v1/products', methods=['GET'])
-@jwt_required
 def view_all_product():
     """Method for admin / store attendant to view all products.
     returns a list products in the Inventory.
     """
-    if not User.valid_token(request.headers):
-        return jsonify({
-            'message': 'Invalid Authentication, Please Login!'
-        }), 401
-    auth_name = get_jwt_identity()
-    auth_user = User.query_item('users', 'username', auth_name)
-    if auth_user is False:
-        return jsonify({
-            'message': 'Unauthorized Access!'
-        }), 401
-
     product = Product.get_all_items('products')
     if not product:
         return jsonify({
