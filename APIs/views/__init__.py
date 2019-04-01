@@ -60,6 +60,10 @@ def register():
     user = User(name, username, hash_password, role)
     new_user = user.add_user()
 
+    if not new_user:
+        return jsonify({
+            'message': f'{username} is already registered!'
+        }), 400
     return jsonify({
-        'message': '{} has been registered'.format(new_user)
+        'message': f'{new_user} has been registered'
     }), 201

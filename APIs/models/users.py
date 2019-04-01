@@ -21,6 +21,9 @@ class User:
     def add_user(self):
         """Method adds a user to the database
         """
+        user = dbq.query_item('users', 'username', self.username)
+        if user:
+            return False
         dbq.add_user(self.name, self.username, self.password, self.role)
         return self.name
 
