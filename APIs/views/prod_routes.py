@@ -82,13 +82,13 @@ def view_a_product(prod_id):
         if not Product.get_all_items('products'):
             return jsonify({
                 'message': 'There are no products yet!'
-            }), 404
+            }), 204
         
         product = Product.get_item('products', 'prod_id', int(prod_id))
         if not product:
             return jsonify({
                 'message': 'This product does not exist!'
-            }), 404
+            }), 204
         return jsonify({
             'product': {
                         'prod_id': product[0],
@@ -114,7 +114,7 @@ def view_all_product():
     if not product:
         return jsonify({
             'message': 'There are no products yet!'
-        }), 404
+        }), 204
     return jsonify({
         'products': product}), 200
 
@@ -169,7 +169,7 @@ def update_product(prod_id):
         prod = product.update_product(prod_id)
         if not prod:
             return jsonify({
-                'message': "This product doesn't exists in the Inventory!"}), 400
+                'message': "This product doesn't exists in the Inventory!"}), 204
         return jsonify({
             'message': 'product updated!',
             'Product': prod
@@ -201,10 +201,10 @@ def delete_product(prod_id):
         product = Product.get_all_items('products')
         if not product:
             return jsonify({
-                'message': 'There are no products in Inventory!'}), 404
+                'message': 'There are no products in Inventory!'}), 204
         elif not Product.get_item('products', 'prod_id', prod_id):
             return jsonify({
-                'message': 'This product does not exist in Inventory!'}), 404
+                'message': 'This product does not exist in Inventory!'}), 204
         Product.delete_product(prod_id)
         return jsonify({
             'message': 'Product deleted!'
